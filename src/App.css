@@ -1,0 +1,40 @@
+.App {
+  text-align: center;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+}
+
+.nav-bar {
+  padding: 5px;
+  width: auto;
+  background-color: #92AA9A;
+  height: 80px;
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
+}
+
+.title {
+  color: white;
+  font-size: 36px;
+  min-width: 250px;
+  padding-left: 30px;
+} 
+
+.nav-bar-links {
+  width: 250px;
+  display: flex;
+  justify-content: space-between;
+  padding-right: 50px;
+  min-width: 180px;
+}
+
+.nav-bar-link {
+  color: white;
+  text-decoration: none;
+  font-size: 24px;
+}
