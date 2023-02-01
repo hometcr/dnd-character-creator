@@ -168,7 +168,23 @@ body {
   height: 68vh;
 }
 
-.characters-container {
+.characters-container-box {
   background-color: #F1F8F0;
   height: 100%;
+}
+
+.characters-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+}
+
+.character {
+  background-color: yellow;
+}
+
+.access-character-buttons {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
 }

@@ -1,3 +1,3 @@
 export const DeleteButton = () => {
-  return <div>delete button</div>;
+  return <button>delete</button>;
 }

@@ -32,8 +32,8 @@ export const CharactersContainer = () => {
 
 
   return (
-    <div className="characters-container">
-      <div>
+    <div className="characters-container-box">
+      <div className="characters-container">
         {characters.map((character: ICharacter) => (
             <Character character={character}/>
             ))}
