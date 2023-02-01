@@ -1,17 +1,18 @@
 .App {
   text-align: center;
+  height: 100vh;
 }
 
 body {
   margin: 0;
   padding: 0;
-  font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+  font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
 }
 
 .nav-bar {
   padding: 5px;
   width: auto;
-  background-color: #92AA9A;
+  background-color: #92aa9a;
   height: 80px;
   align-items: center;
   display: flex;
@@ -23,7 +24,7 @@ body {
   font-size: 36px;
   min-width: 250px;
   padding-left: 30px;
-} 
+}
 
 .nav-bar-links {
   width: 250px;
@@ -49,4 +50,30 @@ body {
   text-align: center;
   padding-bottom: 10px;
   font-size: small;
+}
+
+.welcome-message {
+  font-size: 36px;
+  padding-top: 100px;
+  padding-left: 100px;
+  width: 700px;
+  height: 200px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.welcome-message-2 {
+  font-size: 32px;
+  color: black;
+}
+
+.home-page {
+  height: 100%;
+  /* background-color: orange; */
+  background-size: cover;
+  background-attachment: fixed;
+  background-position: right top;
+  background-image: url("./assets/background.jpg");
 }
