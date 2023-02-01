@@ -40,6 +40,10 @@ body {
   font-size: 24px;
 }
 
+.nav-bar-link:hover {
+  color:#cecece;
+}
+
 .footer {
   position: fixed;
   bottom: 0;
@@ -128,4 +132,43 @@ body {
   justify-content: center;
   padding-top: 100px;
   font-size: 24px;
+}
+
+.witch {
+  height: 100px;
+  width: 100px;
+}
+
+.witch-and-button {
+  padding-top: 20px;
+  padding-bottom: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.new-character-button {
+  width: 210px;
+  height: 40px;
+  font-size: 20px;
+  background: #E3EDE0;
+  border-radius: 10px;
+  font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
+}
+
+.new-character-button:hover {
+  cursor: pointer;
+}
+
+.counter-witch-padding {
+  width: 100px;
+}
+
+.logged-in-home {
+  height: 68vh;
+}
+
+.characters-container {
+  background-color: #F1F8F0;
+  height: 100%;
 }

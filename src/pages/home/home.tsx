@@ -1,5 +1,9 @@
+import { NavigateButton } from "../../components/NavigateButton"
+import { CharactersContainer } from "./components/CharactersContainer"
+import witch from "../../assets/witch.jpg"
+
 export const Home = () => {
-  const user_is_logged_in = false;
+  const user_is_logged_in = true;
 
   if (!user_is_logged_in) {
     return (
@@ -13,6 +17,15 @@ export const Home = () => {
       </div>
     );
   } else {
-    return <div>you are logged in</div>;
+    return (
+      <div className="logged-in-home">
+        <div className="witch-and-button">
+          <img src={witch} alt="witch" className="witch"/>
+          <NavigateButton className="new-character-button" destination="/create" text="Create New Character"/>
+          <div className="counter-witch-padding"></div>
+        </div>
+        <CharactersContainer/>
+      </div>
+    );
   }
 };

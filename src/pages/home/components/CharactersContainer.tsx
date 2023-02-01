@@ -1,0 +1,43 @@
+import { Character } from "./Character"
+
+
+export interface ICharacter {
+  "name": string,
+  "class": string,
+  "race": string
+}
+
+export const CharactersContainer = () => {
+
+  
+
+
+  const characters: ICharacter[] = [
+    {
+      "name": "Beverly Toegold",
+      "class": "paladin",
+      "race": "halfing"
+    },
+    {
+      "name": "Hardwon Surefoot",
+      "class": "fighter",
+      "race": "human"
+    },
+    {
+      "name": "Beverly Toegold",
+      "class": "druid",
+      "race": "wood elf"
+    },
+  ]
+
+
+  return (
+    <div className="characters-container">
+      <div>
+        {characters.map((character: ICharacter) => (
+            <Character character={character}/>
+            ))}
+      </div>
+    </div>
+  );
+}
