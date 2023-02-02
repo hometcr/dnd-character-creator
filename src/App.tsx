@@ -7,7 +7,7 @@ import { Home } from "./pages/home/home";
 import { About } from "./pages/about";
 import { Login } from "./pages/login";
 import { Begin } from "./pages/begin/begin";
-import { AbilityScores } from "./pages/ability-scores";
+import { AbilityScores } from "./pages/ability-scores/ability-scores";
 import { Choices } from "./pages/choices";
 import { Spells } from "./pages/spells";
 import { CharacterSheet } from "./pages/character-sheet";

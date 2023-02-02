@@ -429,3 +429,83 @@ body {
   font-size: 16px;
   color: #92aa9a;
 }
+
+.get-ability-scores-container {
+  display: flex;
+  flex-direction: column;
+  width: 40%;
+  min-width: 265px;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.ability-scores-page {
+  display: flex;
+  width: 100%;
+  height: 90.2%;
+}
+
+.ability-scores-title {
+  font-size: 36px;
+  margin: 20px;
+  margin-top: 80px;
+}
+
+.ability-scores-description {
+  font-size: 24px;
+  padding-right: 40px;
+  padding-left: 40px;
+}
+
+
+.roll-dice-container {
+  height: 165px;
+  width: 200px;
+  background-image: url("./assets/dice.jpg");
+  background-size: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.roll-dice-button {
+  background-color: white;
+  width: 90px;
+  height: 35px;
+  margin: 5px;
+  border-style: solid;
+  border-color: #bc9a59;
+  border-width: 1px;
+  font-size: 20px;
+  font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
+  filter: drop-shadow(0px 2px 2px rgba(0, 0, 0, 0.25));
+  border-style: solid;
+  color: #bc9a59;
+  border-radius: 10px;
+}
+
+.roll-dice-button:hover {
+  cursor: pointer;
+  box-shadow: 0 0 4px #b6b6b6;
+}
+
+.scores-list {
+  display: flex;
+  align-content: center;
+  justify-content: center;
+}
+
+.scores-list-title {
+  margin-top: 10px;
+  margin-right: 5px;
+}
+
+.scores-list-scores {
+  margin-top: 10px;
+  display: flex;
+}
+
+.scores-list-score {
+  margin-right: 5px;
+  margin-left: 5px;
+}

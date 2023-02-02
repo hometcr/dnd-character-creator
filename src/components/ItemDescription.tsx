@@ -18,7 +18,11 @@ const descriptions: IDescriptions = {
 
 export const ItemDescription = (props: iProps) => {
   if (props.item === "") {
-    return (<div className="empty-description-message">{"(Learn about the options here)"}</div>)
+    return (
+      <div className="empty-description-message">
+        {"(Learn about the options here)"}
+      </div>
+    );
   }
   let description;
   if (props.item === "Fighter") {
