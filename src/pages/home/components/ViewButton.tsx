@@ -1,3 +1,3 @@
 export const ViewButton = () => {
-  return <button>View</button>;
+  return <button className="access-character-button">View</button>;
 }

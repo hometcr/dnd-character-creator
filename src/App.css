@@ -13,7 +13,7 @@ body {
   padding: 5px;
   width: auto;
   background-color: #92aa9a;
-  height: 80px;
+  height: 60px;
   align-items: center;
   display: flex;
   justify-content: space-between;
@@ -30,7 +30,7 @@ body {
   width: 250px;
   display: flex;
   justify-content: space-between;
-  padding-right: 50px;
+  padding-right: 40px;
   min-width: 180px;
 }
 
@@ -38,6 +38,7 @@ body {
   color: white;
   text-decoration: none;
   font-size: 24px;
+  padding: 5px;
 }
 
 .nav-bar-link:hover {
@@ -49,7 +50,6 @@ body {
   bottom: 0;
   left: 0;
   width: 100%;
-  background-color: white;
   color: black;
   text-align: center;
   padding-bottom: 10px;
@@ -135,13 +135,13 @@ body {
 }
 
 .witch {
-  height: 100px;
-  width: 100px;
+  height: 80px;
+  width: 80px;
 }
 
 .witch-and-button {
-  padding-top: 20px;
-  padding-bottom: 20px;
+  padding-top: 10px;
+  padding-bottom: 10px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -154,6 +154,9 @@ body {
   background: #E3EDE0;
   border-radius: 10px;
   font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
+  filter: drop-shadow(0px 2px 2px rgba(0, 0, 0, 0.25));
+  border-style: solid;
+  border-color:#E3EDE0;
 }
 
 .new-character-button:hover {
@@ -161,7 +164,7 @@ body {
 }
 
 .counter-witch-padding {
-  width: 100px;
+  width: 80px;
 }
 
 .logged-in-home {
@@ -170,21 +173,69 @@ body {
 
 .characters-container-box {
   background-color: #F1F8F0;
-  height: 100%;
+  height: 78vh;
 }
 
 .characters-container {
   display: flex;
   align-items: center;
   justify-content: space-evenly;
+  margin-left: 40px;
+  margin-right: 40px;
+  height: 100%;
 }
 
 .character {
-  background-color: yellow;
+  background-color: white;
+  border-style: solid;
+  border-color: #BC9A59;
+  border-width: 1px;
+  width: 400px;
+  height: 85%;
+  margin-left: 10px;
+  margin-right: 10px;
+  margin-top: 30px;
+  margin-bottom: 50px;
+  display: flex;
+  flex-direction: column;
+  align-items:center;
+  justify-content: space-between;
 }
 
 .access-character-buttons {
+  width: 70%;
   display: flex;
   align-items: center;
-  justify-content: space-evenly;
+  justify-content: space-between;
+  padding-bottom: 80px;
+}
+
+.access-character-button {
+  background-color: white;
+  width: 100px;
+  height: 50px;
+  margin: 5px;
+  border-style: solid;
+  border-color: #BC9A59;
+  border-width: 1px;
+  font-size: 24px;
+  font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
+  filter: drop-shadow(0px 2px 2px rgba(0, 0, 0, 0.25));
+  border-style: solid;
+  color: #BC9A59;
+  border-radius: 10px;
+}
+
+.race-and-class {
+  display: flex;
+  align-items: center;
+  justify-content:center;
+  font-size: 28px;
+  padding-top: 20px;
+}
+
+.character-name {
+  font-size: 44px;
+  padding: 5px;
+  padding-top: 90px;
 }

@@ -1,3 +1,3 @@
 export const DeleteButton = () => {
-  return <button>delete</button>;
+  return <button className="access-character-button">delete</button>;
 }

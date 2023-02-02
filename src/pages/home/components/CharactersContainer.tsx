@@ -24,7 +24,7 @@ export const CharactersContainer = () => {
       "race": "human"
     },
     {
-      "name": "Beverly Toegold",
+      "name": "Moonshine Cybin",
       "class": "druid",
       "race": "wood elf"
     },
