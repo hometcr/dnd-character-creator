@@ -496,13 +496,15 @@ body {
 }
 
 .scores-list-title {
-  margin-top: 10px;
+  margin-top: 50px;
   margin-right: 5px;
+  font-size: 22px;
 }
 
 .scores-list-scores {
-  margin-top: 10px;
+  margin-top: 50px;
   display: flex;
+  font-size: 22px;
 }
 
 .scores-list-score {
