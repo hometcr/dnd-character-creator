@@ -1,7 +1,7 @@
 import { BeginCharacterForm } from "./components/BeginCharacterForm";
 import { ItemDescription } from "../../components/ItemDescription";
 
-let selectedItem = "Fighter";
+let selectedItem = "Human";
 
 export const Begin = () => {
   return (

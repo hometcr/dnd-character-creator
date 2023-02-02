@@ -258,16 +258,17 @@ body {
   width: 90%;
   padding: 20px;
   max-width: 300px;
+  min-width: 100px;
 }
 
 .self-photo-container {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: center;
   margin: 20px;
   border-color: #bc9a59;
   border-width: 1px;
-  margin-top: 10px;
+  margin-top: 90px;
   margin-right: 10px;
 }
 
@@ -291,11 +292,11 @@ body {
 }
 
 .about-title {
-  font-size: 32px;
+  font-size: 28px;
 }
 
 .about-paragraph {
-  font-size: 18px;
+  font-size: 16px;
 }
 
 .about-signature {
@@ -421,4 +422,10 @@ body {
   padding: 30px;
   overflow: scroll;
   max-height: 470px;
+}
+
+.empty-description-message {
+  padding: 80px;
+  font-size: 16px;
+  color: #92aa9a;
 }
