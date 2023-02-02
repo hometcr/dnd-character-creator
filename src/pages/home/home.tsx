@@ -3,7 +3,7 @@ import { CharactersContainer } from "./components/CharactersContainer"
 import witch from "../../assets/witch.jpg"
 
 export const Home = () => {
-  const user_is_logged_in = false;
+  const user_is_logged_in = true;
 
   if (!user_is_logged_in) {
     return (

@@ -253,21 +253,25 @@ body {
 }
 
 .self-photo {
-  height: 450px;
+  /* height: 90%; */
+  width: 90%;
+  padding: 20px;
+  max-width: 300px;
 }
 
 .self-photo-container {
-  border-style:solid;
-  height: 500px;
-  width: 390px;
+  /* border-style:solid; */
+  /* height: 70%; */
+  /* width: 50%; */
   display: flex;
   align-items: center;
   justify-content: center;
   margin: 20px;
   border-color: #BC9A59;
   border-width: 1px;
-  margin-top: 90px;
-  margin-right: 50px;
+  margin-top: 10px;
+  margin-right: 10px;
+
 }
 
 .about-page {
@@ -284,7 +288,9 @@ body {
   display: flex;
   flex-direction: column;
   overflow: scroll;
-  /* margin-right: 30px; */
+  margin-bottom: 100px;
+  margin-right: 20px;
+  min-width: 270px;
 }
 
 .about-title {
@@ -310,3 +316,4 @@ body {
   box-shadow: 0 0 6px #b5b4b4;
   cursor: pointer;
 }
+
