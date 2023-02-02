@@ -13,7 +13,7 @@ body {
   padding: 5px;
   width: auto;
   background-color: #92aa9a;
-  height: 60px;
+  height: 65px;
   align-items: center;
   display: flex;
   justify-content: space-between;
@@ -27,9 +27,10 @@ body {
 }
 
 .nav-bar-links {
-  width: 250px;
+  width: 300px;
   display: flex;
   justify-content: space-between;
+  align-items: center;
   padding-right: 40px;
   min-width: 180px;
 }
@@ -82,7 +83,7 @@ body {
 }
 
 .google-btn {
-  width: 184px;
+  width: 190px;
   height: 42px;
   background-color: #4285f4;
   border-radius: 2px;
@@ -102,10 +103,10 @@ body {
 
 .google-icon {
   display: flex;
-  margin-top: 11px;
-  margin-left: 11px;
-  width: 18px;
-  height: 18px;
+  margin-top: 10px;
+  margin-left: 10px;
+  width: 20px;
+  height: 20px;
 }
 
 .btn-text {
@@ -113,7 +114,7 @@ body {
   margin: 11px 11px 0 0;
   color: white;
   font-size: 14px;
-  letter-spacing: 0.2px;
+  letter-spacing: 0.3px;
 }
 
 .google-btn:hover {
@@ -226,6 +227,10 @@ body {
   border-radius: 10px;
 }
 
+.access-character-button:hover {
+  cursor: pointer;
+}
+
 .race-and-class {
   display: flex;
   align-items: center;
@@ -238,4 +243,70 @@ body {
   font-size: 44px;
   padding: 5px;
   padding-top: 90px;
+}
+
+.no-characters-message {
+  align-self: flex-start;
+  padding: 80px;
+  font-size: 16px;
+  color: #92AA9A;
+}
+
+.self-photo {
+  height: 450px;
+}
+
+.self-photo-container {
+  border-style:solid;
+  height: 500px;
+  width: 390px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 20px;
+  border-color: #BC9A59;
+  border-width: 1px;
+  margin-top: 90px;
+  margin-right: 50px;
+}
+
+.about-page {
+  width: 100%;
+  display: flex;
+  height: 90%;
+  justify-content: center;
+}
+
+.about-text-container {
+  margin-top: 50px;
+  width: 50%;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  overflow: scroll;
+  /* margin-right: 30px; */
+}
+
+.about-title {
+  font-size: 32px;
+}
+
+.about-paragraph {
+  font-size: 18px;
+}
+
+.about-signature {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.signature-logo {
+  height: 25px;
+  margin-left: 10px;
+}
+
+.signature-logo:hover {
+  box-shadow: 0 0 6px #b5b4b4;
+  cursor: pointer;
 }
