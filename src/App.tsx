@@ -6,6 +6,11 @@ import { Footer } from "./components/Footer";
 import { Home } from "./pages/home/home";
 import { About } from "./pages/about";
 import { Login } from "./pages/login";
+import { Begin } from "./pages/begin/begin";
+import { AbilityScores } from "./pages/ability-scores";
+import { Choices } from "./pages/choices";
+import { Spells } from "./pages/spells";
+import { CharacterSheet } from "./pages/character-sheet";
 
 function App() {
   return (
@@ -16,6 +21,11 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/about" element={<About />} />
           <Route path="/login" element={<Login />} />
+          <Route path="/begin" element={<Begin />} />
+          <Route path="/ability-scores" element={<AbilityScores />} />
+          <Route path="/choices" element={<Choices />} />
+          <Route path="/spells" element={<Spells />} />
+          <Route path="/character-sheet" element={<CharacterSheet />} />
         </Routes>
         <Footer />
       </Router>
