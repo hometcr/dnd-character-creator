@@ -12,7 +12,7 @@ export const BeginCharacterForm = () => {
             <option selected></option>
             <option>Fighter</option>
             <option>Wizard</option>
-            <option>Druid</option>
+            <option>Bard</option>
             <option>Paladin</option>
           </select>
         </div>

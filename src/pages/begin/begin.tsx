@@ -4,7 +4,7 @@ import { ItemDescription } from "../../components/ItemDescription";
 
 export const Begin = () => {
 
-  let selectedItem = "Human";
+  let selectedItem = "";
 
   return (
     <div className="begin-character-page">
