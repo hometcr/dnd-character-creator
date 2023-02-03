@@ -44,7 +44,7 @@ export const AbilityScores = () => {
           </div>
         </div>
       </div>
-      <AbilitiesContainer />
+      <AbilitiesContainer scores={scores}/>
     </div>
   );
 };

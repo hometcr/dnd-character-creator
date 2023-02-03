@@ -311,7 +311,7 @@ body {
 }
 
 .signature-logo:hover {
-  box-shadow: 0 0 6px #b5b4b4;
+  /* box-shadow: 0 0 6px #b5b4b4; */
   cursor: pointer;
 }
 
@@ -433,10 +433,11 @@ body {
 .get-ability-scores-container {
   display: flex;
   flex-direction: column;
-  width: 40%;
+  width: 80%;
   min-width: 265px;
   align-items: center;
   justify-content: flex-start;
+  overflow: scroll;
 }
 
 .ability-scores-page {
@@ -466,6 +467,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
+  min-height: 165px;
 }
 
 .roll-dice-button {
@@ -510,4 +512,72 @@ body {
 .scores-list-score {
   margin-right: 5px;
   margin-left: 5px;
+}
+
+.abilities-container-etc {
+  background-color:  #f1f8f0;
+  width: 100%;
+  overflow: hidden;
+  align-items: center;
+  min-width: 550px;
+}
+
+.abilities-container {
+  display: flex;
+  flex-direction: column;
+  justify-content:center;
+  align-items:center;
+  height: 90%;
+}
+
+.ability {
+  background-color: white;
+  border-style: solid;
+  border-color: #bc9a59;
+  border-width: 1px;
+  margin: 15px;
+  min-width: 150px;
+  min-height: 150px;
+  width: 20%;
+  height: 70%
+}
+
+.abilities-top-row {
+  display: flex;
+  min-height: 200px;
+}
+
+.abilities-bottom-row {
+  display: flex;
+  min-height: 200px;
+}
+
+.ability-score-note {
+  margin: 20px;
+  align-self: center;
+  width: 350px;
+  font-size: 20px;
+  color: #92AA9A;
+}
+
+.choose-score-with-bonus {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.ability-score-select {
+  font-size: 20px;
+  font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
+}
+
+.ability-score-bonus {
+  font-size: 20px;
+}
+
+.plus-sign {
+  font-size: 24px;
+  padding-bottom: 6px;
+  padding-left: 6px;
+  padding-right: 3px;
 }
