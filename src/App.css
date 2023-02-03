@@ -458,7 +458,6 @@ body {
   padding-left: 40px;
 }
 
-
 .roll-dice-container {
   height: 165px;
   width: 200px;
@@ -516,7 +515,7 @@ body {
 }
 
 .abilities-container-etc {
-  background-color:  #f1f8f0;
+  background-color: #f1f8f0;
   width: 100%;
   overflow: hidden;
   align-items: center;
@@ -528,8 +527,8 @@ body {
 .abilities-container {
   display: flex;
   flex-direction: column;
-  justify-content:center;
-  align-items:center;
+  justify-content: center;
+  align-items: center;
   height: 90%;
 }
 
@@ -542,7 +541,7 @@ body {
   min-width: 150px;
   min-height: 150px;
   width: 20%;
-  height: 70%
+  height: 70%;
 }
 
 .abilities-top-row {
@@ -560,7 +559,7 @@ body {
   align-self: center;
   width: 350px;
   font-size: 20px;
-  color: #92AA9A;
+  color: #92aa9a;
 }
 
 .choose-score-with-bonus {
@@ -584,7 +583,6 @@ body {
   padding-left: 6px;
   padding-right: 3px;
 }
-
 
 .abilities-next-button {
   background-color: white;
@@ -659,7 +657,7 @@ body {
 }
 
 .list-of-choices-and-title {
-  width: 180px;
+  width: 200px;
   margin: 10px;
   display: flex;
   flex-direction: column;
@@ -674,10 +672,10 @@ body {
 
 .list-of-choices {
   display: flex;
-  flex-direction:column;
+  flex-direction: column;
   align-items: flex-start;
   justify-content: center;
-  width: 160px;
+  width: 180px;
   padding: 10px;
   border-style: solid;
   border-color: #bc9a59;
@@ -686,4 +684,8 @@ body {
 
 .item-in-choices-list {
   font-size: 18px;
+}
+
+.item-select {
+  font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
 }
