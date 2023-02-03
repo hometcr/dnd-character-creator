@@ -8,7 +8,7 @@ import { About } from "./pages/about";
 import { Login } from "./pages/login";
 import { Begin } from "./pages/begin/begin";
 import { AbilityScores } from "./pages/ability-scores/ability-scores";
-import { Choices } from "./pages/choices";
+import { Choices } from "./pages/choices/choices";
 import { Spells } from "./pages/spells";
 import { CharacterSheet } from "./pages/character-sheet";
 
