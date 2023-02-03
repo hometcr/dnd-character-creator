@@ -520,6 +520,8 @@ body {
   overflow: hidden;
   align-items: center;
   min-width: 550px;
+  display: flex;
+  flex-direction: column;
 }
 
 .abilities-container {
@@ -580,4 +582,29 @@ body {
   padding-bottom: 6px;
   padding-left: 6px;
   padding-right: 3px;
+}
+
+
+.abilities-next-button {
+  background-color: white;
+  width: 80px;
+  height: 33px;
+  margin: 15px;
+  border-style: solid;
+  border-color: #bc9a59;
+  border-width: 1px;
+  font-size: 24px;
+  font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
+  filter: drop-shadow(0px 2px 2px rgba(0, 0, 0, 0.25));
+  border-style: solid;
+  color: #bc9a59;
+  border-radius: 10px;
+  margin-bottom: 30px;
+  margin-right: 50px;
+  align-self: end;
+}
+
+.abilities-next-button:hover {
+  cursor: pointer;
+  box-shadow: 0 0 4px #b6b6b6;
 }

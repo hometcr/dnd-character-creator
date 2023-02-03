@@ -1,4 +1,5 @@
 import { Ability } from "./Ability"
+import {NavigateButton} from "../../../components/NavigateButton"
 
 
 interface IProps {
@@ -35,6 +36,7 @@ export const AbilitiesContainer = (props: IProps) => {
         </div>
         <p className="ability-score-note">{"*You have some score bonuses from your character choices in Step 1*"}</p>
       </div>
+      <NavigateButton destination="/magic" text="Next" className="abilities-next-button"/>
     </div>
   );
 }
