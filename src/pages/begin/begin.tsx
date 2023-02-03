@@ -1,9 +1,11 @@
 import { BeginCharacterForm } from "./components/BeginCharacterForm";
 import { ItemDescription } from "../../components/ItemDescription";
 
-let selectedItem = "Human";
 
 export const Begin = () => {
+
+  let selectedItem = "Human";
+
   return (
     <div className="begin-character-page">
       <div className="begin-character-text">

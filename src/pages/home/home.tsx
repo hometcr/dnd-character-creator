@@ -1,9 +1,48 @@
-import { NavigateButton } from "../../components/NavigateButton"
-import { CharactersContainer } from "./components/CharactersContainer"
-import witch from "../../assets/witch.jpg"
+import { NavigateButton } from "../../components/NavigateButton";
+import { CharactersContainer } from "./components/CharactersContainer";
+import witch from "../../assets/witch.jpg";
+
+export interface ICharacter {
+  name: string;
+  class: string;
+  race: string;
+}
 
 export const Home = () => {
   const user_is_logged_in = true;
+
+  const charactersData: ICharacter[] = [
+    {
+      name: "Beverly Toegold",
+      class: "paladin",
+      race: "halfing",
+    },
+    {
+      name: "Hardwon Surefoot",
+      class: "fighter",
+      race: "human",
+    },
+    {
+      name: "Moonshine Cybin",
+      class: "druid",
+      race: "wood elf",
+    },
+  ];
+
+  let newCharacterButton = <></>
+  if (charactersData.length > 2) {
+    newCharacterButton = (
+      <div>To create a new character, make space by deleting an existing one</div>
+    )
+  } else {
+    newCharacterButton=(
+      <NavigateButton
+        className="new-character-button"
+        destination="/create"
+        text="Create New Character"
+      />
+    )
+  }
 
   if (!user_is_logged_in) {
     return (
@@ -20,11 +59,11 @@ export const Home = () => {
     return (
       <div className="logged-in-home">
         <div className="witch-and-button">
-          <img src={witch} alt="witch" className="witch"/>
-          <NavigateButton className="new-character-button" destination="/create" text="Create New Character"/>
+          <img src={witch} alt="witch" className="witch" />
+          {newCharacterButton}
           <div className="counter-witch-padding"></div>
         </div>
-        <CharactersContainer/>
+        <CharactersContainer characters={charactersData} />
       </div>
     );
   }

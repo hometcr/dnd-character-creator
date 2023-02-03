@@ -1,33 +1,16 @@
 import { Character } from "./Character";
+import { ICharacter } from "../home"
 
-export interface ICharacter {
-  name: string;
-  class: string;
-  race: string;
+interface IProps {
+  characters: ICharacter[]
 }
 
-export const CharactersContainer = () => {
-  const charactersData: ICharacter[] = [
-    {
-      name: "Beverly Toegold",
-      class: "paladin",
-      race: "halfing",
-    },
-    {
-      name: "Hardwon Surefoot",
-      class: "fighter",
-      race: "human",
-    },
-    {
-      name: "Moonshine Cybin",
-      class: "druid",
-      race: "wood elf",
-    },
-  ];
+export const CharactersContainer = (props: IProps) => {
+  
 
   let characters;
-  if (charactersData.length > 0) {
-    characters = charactersData.map((character: ICharacter) => (
+  if (props.characters.length > 0) {
+    characters = props.characters.map((character: ICharacter) => (
       <Character character={character} />
     ));
   } else {

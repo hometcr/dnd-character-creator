@@ -20,7 +20,7 @@ export const Ability = (props: IProps) => {
         </select>
         <div className="plus-sign">+</div>
         <div className="ability-score-bonus">{String(props.bonus)}</div>
-        </div>
+      </div>
     </div>
   );
 };

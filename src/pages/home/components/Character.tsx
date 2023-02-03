@@ -1,4 +1,4 @@
-import { ICharacter } from "./CharactersContainer";
+import { ICharacter } from "../home";
 import { ViewButton } from "./ViewButton";
 import { DeleteButton } from "./DeleteButton";
 import { titleCase } from "../../../helpers/titleCase";

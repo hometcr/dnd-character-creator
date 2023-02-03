@@ -26,7 +26,9 @@ export const AbilityScores = () => {
 
   getAbilityScores();
 
-  let scoresDisplay = scores.map((score) => <div className="scores-list-score">{String(score)}</div>);
+  let scoresDisplay = scores.map((score) => (
+    <div className="scores-list-score">{String(score)}</div>
+  ));
 
   return (
     <div className="ability-scores-page">
@@ -39,12 +41,10 @@ export const AbilityScores = () => {
         <RollDiceButton />
         <div className="scores-list">
           <div className="scores-list-title">Scores: </div>
-          <div className="scores-list-scores">
-            {scoresDisplay}
-          </div>
+          <div className="scores-list-scores">{scoresDisplay}</div>
         </div>
       </div>
-      <AbilitiesContainer scores={scores}/>
+      <AbilitiesContainer scores={scores} />
     </div>
   );
 };
