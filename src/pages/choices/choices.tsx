@@ -1,4 +1,4 @@
-import { ListsContainer } from "./components/ListsContainer";
+import { ListsContainer } from "../../components/ListsContainer";
 import { ItemDescription } from "../../components/ItemDescription";
 import bow from "../../assets/bow.png";
 import { NavigateButton } from "../../components/NavigateButton";
@@ -6,6 +6,30 @@ import { NavigateButton } from "../../components/NavigateButton";
 export const Choices = () => {
   let selectedItem = "Fighter";
   let isMagicUser = true;
+
+  let knownProficiencies = ["Animal Handling", "Survival"];
+  let unknownProficiencies = [
+    ["Acrobatics", "Strength", "Dexterity"],
+    ["Acrobatics", "Strength", "Dexterity"],
+  ];
+  let knownEquipment = ["Shovel", "Iron Pot", "Common Clothes"];
+  let unknownEquipment = [
+    ["Explorer's Pack", "Dungeoneer's Pack"],
+    [
+      "Calligrapher's Supplies",
+      "Carpenter's Tools",
+      "Cook's Utensils",
+      "Mason's Tools",
+      "Tinker's Tools",
+    ],
+  ];
+  let knownWeapons = ["Longbow"];
+  let unknownWeapons = [
+    ["Shield", "Axe"],
+    ["Light Crossbow", "Javelin"],
+  ];
+  let knownLanguages = ["Common", "Dwarvish"];
+  let unknownLanguages = [[]];
 
   let nextPage = "/";
   if (isMagicUser) {
@@ -23,7 +47,17 @@ export const Choices = () => {
             <h2 className="choices-title">Step 3: Choices</h2>
             <div className="counter-bow"></div>
           </div>
-          <ListsContainer />
+          <ListsContainer
+            page="choices"
+            knownEquipment={knownEquipment}
+            unknownEquipment={unknownEquipment}
+            knownProficiencies={knownProficiencies}
+            unknownProficiencies={unknownProficiencies}
+            knownWeapons={knownWeapons}
+            unknownWeapons={unknownWeapons}
+            knownLanguages={knownLanguages}
+            unknownLanguages={unknownLanguages}
+          />
         </div>
         <NavigateButton
           destination={nextPage}
