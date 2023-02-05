@@ -11,13 +11,19 @@ export const ListOfChoices = (props: IProps) => {
   ));
 
   // transform unknown items into listable dropdowns
-  let listedUnknownItems = props.unknownItems.map((unknownItem) => (
-    <select className="item-select">
-      {unknownItem.map((option) => (
-        <option>{option}</option>
-      ))}
-    </select>
-  ));
+  // accounts for empty unknown list
+  let listedUnknownItems
+  if (props.unknownItems[0].length > 0) {
+    listedUnknownItems = props.unknownItems.map((unknownItem) => (
+      <select className="item-select">
+        {unknownItem.map((option) => (
+          <option>{option}</option>
+        ))}
+      </select>
+    ));
+  } else {
+    listedUnknownItems = <div></div>
+  }
 
   return (
     <div className="list-of-choices-and-title">

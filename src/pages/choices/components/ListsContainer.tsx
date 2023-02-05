@@ -22,8 +22,8 @@ export const ListsContainer = () => {
     ["Shield", "Axe"],
     ["Light Crossbow", "Javelin"],
   ];
-  let knownLanguages = [""];
-  let unknownLanguages = [["Common", "Dwarvish"]];
+  let knownLanguages = ["Common", "Dwarvish"];
+  let unknownLanguages = [[]];
 
   return (
     <div className="lists-container">
