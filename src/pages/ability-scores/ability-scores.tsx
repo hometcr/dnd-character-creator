@@ -2,6 +2,10 @@ import { AbilitiesContainer } from "./components/AbilitiesContainer";
 import { RollDiceButton } from "./components/RollDiceButton";
 
 export const AbilityScores = () => {
+
+  // will become state
+  let diceRolled = true;
+
   const getAbilityScore = () => {
     let rolls = [];
     for (let i = 0; i < 4; i++) {
@@ -24,7 +28,11 @@ export const AbilityScores = () => {
     return scores;
   };
 
-  getAbilityScores();
+  let abilityScores: Number[] = [0, 0, 0, 0, 0, 0]
+  if (diceRolled) {
+    abilityScores = getAbilityScores()
+  }
+
 
   let scoresDisplay = scores.map((score) => (
     <div className="scores-list-score">{String(score)}</div>
@@ -44,7 +52,7 @@ export const AbilityScores = () => {
           <div className="scores-list-scores">{scoresDisplay}</div>
         </div>
       </div>
-      <AbilitiesContainer scores={scores} />
+      <AbilitiesContainer scores={abilityScores} />
     </div>
   );
 };

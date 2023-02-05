@@ -5,6 +5,14 @@ import { NavigateButton } from "../../components/NavigateButton";
 
 export const Choices = () => {
   let selectedItem = "Fighter";
+  let isMagicUser = true;
+
+  let nextPage = "/";
+  if (isMagicUser) {
+    nextPage = "/spells";
+  } else {
+    nextPage = "/";
+  }
 
   return (
     <div className="choices-page">
@@ -18,7 +26,7 @@ export const Choices = () => {
           <ListsContainer />
         </div>
         <NavigateButton
-          destination="/spells"
+          destination={nextPage}
           text="Next"
           className="choices-next-button"
         />
