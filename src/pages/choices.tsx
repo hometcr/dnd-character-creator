@@ -1,11 +1,10 @@
-import { ListsContainer } from "../../components/ListsContainer";
-import { ItemDescription } from "../../components/ItemDescription";
-import bow from "../../assets/bow.png";
-import { NavigateButton } from "../../components/NavigateButton";
+import { ListsContainer } from "../components/ListsContainer";
+import { ItemDescription } from "../components/ItemDescription";
+import bow from "../assets/bow.png";
+import { NavigateButton } from "../components/NavigateButton";
 
 export const Choices = () => {
-  let selectedItem = "Fighter";
-  let isMagicUser = true;
+  let selectedItem = "";
 
   let knownProficiencies = ["Animal Handling", "Survival"];
   let unknownProficiencies = [
@@ -31,13 +30,6 @@ export const Choices = () => {
   let knownLanguages = ["Common", "Dwarvish"];
   let unknownLanguages = [[]];
 
-  let nextPage = "/";
-  if (isMagicUser) {
-    nextPage = "/spells";
-  } else {
-    nextPage = "/";
-  }
-
   return (
     <div className="choices-page">
       <div className="choices-without-description">
@@ -60,12 +52,12 @@ export const Choices = () => {
           />
         </div>
         <NavigateButton
-          destination={nextPage}
+          destination="spells"
           text="Next"
           className="choices-next-button"
         />
       </div>
-      <div className="choices-options-container">
+      <div className="choices-description-container">
         <ItemDescription item={selectedItem} />
       </div>
     </div>
