@@ -10,6 +10,12 @@ interface IProps {
   unknownLanguages?: String[][];
   knownWeapons?: String[];
   unknownWeapons?: String[][];
+  knownCantrips?: String[];
+  unknownCantrips?: String[][];
+  knownFirstLevelSpells?: String[];
+  unknownFirstLevelSpells?: String[][];
+  knownPreparedSpells?: String[];
+  unknownPreparedSpells?: String[][];
 }
 
 export const ListsContainer = (props: IProps) => {
@@ -61,12 +67,51 @@ export const ListsContainer = (props: IProps) => {
     );
   }
 
+  // set up cantrips list if one is sent in via props
+  let cantripsList;
+  if (props.knownCantrips && props.unknownCantrips) {
+    cantripsList = (
+      <ListOfChoices
+        listName="Cantrips"
+        knownItems={props.knownCantrips}
+        unknownItems={props.unknownCantrips}
+      />
+    );
+  }
+
+  // set up first level spells list if one is sent in via props
+  let firstLevelSpellsList;
+  if (props.knownFirstLevelSpells && props.unknownFirstLevelSpells) {
+    firstLevelSpellsList = (
+      <ListOfChoices
+        listName="1st Level Spells"
+        knownItems={props.knownFirstLevelSpells}
+        unknownItems={props.unknownFirstLevelSpells}
+      />
+    );
+  }
+
+  // set up prepared spells list if one is sent in via props
+  let preparedSpellsList;
+  if (props.knownPreparedSpells && props.unknownPreparedSpells) {
+    preparedSpellsList = (
+      <ListOfChoices
+        listName="Prepared Spells"
+        knownItems={props.knownPreparedSpells}
+        unknownItems={props.unknownPreparedSpells}
+      />
+    );
+  }
+
   return (
     <div className="lists-container">
       {proficienciesList}
       {equipmentList}
       {weaponsList}
       {languagesList}
+      {cantripsList}
+      {firstLevelSpellsList}
+      {preparedSpellsList}
     </div>
   );
 };
