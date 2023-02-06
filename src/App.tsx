@@ -10,7 +10,7 @@ import { Begin } from "./pages/begin/begin";
 import { AbilityScores } from "./pages/ability-scores/ability-scores";
 import { Choices } from "./pages/choices";
 import { Spells } from "./pages/spells";
-import { CharacterSheet } from "./pages/character-sheet";
+import { CharacterSheet } from "./pages/character-sheet/character-sheet";
 
 function App() {
   return (
