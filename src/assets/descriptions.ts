@@ -14,6 +14,12 @@ export interface IDescriptions {
   "Rustic Hospitality": string;
   Dueling: string;
   "Second Wind": string;
+  "Mage Armor": string;
+  Sleep: string;
+  "Feather Fall": string;
+  Mending: string;
+  Light: string;
+  "Fire Bolt": string;
 }
 
 export const descriptions: IDescriptions = {
@@ -45,4 +51,16 @@ export const descriptions: IDescriptions = {
     "When you are wielding a melee weapon in one hand and no other weapons, you gain a +2 bonus to damage rolls with that weapon.",
   "Second Wind":
     "You have a limited well of stamina that you can draw on to protect yourself from harm. On your turn, you can use a bonus action to regain hit points equal to 1d10 + your fighter level. Once you use this feature, you must finish a short or long rest before you can use it again.",
+  "Mage Armor":
+    "Casting Time: 1 action; Range: Touch; Components: V, S, M; Duration: 8 hours; You touch a willing creature who isn’t wearing armor, and a protective magical force surrounds it until the spell ends. The target’s base AC becomes 13 + its Dexterity modifier. The spell ends if the target dons armor or if you dismiss the spell as an action.",
+  Sleep:
+    "Casting Time: 1 action; Range: 90 feet; Components: V, S, M; Duration: 1 minute; This spell sends creatures into a magical slumber. Roll 5d8, the total is how many hit points of creatures this spell can affect. Creatures within 20 feet of a point you choose within range are affected in ascending order of their current hit points (ignoring unconscious creatures). Starting with the creature that has the lowest current hit points, each creature affected by this spell falls unconscious until the spell ends, the sleeper takes damage, or someone uses an action to shake or slap the sleeper awake. Subtract each creature’s hit points from the total before moving on to the creature with the next lowest hit points. A creature’s hit points must be equal to or less than the remaining total for that creature to be affected. Undead and creatures immune to being charmed aren’t affected by this spell.",
+  "Feather Fall":
+    "Casting Time: 1 reaction, which you take when you or a creature within 60 feet of you falls; Range: 60 feet; Components: V, M; Duration: 1 minute; Choose up to five falling creatures within range. A falling creature’s rate of descent slows to 60 feet per round until the spell ends. If the creature lands before the spell ends, it takes no falling damage and can land on its feet, and the spell ends for that creature.",
+  Mending:
+    "Casting Time: 1 minute; Range: Touch; Components: V, S, M; Duration: Instantaneous; This spell repairs a single break or tear in an object you touch, such as a broken chain link, two halves of a broken key, a torn cloak, or a leaking wineskin. As long as the break or tear is no larger than 1 foot in any dimension, you mend it, leaving no trace of the former damage. This spell can physically repair a magic item or construct, but the spell can’t restore magic to such an object.",
+  Light:
+    "Casting Time: 1 action; Range: Touch; Components: V, M; Duration: 1 hour; You touch one object that is no larger than 10 feet in any dimension. Until the spell ends, the object sheds bright light in a 20-foot radius and dim light for an additional 20 feet. The light can be colored as you like. Completely covering the object with something opaque blocks the light. The spell ends if you cast it again or dismiss it as an action. If you target an object held or worn by a hostile creature, that creature must succeed on a Dexterity saving throw to avoid the spell.",
+  "Fire Bolt":
+    "Casting Time: 1 action; Range: 120 feet; Components: V, S; Duration: Instantaneous; You hurl a mote of fire at a creature or object within range. Make a ranged spell attack against the target. On a hit, the target takes 1d10 fire damage. A flammable object hit by this spell ignites if it isn’t being worn or carried.",
 };

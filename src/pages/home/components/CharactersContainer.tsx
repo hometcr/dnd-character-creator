@@ -1,13 +1,11 @@
 import { Character } from "./Character";
-import { ICharacter } from "../home"
+import { ICharacter } from "../home";
 
 interface IProps {
-  characters: ICharacter[]
+  characters: ICharacter[];
 }
 
 export const CharactersContainer = (props: IProps) => {
-  
-
   let characters;
   if (props.characters.length > 0) {
     characters = props.characters.map((character: ICharacter) => (

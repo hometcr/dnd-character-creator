@@ -869,7 +869,6 @@ body {
 
 .stats-box {
   border-top-style: solid;
-  /* border-bottom-style: solid; */
   border-left-style: solid;
   border-color: #bc9a59;
   border-width: 1px;
@@ -911,6 +910,7 @@ body {
   text-align: left;
   padding-left: 25px;
   color: gray;
+  padding-right: 10px;
 }
 
 .description-toggle-triangle:hover {
@@ -928,5 +928,87 @@ body {
 }
 
 .proficiencies-bottom-box {
-  padding-bottom:8px;
+  padding-bottom: 8px;
+}
+
+.spells-box {
+  border-top-style: solid;
+  border-left-style: solid;
+  border-color: #bc9a59;
+  border-width: 1px;
+  width: 360px;
+  height: 240px;
+  background-color: white;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+}
+
+.spells-small-boxes-container {
+  display: flex;
+}
+
+.spells-small-box {
+  border-right-style: solid;
+  border-bottom-style: solid;
+  border-color: #bc9a59;
+  border-width: 1px;
+  width: 119px;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.spells-small-box-title {
+  text-align: right;
+  font-size: 14px;
+}
+
+.spells-attack-mod-title {
+  text-align: right;
+  width: 72px;
+  font-size: 14px;
+}
+
+.spells-small-box-stat {
+  font-size: 16px;
+  padding-left: 5px;
+  padding-bottom: 2px;
+}
+
+.spells-large-box {
+  border-color: #bc9a59;
+  border-width: 1px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding-bottom: 5px;
+}
+
+.spells-cantrips-box {
+  border-bottom-style: solid;
+  border-color: #bc9a59;
+  border-width: 1px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding-bottom: 5px;
+}
+
+.spells-large-boxes-container {
+  border-right-style: solid;
+  border-bottom-style: solid;
+  border-color: #bc9a59;
+  border-width: 1px;
+  height: 197px;
+  overflow: scroll;
+  display: flex;
+  flex-direction: column;
+}
+
+.spells-large-box-title {
+  font-size: 14px;
+  padding-left: 8px;
+  padding-top: 5px;
 }

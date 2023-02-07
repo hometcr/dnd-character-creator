@@ -18,9 +18,19 @@ export const CharacterSheet = () => {
     proficiencyBonus: 2,
     passivePerception: 14,
     hitDice: [1, "d10"],
-    proficiencies: ["Heavy Armor", "Shields", "Simple Weapons", "Martial Weapons"],
+    proficiencies: [
+      "Heavy Armor",
+      "Shields",
+      "Simple Weapons",
+      "Martial Weapons",
+    ],
     languages: ["Common", "Dwarvish", "Elvish"],
     features: ["Rustic Hospitality", "Dueling", "Second Wind"],
+    spellSlots: 4,
+    spellSaveDc: 4,
+    spellAttackMod: 4,
+    cantrips: ["Fire Bolt", "Light", "Mending"],
+    firstLevelSpells: ["Feather Fall", "Mage Armor", "Sleep"],
   };
 
   return (
@@ -43,8 +53,18 @@ export const CharacterSheet = () => {
           passivePerception={characterInfo.passivePerception}
           hitDice={characterInfo.hitDice}
         />
-        <ProficienciesAndFeatures proficiencies={characterInfo.proficiencies} languages={characterInfo.languages} features={characterInfo.features}/>
-        <Spells />
+        <ProficienciesAndFeatures
+          proficiencies={characterInfo.proficiencies}
+          languages={characterInfo.languages}
+          features={characterInfo.features}
+        />
+        <Spells
+          spellSlots={characterInfo.spellSlots}
+          spellSaveDc={characterInfo.spellSaveDc}
+          spellAttackMod={characterInfo.spellAttackMod}
+          cantrips={characterInfo.cantrips}
+          firstLevelSpells={characterInfo.firstLevelSpells}
+        />
         <Skills />
         <ArmorAndWeapons />
         <Items />
