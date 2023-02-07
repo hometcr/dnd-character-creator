@@ -888,3 +888,45 @@ body {
 .stat {
   font-size: 20px;
 }
+
+.proficiencies-top-box {
+  border-bottom-style: solid;
+  border-color: #bc9a59;
+  border-width: 1px;
+  padding-bottom: 8px;
+}
+
+.description-toggle-title-and-triangle {
+  display: flex;
+  padding-top: 8px;
+  padding-left: 10px;
+}
+
+.description-toggle-title {
+  font-size: 20px;
+  padding-left: 5px;
+}
+
+.description-toggle-description {
+  text-align: left;
+  padding-left: 25px;
+  color: gray;
+}
+
+.description-toggle-triangle:hover {
+  cursor: pointer;
+}
+
+.proficiencies-box {
+  border-style: solid;
+  border-color: #bc9a59;
+  border-width: 1px;
+  width: 360px;
+  height: 240px;
+  background-color: white;
+  overflow: scroll;
+}
+
+.proficiencies-bottom-box {
+  padding-bottom:8px;
+}

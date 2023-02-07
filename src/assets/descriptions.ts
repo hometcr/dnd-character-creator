@@ -1,4 +1,22 @@
-export const descriptions = {
+export interface IDescriptions {
+  Fighter: string;
+  Wizard: string;
+  Bard: string;
+  Paladin: string;
+  Human: string;
+  Elf: string;
+  Dwarf: string;
+  Halfling: string;
+  Entertainer: string;
+  Acolyte: string;
+  "Folk Hero": string;
+  Noble: string;
+  "Rustic Hospitality": string;
+  Dueling: string;
+  "Second Wind": string;
+}
+
+export const descriptions: IDescriptions = {
   Fighter:
     "Fighters share an unparalleled mastery with weapons and armor, and a thorough knowledge of the skills of combat. They are well acquainted with death, both meting it out and staring it defiantly in the face.",
   Wizard:
@@ -21,4 +39,10 @@ export const descriptions = {
     "You have spent your life in the service of a temple to a specific god or pantheon of gods. You act as an intermediary between the realm of the holy and the mortal world, performing sacred rites and offering sacrifices in order to conduct worshipers into the presence of the divine. You are not necessarily a cleric – performing sacred rites is not the same thing as channeling divine power.",
   Noble:
     "You understand wealth, power, and privilege. You carry a noble title, and your family owns land, collects taxes, and wields significant political influence. You might be a pampered aristocrat unfamiliar with work or discomfort, a former merchant just elevated to the nobility, or a disinherited scoundrel with a disproportionate sense of entitlement. Or you could be an honest, hard-working landowner who cares deeply about the people who live and work on your land, keenly aware of your responsibility to them.",
+  "Rustic Hospitality":
+    "Since you come from the ranks of the common folk, you fit in among them with ease. You can find a place to hide, rest, or recuperate among other commoners, unless you have shown yourself to be a danger to them. They will shield you from the law or anyone else searching for you, though they will not risk their lives for you.",
+  Dueling:
+    "When you are wielding a melee weapon in one hand and no other weapons, you gain a +2 bonus to damage rolls with that weapon.",
+  "Second Wind":
+    "You have a limited well of stamina that you can draw on to protect yourself from harm. On your turn, you can use a bonus action to regain hit points equal to 1d10 + your fighter level. Once you use this feature, you must finish a short or long rest before you can use it again.",
 };

@@ -1,5 +1,5 @@
 import { Stats } from "./components/Stats";
-import { ProficienciesAndTraits } from "./components/ProficienciesAndTraits";
+import { ProficienciesAndFeatures } from "./components/ProficienciesAndFeatures";
 import { Spells } from "./components/Spells";
 import { Skills } from "./components/Skills";
 import { ArmorAndWeapons } from "./components/ArmorAndWeapons";
@@ -18,6 +18,9 @@ export const CharacterSheet = () => {
     proficiencyBonus: 2,
     passivePerception: 14,
     hitDice: [1, "d10"],
+    proficiencies: ["Heavy Armor", "Shields", "Simple Weapons", "Martial Weapons"],
+    languages: ["Common", "Dwarvish", "Elvish"],
+    features: ["Rustic Hospitality", "Dueling", "Second Wind"],
   };
 
   return (
@@ -40,7 +43,7 @@ export const CharacterSheet = () => {
           passivePerception={characterInfo.passivePerception}
           hitDice={characterInfo.hitDice}
         />
-        <ProficienciesAndTraits />
+        <ProficienciesAndFeatures proficiencies={characterInfo.proficiencies} languages={characterInfo.languages} features={characterInfo.features}/>
         <Spells />
         <Skills />
         <ArmorAndWeapons />
