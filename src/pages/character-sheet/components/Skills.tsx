@@ -1,87 +1,98 @@
-import { isPropertySignature } from "typescript";
 import { SkillDisplay } from "./SkillDisplay";
 
-export interface ISkills {
-  "Str Saving Throws": number;
-  "Athletics": number;
-  "Con Saving Throws": number;
-  "Dex Saving Throws": number;
-  Acrobatics: number;
-  "Sleight of Hand": number;
-  Stealth: number;
-  "Char Saving Throws": number;
-  Deception: number;
-  Intimidation: number;
-  Performance: number;
-  Persuasion: number;
-  "Wis Saving Throws": number;
-  "Animal Handling": number;
-  Insight: number;
-  Medicine: number;
-  Perception: number;
-  Survival: number;
-  "Int Saving Throws": number;
-  Arcana: number;
-  History: number;
-  Investigation: number;
-  Nature: number;
-  Religion: number;
+interface ISkill {
+  "Saving Throws"?: number;
+  Athletics?: number;
+  Acrobatics?: number;
+  "Sleight of Hand"?: number;
+  Stealth?: number;
+  Deception?: number;
+  Intimidation?: number;
+  Performance?: number;
+  Persuasion?: number;
+  "Animal Handling"?: number;
+  Insight?: number;
+  Medicine?: number;
+  Perception?: number;
+  Survival?: number;
+  Arcana?: number;
+  History?: number;
+  Investigation?: number;
+  Nature?: number;
+  Religion?: number;
 }
 
-export interface IAbilityScores {
-  str: number;
-  con: number;
-  wis: number;
-  int: number;
-  char: number;
-  dex: number;
+interface ISkills {
+  Strength: ISkill;
+  Constitution: ISkill;
+  Dexterity: ISkill;
+  Charisma: ISkill;
+  Wisdom: ISkill;
+  Intelligence: ISkill;
+}
+
+interface IAbilityScores {
+  Strength: number;
+  Constitution: number;
+  Wisdom: number;
+  Intelligence: number;
+  Charisma: number;
+  Dexterity: number;
 }
 interface IProps {
   abilityScores: IAbilityScores;
   skills: ISkills;
 }
 
-
 export const Skills = (props: IProps) => {
-
   const createScoreDisplay = (score: number) => {
-    let sign = "+";
-    if (score < 0) {
-      sign = "-";
+    let sign = "";
+    if (score > 0) {
+      sign = "+";
     }
-    return `${sign}${score}`
-  }
+    return `${sign}${score}`;
+  };
 
   const createSkillItem = (skill: string, score: number) => {
-    let scoreDisplay = createScoreDisplay(score)
+    let scoreDisplay = createScoreDisplay(score);
     return `${scoreDisplay} ${skill}`;
   };
 
-  const createSkillItemList = (skills: string[]) => {
+  const createSkillItemList = (ability: String) => {
+    let skillsDict = props.skills[ability as keyof ISkills];
     let skillItemList = [];
-    for (let skill of skills) {
+    for (let skill in skillsDict) {
       let newSkillItem = createSkillItem(
         skill,
-        props.skills[skill as keyof ISkills]
+        Number(skillsDict[skill as keyof ISkill])
       );
       skillItemList.push(newSkillItem);
     }
     return skillItemList;
   };
 
-  let strSkillItems = createSkillItemList(["Str Saving Throws", "Athletics"]);
-  let strScoreDisplay = createScoreDisplay(props.abilityScores.str)
+  let skillDisplays = () => {
+    let skillDisplaysList = [];
+    for (let ability in props.abilityScores) {
+      let scoreDisplay = createScoreDisplay(
+        props.abilityScores[ability as keyof IAbilityScores]
+      );
+      let skillItems = createSkillItemList(ability);
+      skillDisplaysList.push(
+        <SkillDisplay
+          ability={String(ability)}
+          abilityScore={scoreDisplay}
+          skillItems={skillItems}
+        />
+      );
+    }
+    return skillDisplaysList;
+  };
 
   return (
     <div className="character-sheet-item">
       <div className="character-sheet-box-title">Skills</div>
-      <div className="skills-box">
-        <SkillDisplay
-          ability="Strength"
-          abilityScore={strScoreDisplay}
-          skillItems={strSkillItems}
-        />
-      </div>
+      <div className="skills-box">{skillDisplays()}</div>
     </div>
   );
 };

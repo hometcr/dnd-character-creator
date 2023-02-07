@@ -9,7 +9,7 @@ export const SkillDisplay = (props: IProps) => {
     <div>
       <div>Ability: {props.ability}</div>
       <div>Score: {props.abilityScore}</div>
-      <div>Ability: {props.skillItems}</div>
+      <div>Skills: {props.skillItems}</div>
     </div>
   );
 };
