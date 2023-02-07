@@ -3,13 +3,21 @@ import { ProficienciesAndTraits } from "./components/ProficienciesAndTraits";
 import { Spells } from "./components/Spells";
 import { Skills } from "./components/Skills";
 import { ArmorAndWeapons } from "./components/ArmorAndWeapons";
-import { Items } from "./components/Items"
+import { Items } from "./components/Items";
 
 export const CharacterSheet = () => {
   let characterInfo = {
     name: "Hardwon Surefoot",
     class: "Fighter",
     race: "Human",
+    level: 1,
+    hp: 15,
+    ac: 14,
+    speed: 25,
+    initiative: 3,
+    proficiencyBonus: 2,
+    passivePerception: 14,
+    hitDice: [1, "d10"],
   };
 
   return (
@@ -22,7 +30,16 @@ export const CharacterSheet = () => {
         </div>
       </div>
       <div className="character-sheet-container">
-        <Stats />
+        <Stats
+          level={characterInfo.level}
+          hp={characterInfo.hp}
+          ac={characterInfo.ac}
+          speed={characterInfo.speed}
+          initiative={characterInfo.initiative}
+          proficiencyBonus={characterInfo.proficiencyBonus}
+          passivePerception={characterInfo.passivePerception}
+          hitDice={characterInfo.hitDice}
+        />
         <ProficienciesAndTraits />
         <Spells />
         <Skills />

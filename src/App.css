@@ -830,14 +830,16 @@ body {
 
 .character-sheet-box-title {
   font-size: 20px;
+  margin-bottom: 3px;
 }
 
 .character-sheet-box {
   border-style: solid;
   border-color: #bc9a59;
   border-width: 1px;
-  width: 350px;
+  width: 360px;
   height: 240px;
+  background-color: white;
 }
 
 .character-sheet-item {
@@ -845,4 +847,44 @@ body {
   flex-direction: column;
   align-items: center;
   margin: 10px;
+}
+
+.stats-small-box {
+  border-bottom-style: solid;
+  border-right-style: solid;
+  border-color: #bc9a59;
+  border-width: 1px;
+  width: 89px;
+  display: flex;
+  flex-direction: column;
+}
+
+.stats-large-box {
+  border-bottom-style: solid;
+  border-right-style: solid;
+  border-color: #bc9a59;
+  border-width: 1px;
+  width: 179px;
+}
+
+.stats-box {
+  border-top-style: solid;
+  /* border-bottom-style: solid; */
+  border-left-style: solid;
+  border-color: #bc9a59;
+  border-width: 1px;
+  width: 360px;
+  height: 240px;
+  background-color: white;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.stats-label {
+  font-size: 20px;
+  padding: 10px;
+}
+
+.stat {
+  font-size: 20px;
 }
