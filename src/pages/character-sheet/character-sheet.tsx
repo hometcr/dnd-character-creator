@@ -5,6 +5,7 @@ import { Skills } from "./components/Skills";
 import { ArmorAndWeapons } from "./components/ArmorAndWeapons";
 import { Items } from "./components/Items";
 
+
 export const CharacterSheet = () => {
   let characterInfo = {
     name: "Hardwon Surefoot",
@@ -31,6 +32,40 @@ export const CharacterSheet = () => {
     spellAttackMod: 4,
     cantrips: ["Fire Bolt", "Light", "Mending"],
     firstLevelSpells: ["Feather Fall", "Mage Armor", "Sleep"],
+    abilityScores: {
+      str: 2,
+      con: 2,
+      dex: 0,
+      char: 1,
+      wis: -1,
+      int: 1,
+    },
+    skills: {
+      "Str Saving Throws": 3,
+      Athletics: 5,
+      "Con Saving Throws": 3,
+      "Dex Saving Throws": 0,
+      Acrobatics: 1,
+      "Sleight of Hand": -1,
+      Stealth: -1,
+      "Char Saving Throws": 1,
+      Deception: 3,
+      Intimidation: 3,
+      Performance: 3,
+      Persuasion: 5,
+      "Wis Saving Throws": -1,
+      "Animal Handling": -1,
+      Insight: -1,
+      Medicine: -1,
+      Perception: -1,
+      Survival: -1,
+      "Int Saving Throws": 1,
+      Arcana: 1,
+      History: 1,
+      Investigation: 3,
+      Nature: 1,
+      Religion: 1,
+    }
   };
 
   return (
@@ -65,7 +100,7 @@ export const CharacterSheet = () => {
           cantrips={characterInfo.cantrips}
           firstLevelSpells={characterInfo.firstLevelSpells}
         />
-        <Skills />
+        <Skills abilityScores={characterInfo.abilityScores} skills={characterInfo.skills}/>
         <ArmorAndWeapons />
         <Items />
       </div>
