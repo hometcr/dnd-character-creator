@@ -24,6 +24,10 @@ export interface IDescriptions {
   Javelin: string;
   Longsword: string;
   Dagger: string;
+  "Explorer's Pack": string;
+  "Tinker's Tools": string;
+  Shovel: string;
+  "Bag of Holding": string;
 }
 
 export const descriptions: IDescriptions = {
@@ -73,4 +77,11 @@ export const descriptions: IDescriptions = {
   Longsword: "Damage: 1d8; Damage Type: Slashing; Properties: Versatile",
   Dagger:
     "Damage: 1d4; Damage Type: Piercing; Properties: Finesse, Light, Range, Thrown; Range: 20/60",
+  "Explorer's Pack":
+    "Backpack, bedroll, mess kit, tinderbox, 10 torchs, 10 rations, waterskin, hempen rope",
+  "Tinker's Tools":
+    "A set of tinker's tools is designed to enable you to repair many mundane objects. Though you can't manufacture much with tinker's tools, you can mend torn clothes, sharpen a worn sword, and patch a tattered suit of chain mail. Tinker's tools include a variety of hand tools, thread, needles, a whetstone, scraps of cloth and leather, and a small pot of glue. You can determine the age and origin of objects, even if you have only a few pieces remaining from the original. When you inspect a damaged object, you gain knowledge of how it was damaged and how long ago. You can restore 10 hit points to a damaged object for each hour of work. For any object, you need access to the raw materials required to repair it. For metal objects, you need access to an open flame hot enough to make the metal pliable. Activities: temporarily repair a disabled device (DC 10), repair an item in half the time (DC 15), improvise a temporary item using scraps (DC 20)",
+  Shovel: "A standard shovel used for digging.",
+  "Bag of Holding":
+    "This bag has an interior space considerably larger than its outside dimensions, roughly 2 feet in diameter at the mouth and 4 feet deep. The bag can hold up to 500 pounds, not exceeding a volume of 64 cubic feet. The bag weighs 15 pounds, regardless of its Contents. Retrieving an item from the bag requires an Action. If the bag is overloaded, pierced, or torn, it ruptures and is destroyed, and its Contents are scattered in the Astral Plane. If the bag is turned inside out, its Contents spill forth, unharmed, but the bag must be put right before it can be used again. Breathing Creatures inside the bag can survive up to a number of minutes equal to 10 divided by the number of Creatures (minimum 1 minute), after which time they begin to suffocate. Placing a bag of holding inside an extradimensional space created by a Handy Haversack, Portable Hole, or similar item instantly destroys both items and opens a gate to the Astral Plane. The gate originates where the one item was placed inside the other. Any creature within 10 feet of the gate is sucked through it to a random Location on the Astral Plane. The gate then closes. The gate is one-way only and can't be reopened.",
 };

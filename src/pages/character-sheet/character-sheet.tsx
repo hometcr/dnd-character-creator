@@ -74,6 +74,8 @@ export const CharacterSheet = () => {
     },
     weapons: ["Javelin", "Longsword", "Dagger"],
     armor: ["Leather Armor"],
+    money: { gp: 15 },
+    items: ["Explorer's Pack", "Tinker's Tools", "Shovel", "Bag of Holding"],
   };
 
   return (
@@ -116,7 +118,7 @@ export const CharacterSheet = () => {
           weapons={characterInfo.weapons}
           armor={characterInfo.armor}
         />
-        <Items />
+        <Items money={characterInfo.money} items={characterInfo.items} />
       </div>
     </div>
   );

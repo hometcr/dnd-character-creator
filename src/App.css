@@ -1114,3 +1114,30 @@ body {
   padding-top: 5px;
   font-size: 14px;
 }
+
+.items-box {
+  border-style: solid;
+  border-color: #bc9a59;
+  border-width: 1px;
+  width: 360px;
+  height: 240px;
+  background-color: white;
+  overflow: scroll;
+}
+
+.money-box {
+  border-bottom-style: solid;
+  border-color: #bc9a59;
+  border-width: 1px;
+  display: flex;
+  padding: 5px;
+  padding-left: 8px;
+}
+
+.money-title {
+  padding-right: 5px;
+}
+
+.items-items-box {
+  padding-bottom: 8px;
+}
