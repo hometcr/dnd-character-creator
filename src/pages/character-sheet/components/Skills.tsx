@@ -31,7 +31,7 @@ interface ISkills {
   Intelligence: ISkill;
 }
 
-interface IAbilityScores {
+interface IAbilityModifiers {
   Strength: number;
   Constitution: number;
   Wisdom: number;
@@ -40,14 +40,41 @@ interface IAbilityScores {
   Dexterity: number;
 }
 interface IProps {
-  abilityScores: IAbilityScores;
+  abilityModifiers: IAbilityModifiers;
   skills: ISkills;
 }
 
 export const Skills = (props: IProps) => {
+  interface IAbilityScores {
+    Strength: number;
+    Constitution: number;
+    Dexterity: number;
+    Intelligence: number;
+    Charisma: number;
+    Wisdom: number;
+  }
+
+  const getModifier = (score: number) => {
+    let modifier = 0;
+    if (score > 10) {
+      modifier = Math.floor((score - 10) / 2);
+    } else {
+      modifier = Math.floor((score - 9) / 2);
+    }
+    return modifier;
+  };
+
+  let abilityScores: IAbilityScores = { ...props.abilityModifiers };
+  for (let ability in props.abilityModifiers) {
+    let modifier = getModifier(
+      props.abilityModifiers[ability as keyof IAbilityModifiers]
+    );
+    abilityScores[ability as keyof IAbilityScores] = modifier;
+  }
+
   const createScoreDisplay = (score: number) => {
     let sign = "";
-    if (score > 0) {
+    if (score >= 0) {
       sign = "+";
     }
     return `${sign}${score}`;
@@ -73,9 +100,9 @@ export const Skills = (props: IProps) => {
 
   let skillDisplays = () => {
     let skillDisplaysList = [];
-    for (let ability in props.abilityScores) {
+    for (let ability in abilityScores) {
       let scoreDisplay = createScoreDisplay(
-        props.abilityScores[ability as keyof IAbilityScores]
+        abilityScores[ability as keyof IAbilityScores]
       );
       let skillItems = createSkillItemList(ability);
       skillDisplaysList.push(
@@ -83,6 +110,9 @@ export const Skills = (props: IProps) => {
           ability={String(ability)}
           abilityScore={scoreDisplay}
           skillItems={skillItems}
+          abilityModifier={
+            props.abilityModifiers[ability as keyof IAbilityModifiers]
+          }
         />
       );
     }

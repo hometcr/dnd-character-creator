@@ -20,6 +20,10 @@ export interface IDescriptions {
   Mending: string;
   Light: string;
   "Fire Bolt": string;
+  "Leather Armor": string;
+  Javelin: string;
+  Longsword: string;
+  Dagger: string;
 }
 
 export const descriptions: IDescriptions = {
@@ -63,4 +67,10 @@ export const descriptions: IDescriptions = {
     "Casting Time: 1 action; Range: Touch; Components: V, M; Duration: 1 hour; You touch one object that is no larger than 10 feet in any dimension. Until the spell ends, the object sheds bright light in a 20-foot radius and dim light for an additional 20 feet. The light can be colored as you like. Completely covering the object with something opaque blocks the light. The spell ends if you cast it again or dismiss it as an action. If you target an object held or worn by a hostile creature, that creature must succeed on a Dexterity saving throw to avoid the spell.",
   "Fire Bolt":
     "Casting Time: 1 action; Range: 120 feet; Components: V, S; Duration: Instantaneous; You hurl a mote of fire at a creature or object within range. Make a ranged spell attack against the target. On a hit, the target takes 1d10 fire damage. A flammable object hit by this spell ignites if it isn’t being worn or carried.",
+  "Leather Armor": "AC: 11",
+  Javelin:
+    "Damage: 1d6; Damage Type: Piercing; Properties: Range; Thrown Range: 30/120",
+  Longsword: "Damage: 1d8; Damage Type: Slashing; Properties: Versatile",
+  Dagger:
+    "Damage: 1d4; Damage Type: Piercing; Properties: Finesse, Light, Range, Thrown; Range: 20/60",
 };

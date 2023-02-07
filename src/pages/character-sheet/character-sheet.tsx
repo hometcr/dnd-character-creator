@@ -31,13 +31,13 @@ export const CharacterSheet = () => {
     spellAttackMod: 4,
     cantrips: ["Fire Bolt", "Light", "Mending"],
     firstLevelSpells: ["Feather Fall", "Mage Armor", "Sleep"],
-    abilityScores: {
-      Strength: 2,
-      Constitution: 2,
-      Dexterity: 0,
-      Charisma: 1,
-      Wisdom: -1,
-      Intelligence: 1,
+    abilityModifiers: {
+      Strength: 14,
+      Constitution: 15,
+      Dexterity: 10,
+      Charisma: 13,
+      Wisdom: 8,
+      Intelligence: 12,
     },
     skills: {
       Strength: { "Saving Throws": 3, Athletics: 5 },
@@ -72,6 +72,8 @@ export const CharacterSheet = () => {
         Religion: 1,
       },
     },
+    weapons: ["Javelin", "Longsword", "Dagger"],
+    armor: ["Leather Armor"],
   };
 
   return (
@@ -107,10 +109,13 @@ export const CharacterSheet = () => {
           firstLevelSpells={characterInfo.firstLevelSpells}
         />
         <Skills
-          abilityScores={characterInfo.abilityScores}
+          abilityModifiers={characterInfo.abilityModifiers}
           skills={characterInfo.skills}
         />
-        <ArmorAndWeapons />
+        <ArmorAndWeapons
+          weapons={characterInfo.weapons}
+          armor={characterInfo.armor}
+        />
         <Items />
       </div>
     </div>
