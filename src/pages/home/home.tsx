@@ -32,7 +32,7 @@ export const Home = () => {
   let newCharacterButton = <></>
   if (charactersData.length > 2) {
     newCharacterButton = (
-      <div>Hello! To create a new character, please please make space by deleting an old one</div>
+      <div>To create a new character, please please make space by deleting an old one</div>
     )
   } else {
     newCharacterButton=(
