@@ -52,7 +52,7 @@ export const Choices = () => {
           />
         </div>
         <NavigateButton
-          destination="spells"
+          destination="/spells"
           text="Next"
           className="choices-next-button"
         />

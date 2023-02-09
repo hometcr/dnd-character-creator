@@ -1,3 +1,4 @@
+import { useNavigate } from "react-router-dom";
 
 interface iProps {
   destination: string;
@@ -6,5 +7,19 @@ interface iProps {
 }
 
 export const NavigateButton = (props: iProps) => {
-  return <button className={props.className} >{props.text}</button>;
-}
+  const navigate = useNavigate();
+  const goToNewPage = (newPage: string) => {
+    navigate(newPage);
+  };
+
+  return (
+    <button
+      onClick={() => {
+        goToNewPage(props.destination);
+      }}
+      className={props.className}
+    >
+      {props.text}
+    </button>
+  );
+};

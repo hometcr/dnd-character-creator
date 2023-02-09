@@ -2,6 +2,7 @@ import { ICharacter } from "../home";
 import { ViewButton } from "./ViewButton";
 import { DeleteButton } from "./DeleteButton";
 import { titleCase } from "../../../helpers/titleCase";
+import { NavigateButton } from "../../../components/NavigateButton";
 
 interface IProps {
   character: ICharacter;
@@ -24,7 +25,7 @@ export const Character = (props: IProps) => {
         </div>
       </div>
       <div className="access-character-buttons">
-        <ViewButton />
+        <NavigateButton text="View" destination="/character-sheet" className="access-character-button"/>
         <DeleteButton />
       </div>
     </div>

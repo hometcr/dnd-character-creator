@@ -37,9 +37,9 @@ export const BeginCharacterForm = () => {
           </select>
         </div>
       </div>
-      <button className="begin-next-button" type="submit">
+      {/* <button className="begin-next-button" type="submit">
         Next
-      </button>
+      </button> */}
     </form>
   );
 };

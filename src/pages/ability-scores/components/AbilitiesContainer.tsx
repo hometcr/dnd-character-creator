@@ -61,7 +61,7 @@ export const AbilitiesContainer = (props: IProps) => {
         </p>
       </div>
       <NavigateButton
-        destination="/magic"
+        destination="/choices"
         text="Next"
         className="abilities-next-button"
       />

@@ -12,11 +12,11 @@ export const Home = () => {
   const user_is_logged_in = true;
 
   const charactersData: ICharacter[] = [
-    {
-      name: "Beverly Toegold",
-      class: "paladin",
-      race: "halfing",
-    },
+    // {
+    //   name: "Beverly Toegold",
+    //   class: "paladin",
+    //   race: "halfing",
+    // },
     {
       name: "Hardwon Surefoot",
       class: "fighter",
@@ -38,7 +38,7 @@ export const Home = () => {
     newCharacterButton=(
       <NavigateButton
         className="new-character-button"
-        destination="/create"
+        destination="/begin"
         text="Create New Character"
       />
     )
