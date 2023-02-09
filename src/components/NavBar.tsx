@@ -1,15 +1,24 @@
 import { Link } from "react-router-dom";
+import { auth } from "../config/firebase";
+import { useAuthState } from "react-firebase-hooks/auth";
+import { signOut } from "firebase/auth";
 
 export const NavBar = () => {
 
-  const user_is_logged_in = false;
+  const [user] = useAuthState(auth);
+  // const user_is_logged_in = false;
+
+  const logUserOut = async () => {
+    await signOut(auth);
+  }
+
 
   let logLink = <></>
-  if (user_is_logged_in) {
+  if (user) {
     logLink = (
-      <Link to="/login" className="nav-bar-link">
+      <div className="nav-bar-link" onClick={logUserOut}>
           Log Out
-        </Link>
+        </div>
     )
   } else {
     logLink = (
@@ -30,9 +39,6 @@ export const NavBar = () => {
           About
         </Link>
         {logLink}
-        {/* <Link to="/login" className="nav-bar-link">
-          Log In
-        </Link> */}
       </div>
     </div>
   );
