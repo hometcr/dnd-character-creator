@@ -1,6 +1,9 @@
 import { NavigateButton } from "../../components/NavigateButton";
 import { CharactersContainer } from "./components/CharactersContainer";
 import witch from "../../assets/witch.jpg";
+import { auth } from "../../config/firebase"
+import { useAuthState } from "react-firebase-hooks/auth";
+
 
 export interface ICharacter {
   name: string;
@@ -9,7 +12,10 @@ export interface ICharacter {
 }
 
 export const Home = () => {
-  const user_is_logged_in = true;
+
+  const [user] = useAuthState(auth);
+
+  // const user_is_logged_in = true;
 
   const charactersData: ICharacter[] = [
     // {
@@ -44,7 +50,7 @@ export const Home = () => {
     )
   }
 
-  if (!user_is_logged_in) {
+  if (!user) {
     return (
       <div className="home-page">
         <div className="welcome-message">
