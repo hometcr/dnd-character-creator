@@ -11,12 +11,75 @@ import { doc, getDoc } from "firebase/firestore";
 import { useEffect, useState } from "react";
 import { ICharacterData } from "../home/home";
 
+
+
 export const CharacterSheet = () => {
   const routeParams = useParams();
   console.log(routeParams.id);
 
-  const [characterData, setCharacterData] = useState<ICharacterData | null>(
-    null
+  const initialCharacterData = { 
+    id: "",
+    userId: 0,
+    name: "",
+    race: "",
+    class: "",
+    background: "",
+    level: 0,
+    proficiencyBonus: 0,
+    speed: 0,
+    hitDice: [],
+    initiative: 0,
+    passivePerception: 0,
+    hp: 0,
+    ac: 0,
+  
+    savingThrowProficiencies: [],
+    skillProficiencies: [],
+    strengthScore: 0,
+    charismaScore: 0,
+    intelligenceScore: 0,
+    wisdomScore: 0,
+    dexterityScore: 0,
+    constitutionScore: 0,
+    athleticsSkill: 0,
+    acrobaticsSkill: 0,
+    sleightOfHandSkill: 0,
+    stealthSkill: 0,
+    deceptionSkill: 0,
+    intimidationSkill: 0,
+    performanceSkill: 0,
+    persuasionSkill: 0,
+    animalHandlingSkill: 0,
+    insightSkill: 0,
+    medicineSkill: 0,
+    perceptionSkill: 0,
+    survivalSkill: 0,
+    arcanaSkill: 0,
+    historySkill: 0,
+    investigationSkill: 0,
+    natureSkill: 0,
+    religionSkill: 0,
+  
+    armor: [],
+    weapons: [],
+  
+    features: [],
+    itemProficiencies: [],
+    languages: [],
+  
+    spellSlots: 0,
+    spellSaveDc: 0,
+    spellAttackModifier: 0,
+    cantrips: [],
+    knownSpells: [],
+    preparedSpells: [],
+  
+    money: [],
+    items: [],
+  }
+
+  const [characterData, setCharacterData] = useState<ICharacterData>(
+    initialCharacterData
   );
 
   const getCharacterData = async () => {
@@ -37,7 +100,52 @@ export const CharacterSheet = () => {
     getCharacterData();
   }, [routeParams]);
 
-  let characterInfo = {
+
+  const abilityScores =  {
+    Strength: characterData.strengthScore,
+    Constitution: characterData.constitutionScore,
+    Dexterity: characterData.dexterityScore,
+    Charisma: characterData.charismaScore,
+    Wisdom: characterData.wisdomScore,
+    Intelligence: characterData.intelligenceScore,
+  }
+
+  const skills = {
+    Strength: { "Saving Throws": 3, Athletics: 5 },
+    Constitution: { "Saving Throws": 3 },
+    Dexterity: {
+      "Saving Throws": 0,
+      Acrobatics: 1,
+      "Sleight of Hand": -1,
+      Stealth: -1,
+    },
+    Charisma: {
+      "Saving Throws": 1,
+      Deception: 3,
+      Intimidation: 3,
+      Performance: 3,
+      Persuasion: 5,
+    },
+    Wisdom: {
+      "Saving Throws": -1,
+      "Animal Handling": -1,
+      Insight: -1,
+      Medicine: -1,
+      Perception: -1,
+      Survival: -1,
+    },
+    Intelligence: {
+      "Saving Throws": 1,
+      Arcana: 1,
+      History: 1,
+      Investigation: 3,
+      Nature: 1,
+      Religion: 1,
+    },
+  }
+  
+
+  const characterInfo = {
     name: "Hardwon Surefoot",
     class: "Fighter",
     race: "Human",
@@ -109,40 +217,44 @@ export const CharacterSheet = () => {
     items: ["Explorer's Pack", "Tinker's Tools", "Shovel", "Bag of Holding"],
   };
 
+
+
+
+  // fix ability scores and modifiers names inside skills.tsx
   return (
     <div className="character-sheet-page">
       <div className="character-sheet-name-class-race">
-        <div className="character-sheet-name">{characterInfo.name}</div>
+        <div className="character-sheet-name">{characterData.name}</div>
         <div className="character-sheet-class-race">
           {" "}
-          {characterInfo.race} {characterInfo.class}
+          {characterData.race} {characterData.class}
         </div>
       </div>
       <div className="character-sheet-container">
         <Stats
-          level={characterInfo.level}
-          hp={characterInfo.hp}
-          ac={characterInfo.ac}
-          speed={characterInfo.speed}
-          initiative={characterInfo.initiative}
-          proficiencyBonus={characterInfo.proficiencyBonus}
-          passivePerception={characterInfo.passivePerception}
-          hitDice={characterInfo.hitDice}
+          level={characterData.level}
+          hp={characterData.hp}
+          ac={characterData.ac}
+          speed={characterData.speed}
+          initiative={characterData.initiative}
+          proficiencyBonus={characterData.proficiencyBonus}
+          passivePerception={characterData.passivePerception}
+          hitDice={characterData.hitDice}
         />
         <ProficienciesAndFeatures
-          proficiencies={characterInfo.proficiencies}
-          languages={characterInfo.languages}
-          features={characterInfo.features}
+          proficiencies={characterData.itemProficiencies}
+          languages={characterData.languages}
+          features={characterData.features}
         />
         <Spells
-          spellSlots={characterInfo.spellSlots}
-          spellSaveDc={characterInfo.spellSaveDc}
-          spellAttackMod={characterInfo.spellAttackMod}
-          cantrips={characterInfo.cantrips}
-          firstLevelSpells={characterInfo.firstLevelSpells}
+          spellSlots={characterData.spellSlots}
+          spellSaveDc={characterData.spellSaveDc}
+          spellAttackMod={characterData.spellAttackModifier}
+          cantrips={characterData.cantrips}
+          firstLevelSpells={characterData.knownSpells}
         />
         <Skills
-          abilityModifiers={characterInfo.abilityModifiers}
+          abilityModifiers={abilityScores}
           skills={characterInfo.skills}
         />
         <ArmorAndWeapons
