@@ -1,10 +1,10 @@
 import { AbilitiesContainer } from "./components/AbilitiesContainer";
-import { RollDiceButton } from "./components/RollDiceButton";
+import { useState } from "react";
 
 export const AbilityScores = () => {
 
-  // will become state
-  let diceRolled = true;
+  let [diceRolled, setDiceRolled] = useState(false)
+
 
   const getAbilityScore = () => {
     let rolls = [];
@@ -46,7 +46,9 @@ export const AbilityScores = () => {
           Roll dice to get your ability scores, then choose which ability gets
           which score
         </p>
-        <RollDiceButton />
+        <div className="roll-dice-container">
+          <button onClick={()=>{setDiceRolled(true)}}className="roll-dice-button">Roll dice</button>
+        </div>
         <div className="scores-list">
           <div className="scores-list-title">Scores: </div>
           <div className="scores-list-scores">{scoresDisplay}</div>
