@@ -1,10 +1,10 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialBeginState = {
-  Name: "",
-  Class: "",
-  Race: "",
-  Background: ""
+  name: "",
+  class: "",
+  race: "",
+  background: ""
 };
 
 export const beginSlice = createSlice({
