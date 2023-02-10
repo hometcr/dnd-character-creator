@@ -1,4 +1,20 @@
+import React, { useState } from "react";
+import { useDispatch } from "react-redux";
+import { fillSlice } from "../../../features/character";
+
 export const BeginCharacterForm = () => {
+  const dispatch = useDispatch();
+
+  const fillBeginSlice = () => {
+    let beginInfo = {
+      name: "",
+      age: 0,
+      email: "",
+      userId: ""
+    };
+    dispatch(fillSlice(beginInfo));
+  };
+
   return (
     <form className="begin-character-form">
       <div className="begin-form-only">
@@ -37,9 +53,9 @@ export const BeginCharacterForm = () => {
           </select>
         </div>
       </div>
-      {/* <button className="begin-next-button" type="submit">
+      <button className="begin-next-button" type="submit">
         Next
-      </button> */}
+      </button>
     </form>
   );
 };
