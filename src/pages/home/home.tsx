@@ -13,112 +13,104 @@ export interface ICharacter {
 }
 
 interface ICharacterData {
-  id: string,
-  userId: number,
-	name: string,
-	race: string,
-	class: string,
-	background: string,
-	level: number,
-	proficiencyBonus: number,
-	speed: number,
-	hitDice: [number, string],
-	initiative: number,
-	passivePerception: number,
-	hp: number,
-	ac: number,
-	savingThrowProficiencies: string[],
-	skillProficiencies: string[],
-	strengthScore: number,
-	charismaScore: number,
-	intelligenceScore: number,
-	wisdomScore: number,
-	dexterityScore: number,
-	constitutionScore: number,
-	athleticsSkill: number,
-	acrobaticsSkill: number,
-	sleightOfHandSkill: number,
-	stealthSkill: number,
-	deceptionSkill: number,
-	intimidationSkill: number,
-	performanceSkill: number,
-	persuasionSkill: number,
-	animalHandlingSkill: number,
-	insightSkill: number,
-	medicineSkill: number,
-	perceptionSkill: number,
-	survivalSkill: number,
-	arcanaSkill: number,
-	historySkill: number,
-	investigationSkill: number,
-	natureSkill: number,
-	religionSkill: number,
-	armor: string[],
-	weapons: string[],
-	features: string[],
-	itemProficiencies: string[],
-	languages: string[],
-	spellSlots: number,
-	spellSaveDc: number,
-	spellAttackModifier: number,
-	cantrips: string[],
-	knownSpells: string[],
-	preparedSpells: string[],
-	money: number[],
-	items: string[],
+  id: string;
+  userId: number;
+  name: string;
+  race: string;
+  class: string;
+  background: string;
+  level: number;
+  proficiencyBonus: number;
+  speed: number;
+  hitDice: [number, string];
+  initiative: number;
+  passivePerception: number;
+  hp: number;
+  ac: number;
+  savingThrowProficiencies: string[];
+  skillProficiencies: string[];
+  strengthScore: number;
+  charismaScore: number;
+  intelligenceScore: number;
+  wisdomScore: number;
+  dexterityScore: number;
+  constitutionScore: number;
+  athleticsSkill: number;
+  acrobaticsSkill: number;
+  sleightOfHandSkill: number;
+  stealthSkill: number;
+  deceptionSkill: number;
+  intimidationSkill: number;
+  performanceSkill: number;
+  persuasionSkill: number;
+  animalHandlingSkill: number;
+  insightSkill: number;
+  medicineSkill: number;
+  perceptionSkill: number;
+  survivalSkill: number;
+  arcanaSkill: number;
+  historySkill: number;
+  investigationSkill: number;
+  natureSkill: number;
+  religionSkill: number;
+  armor: string[];
+  weapons: string[];
+  features: string[];
+  itemProficiencies: string[];
+  languages: string[];
+  spellSlots: number;
+  spellSaveDc: number;
+  spellAttackModifier: number;
+  cantrips: string[];
+  knownSpells: string[];
+  preparedSpells: string[];
+  money: number[];
+  items: string[];
 }
 
 export const Home = () => {
   // hold current user info
   const [user] = useAuthState(auth);
   // hold character info from database
-  const [characterData, setCharacterData] = useState<ICharacterData[] | null>(null);
+  const [characterData, setCharacterData] = useState<ICharacterData[] | null>(
+    null
+  );
   // grab reference to characters in database
-  const charactersCollectionRef = collection(db, "characters");
-
+  const charactersRef = collection(db, "characters");
 
   const getCharacterData = async () => {
-    // get the data
-    const data = await getDocs(charactersCollectionRef)
-    // format the data
-    const newCharacterData = data.docs.map((doc) => ({
-      ...doc.data(),
-      id: doc.id,
-    })) as ICharacterData[];
-    // fill the state with the data and each document's id
-    setCharacterData(newCharacterData);
-    console.log(characterData)
-  }
+    if (user) {
+      // grab reference to user's characters
+      const userCharactersRef = query(
+        charactersRef,
+        where("userId", "==", user.uid)
+      );
+      // get the data
+      const data = await getDocs(userCharactersRef);
+      // format the data
+      const newCharacterData = data.docs.map((doc) => ({
+        ...doc.data(),
+        id: doc.id,
+      })) as ICharacterData[];
+      // fill the state with the data and each document's id
+      setCharacterData(newCharacterData);
+    }
+  };
 
+  // get user-specific character data whenever user is updated
   useEffect(() => {
     getCharacterData();
-  }, []);
-
-
-
-  // for testing purposes only
-  if (user) {
-    const currentUserId = user.uid;
-    console.log(`user ID is ${currentUserId}`);
-
-    console.log(`request.auth.uid is ${user.uid}`)
-    if (characterData) {
-      console.log(`request.resource.data.userId is ${characterData[0].userId}`)
-
-    }
-  }
+  }, [user]);
 
   // fill characters with useful info from database (as stored in state)
-  const characters: ICharacter[] = []
+  const characters: ICharacter[] = [];
   if (characterData) {
     for (let characterItem of characterData) {
-      characters.push(
-        {
-          name: characterItem.name,
-          class: characterItem.class,
-          race: characterItem.race,
-        }
-      )
+      characters.push({
+        name: characterItem.name,
+        class: characterItem.class,
+        race: characterItem.race,
+      });
     }
   }
 
