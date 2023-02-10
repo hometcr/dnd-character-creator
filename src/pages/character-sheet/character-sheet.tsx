@@ -4,13 +4,38 @@ import { Spells } from "./components/Spells";
 import { Skills } from "./components/Skills";
 import { ArmorAndWeapons } from "./components/ArmorAndWeapons";
 import { Items } from "./components/Items";
-import { useParams } from 'react-router-dom'
-
+import { useParams } from "react-router-dom";
+// test to get doc
+import { db } from "../../config/firebase";
+import { doc, getDoc } from "firebase/firestore";
+import { useEffect, useState } from "react";
+import { ICharacterData } from "../home/home";
 
 export const CharacterSheet = () => {
-
   const routeParams = useParams();
-  console.log(routeParams.id)
+  console.log(routeParams.id);
+
+  const [characterData, setCharacterData] = useState<ICharacterData | null>(
+    null
+  );
+
+  const getCharacterData = async () => {
+    if (routeParams.id) {
+      const docRef = doc(db, "characters", routeParams.id);
+      const docSnap = await getDoc(docRef);
+      if (docSnap.exists()) {
+        console.log("Document data:", docSnap.data());
+        const givenData = docSnap.data() as ICharacterData;
+        setCharacterData(givenData);
+      } else {
+        console.log("No such document!");
+      }
+    }
+  };
+
+  useEffect(() => {
+    getCharacterData();
+  }, [routeParams]);
 
   let characterInfo = {
     name: "Hardwon Surefoot",

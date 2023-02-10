@@ -13,7 +13,7 @@ export interface ICharacter {
   id: string;
 }
 
-interface ICharacterData {
+export interface ICharacterData {
   id: string;
   userId: number;
   name: string;
@@ -23,7 +23,7 @@ interface ICharacterData {
   level: number;
   proficiencyBonus: number;
   speed: number;
-  hitDice: [number, string];
+  hitDice: (string | number)[];
   initiative: number;
   passivePerception: number;
   hp: number;
