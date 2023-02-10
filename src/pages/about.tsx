@@ -1,9 +1,11 @@
 import self from "../assets/self.jpg";
 import githubLogo from "../assets/github-logo.jpg";
 import linkedInLogo from "../assets/linked-in-logo.jpg"
-
+import { useNavigate } from "react-router-dom";
 
 export const About = () => {
+
+const navigate = useNavigate()
 
   return (
     <div className="about-page">
@@ -37,8 +39,8 @@ export const About = () => {
         </p>
         <div className="about-signature">
           <p>— Caitlyn Homet, Junior Software Developer</p>
-          <img className="signature-logo" src={linkedInLogo} alt="linked in logo"/>
-          <img className="signature-logo" src={githubLogo} alt="github logo"/>
+          <a href="https://www.linkedin.com/in/caitlyn-homet/"><img className="signature-logo" src={linkedInLogo} alt="linked in logo"/></a>
+          <a href="https://github.com/hometcr/dnd-character-creator"> <img className="signature-logo" src={githubLogo} alt="github logo"/> </a>
         </div>
       </div>
     </div>

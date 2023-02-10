@@ -8,7 +8,7 @@ const initialBeginState = {
 };
 
 export const beginSlice = createSlice({
-  name: "character",
+  name: "begin",
   initialState: { value: initialBeginState },
   reducers: {
     fillSlice: (state, action) => {

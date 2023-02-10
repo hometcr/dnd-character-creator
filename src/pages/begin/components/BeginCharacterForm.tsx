@@ -1,9 +1,16 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-import { fillSlice } from "../../../features/character";
+import { fillSlice } from "../../../features/begin";
+import { useNavigate } from "react-router-dom";
+import { titleCase } from "../../../helpers/titleCase";
 
-export const BeginCharacterForm = () => {
+interface IProps {
+  setItem: Function;
+}
+
+export const BeginCharacterForm = (props: IProps) => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const [charName, setCharName] = useState("");
   const [charRace, setCharRace] = useState("");
@@ -18,21 +25,25 @@ export const BeginCharacterForm = () => {
   const updateRace = (e: React.SyntheticEvent<EventTarget>) => {
     const raceInput = (e.target as HTMLInputElement).value;
     setCharRace(raceInput);
+    props.setItem(raceInput);
   };
 
   const updateClass = (e: React.SyntheticEvent<EventTarget>) => {
     const classInput = (e.target as HTMLInputElement).value;
     setCharClass(classInput);
+    props.setItem(classInput);
   };
 
   const updateBackground = (e: React.SyntheticEvent<EventTarget>) => {
     const charInput = (e.target as HTMLInputElement).value;
     setCharBackground(charInput);
+    props.setItem(charInput);
   };
 
   const fillBeginSlice = () => {
+    let titleCaseName = titleCase(charName);
     let beginInfo = {
-      name: charName,
+      name: titleCaseName,
       race: charRace,
       class: charClass,
       background: charBackground,
@@ -42,7 +53,14 @@ export const BeginCharacterForm = () => {
 
   const onFormSubmit = (e: React.SyntheticEvent<EventTarget>) => {
     e.preventDefault();
-    fillBeginSlice();
+    if (charName && charRace && charClass && charBackground) {
+      fillBeginSlice();
+      navigate("/ability-scores");
+    } else {
+      alert(
+        "Please choose a name, class, race and background before proceeding"
+      );
+    }
   };
 
   return (
