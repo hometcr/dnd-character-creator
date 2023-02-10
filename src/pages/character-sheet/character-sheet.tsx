@@ -5,19 +5,16 @@ import { Skills } from "./components/Skills";
 import { ArmorAndWeapons } from "./components/ArmorAndWeapons";
 import { Items } from "./components/Items";
 import { useParams } from "react-router-dom";
-// test to get doc
 import { db } from "../../config/firebase";
 import { doc, getDoc } from "firebase/firestore";
 import { useEffect, useState } from "react";
 import { ICharacterData } from "../home/home";
 
-
-
 export const CharacterSheet = () => {
   const routeParams = useParams();
   console.log(routeParams.id);
 
-  const initialCharacterData = { 
+  const initialCharacterData = {
     id: "",
     userId: 0,
     name: "",
@@ -32,9 +29,13 @@ export const CharacterSheet = () => {
     passivePerception: 0,
     hp: 0,
     ac: 0,
-  
-    savingThrowProficiencies: [],
     skillProficiencies: [],
+    strengthSavingThrow: 0,
+    constitutionSavingThrow: 0,
+    wisdomSavingThrow: 0,
+    intelligenceSavingThrow: 0,
+    charismaSavingThrow: 0,
+    dexteritySavingThrow: 0,
     strengthScore: 0,
     charismaScore: 0,
     intelligenceScore: 0,
@@ -59,28 +60,23 @@ export const CharacterSheet = () => {
     investigationSkill: 0,
     natureSkill: 0,
     religionSkill: 0,
-  
     armor: [],
     weapons: [],
-  
     features: [],
     itemProficiencies: [],
     languages: [],
-  
     spellSlots: 0,
     spellSaveDc: 0,
     spellAttackModifier: 0,
     cantrips: [],
     knownSpells: [],
     preparedSpells: [],
-  
-    money: [],
+    money: [0, 0, 0, 0],
     items: [],
-  }
+  };
 
-  const [characterData, setCharacterData] = useState<ICharacterData>(
-    initialCharacterData
-  );
+  const [characterData, setCharacterData] =
+    useState<ICharacterData>(initialCharacterData);
 
   const getCharacterData = async () => {
     if (routeParams.id) {
@@ -100,125 +96,58 @@ export const CharacterSheet = () => {
     getCharacterData();
   }, [routeParams]);
 
-
-  const abilityScores =  {
+  const abilityScores = {
     Strength: characterData.strengthScore,
     Constitution: characterData.constitutionScore,
     Dexterity: characterData.dexterityScore,
     Charisma: characterData.charismaScore,
     Wisdom: characterData.wisdomScore,
     Intelligence: characterData.intelligenceScore,
-  }
-
-  const skills = {
-    Strength: { "Saving Throws": 3, Athletics: 5 },
-    Constitution: { "Saving Throws": 3 },
-    Dexterity: {
-      "Saving Throws": 0,
-      Acrobatics: 1,
-      "Sleight of Hand": -1,
-      Stealth: -1,
-    },
-    Charisma: {
-      "Saving Throws": 1,
-      Deception: 3,
-      Intimidation: 3,
-      Performance: 3,
-      Persuasion: 5,
-    },
-    Wisdom: {
-      "Saving Throws": -1,
-      "Animal Handling": -1,
-      Insight: -1,
-      Medicine: -1,
-      Perception: -1,
-      Survival: -1,
-    },
-    Intelligence: {
-      "Saving Throws": 1,
-      Arcana: 1,
-      History: 1,
-      Investigation: 3,
-      Nature: 1,
-      Religion: 1,
-    },
-  }
-  
-
-  const characterInfo = {
-    name: "Hardwon Surefoot",
-    class: "Fighter",
-    race: "Human",
-    level: 1,
-    hp: 15,
-    ac: 14,
-    speed: 25,
-    initiative: 3,
-    proficiencyBonus: 2,
-    passivePerception: 14,
-    hitDice: [1, "d10"],
-    proficiencies: [
-      "Heavy Armor",
-      "Shields",
-      "Simple Weapons",
-      "Martial Weapons",
-    ],
-    languages: ["Common", "Dwarvish", "Elvish"],
-    features: ["Rustic Hospitality", "Dueling", "Second Wind"],
-    spellSlots: 4,
-    spellSaveDc: 4,
-    spellAttackMod: 4,
-    cantrips: ["Fire Bolt", "Light", "Mending"],
-    firstLevelSpells: ["Feather Fall", "Mage Armor", "Sleep"],
-    abilityModifiers: {
-      Strength: 14,
-      Constitution: 15,
-      Dexterity: 10,
-      Charisma: 13,
-      Wisdom: 8,
-      Intelligence: 12,
-    },
-    skills: {
-      Strength: { "Saving Throws": 3, Athletics: 5 },
-      Constitution: { "Saving Throws": 3 },
-      Dexterity: {
-        "Saving Throws": 0,
-        Acrobatics: 1,
-        "Sleight of Hand": -1,
-        Stealth: -1,
-      },
-      Charisma: {
-        "Saving Throws": 1,
-        Deception: 3,
-        Intimidation: 3,
-        Performance: 3,
-        Persuasion: 5,
-      },
-      Wisdom: {
-        "Saving Throws": -1,
-        "Animal Handling": -1,
-        Insight: -1,
-        Medicine: -1,
-        Perception: -1,
-        Survival: -1,
-      },
-      Intelligence: {
-        "Saving Throws": 1,
-        Arcana: 1,
-        History: 1,
-        Investigation: 3,
-        Nature: 1,
-        Religion: 1,
-      },
-    },
-    weapons: ["Javelin", "Longsword", "Dagger"],
-    armor: ["Leather Armor"],
-    money: { gp: 15 },
-    items: ["Explorer's Pack", "Tinker's Tools", "Shovel", "Bag of Holding"],
   };
 
+  const skills = {
+    Strength: {
+      "Saving Throws": characterData.strengthSavingThrow,
+      Athletics: characterData.athleticsSkill,
+    },
+    Constitution: { "Saving Throws": characterData.constitutionSavingThrow },
+    Dexterity: {
+      "Saving Throws": characterData.dexteritySavingThrow,
+      Acrobatics: characterData.acrobaticsSkill,
+      "Sleight of Hand": characterData.sleightOfHandSkill,
+      Stealth: characterData.stealthSkill,
+    },
+    Charisma: {
+      "Saving Throws": characterData.charismaSavingThrow,
+      Deception: characterData.deceptionSkill,
+      Intimidation: characterData.intimidationSkill,
+      Performance: characterData.performanceSkill,
+      Persuasion: characterData.persuasionSkill,
+    },
+    Wisdom: {
+      "Saving Throws": characterData.wisdomSavingThrow,
+      "Animal Handling": characterData.animalHandlingSkill,
+      Insight: characterData.insightSkill,
+      Medicine: characterData.medicineSkill,
+      Perception: characterData.perceptionSkill,
+      Survival: characterData.survivalSkill,
+    },
+    Intelligence: {
+      "Saving Throws": characterData.intelligenceSavingThrow,
+      Arcana: characterData.arcanaSkill,
+      History: characterData.historySkill,
+      Investigation: characterData.investigationSkill,
+      Nature: characterData.natureSkill,
+      Religion: characterData.religionSkill,
+    },
+  };
 
-
+  const money = {
+    pp: characterData.money[0],
+    sp: characterData.money[1],
+    gp: characterData.money[2],
+    cp: characterData.money[3],
+  };
 
   // fix ability scores and modifiers names inside skills.tsx
   return (
@@ -253,15 +182,12 @@ export const CharacterSheet = () => {
           cantrips={characterData.cantrips}
           firstLevelSpells={characterData.knownSpells}
         />
-        <Skills
-          abilityModifiers={abilityScores}
-          skills={characterInfo.skills}
-        />
+        <Skills abilityModifiers={abilityScores} skills={skills} />
         <ArmorAndWeapons
-          weapons={characterInfo.weapons}
-          armor={characterInfo.armor}
+          weapons={characterData.weapons}
+          armor={characterData.armor}
         />
-        <Items money={characterInfo.money} items={characterInfo.items} />
+        <Items money={money} items={characterData.items} />
       </div>
     </div>
   );

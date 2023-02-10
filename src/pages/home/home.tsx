@@ -28,7 +28,12 @@ export interface ICharacterData {
   passivePerception: number;
   hp: number;
   ac: number;
-  savingThrowProficiencies: string[];
+  strengthSavingThrow: number;
+  constitutionSavingThrow: number;
+  wisdomSavingThrow: number;
+  intelligenceSavingThrow: number;
+  charismaSavingThrow: number;
+  dexteritySavingThrow: number;
   skillProficiencies: string[];
   strengthScore: number;
   charismaScore: number;

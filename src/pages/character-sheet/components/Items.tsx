@@ -16,7 +16,9 @@ interface IProps {
 export const Items = (props: IProps) => {
   let moneyList = [];
   for (let coinType in props.money) {
-    moneyList.push(`${props.money[coinType as keyof IMoney]} ${coinType}`);
+    if (props.money[coinType as keyof IMoney] != 0) {
+      moneyList.push(`${props.money[coinType as keyof IMoney]} ${coinType}`);
+    }
   }
   let moneyDisplay = moneyList.join(", ");
 
