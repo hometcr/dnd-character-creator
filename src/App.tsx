@@ -25,7 +25,7 @@ function App() {
           <Route path="/ability-scores" element={<AbilityScores />} />
           <Route path="/choices" element={<Choices />} />
           <Route path="/spells" element={<Spells />} />
-          <Route path="/character-sheet" element={<CharacterSheet />} />
+          <Route path="/character-sheet/:id" element={<CharacterSheet />} />
         </Routes>
         <Footer />
       </Router>

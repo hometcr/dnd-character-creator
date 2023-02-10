@@ -10,6 +10,7 @@ export interface ICharacter {
   name: string;
   class: string;
   race: string;
+  id: string;
 }
 
 interface ICharacterData {
@@ -110,27 +111,10 @@ export const Home = () => {
         name: characterItem.name,
         class: characterItem.class,
         race: characterItem.race,
+        id: characterItem.id,
       });
     }
   }
-
-  // const charactersData: ICharacter[] = [
-  //   // {
-  //   //   name: "Beverly Toegold",
-  //   //   class: "paladin",
-  //   //   race: "halfing",
-  //   // },
-  //   {
-  //     name: "Hardwon Surefoot",
-  //     class: "fighter",
-  //     race: "human",
-  //   },
-  //   {
-  //     name: "Moonshine Cybin",
-  //     class: "druid",
-  //     race: "wood elf",
-  //   },
-  // ];
 
   let newCharacterButton = <></>;
   if (characters.length > 2) {

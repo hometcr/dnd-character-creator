@@ -4,8 +4,14 @@ import { Spells } from "./components/Spells";
 import { Skills } from "./components/Skills";
 import { ArmorAndWeapons } from "./components/ArmorAndWeapons";
 import { Items } from "./components/Items";
+import { useParams } from 'react-router-dom'
+
 
 export const CharacterSheet = () => {
+
+  const routeParams = useParams();
+  console.log(routeParams.id)
+
   let characterInfo = {
     name: "Hardwon Surefoot",
     class: "Fighter",

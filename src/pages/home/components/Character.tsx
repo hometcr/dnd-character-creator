@@ -25,7 +25,7 @@ export const Character = (props: IProps) => {
         </div>
       </div>
       <div className="access-character-buttons">
-        <NavigateButton text="View" destination="/character-sheet" className="access-character-button"/>
+        <NavigateButton text="View" destination={`/character-sheet/${props.character.id}`} className="access-character-button"/>
         <DeleteButton />
       </div>
     </div>
