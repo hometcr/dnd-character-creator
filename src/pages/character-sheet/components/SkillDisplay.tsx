@@ -1,8 +1,8 @@
 interface IProps {
   ability: string;
-  abilityScore: string;
+  abilityModifier: string;
   skillItems: string[];
-  abilityModifier: number;
+  abilityScore: number;
 }
 
 export const SkillDisplay = (props: IProps) => {
@@ -14,8 +14,8 @@ export const SkillDisplay = (props: IProps) => {
     <div className="skill-display">
       <div className="skill-ability-and-title">
         <div className="ability-title">{props.ability}</div>
-        <div className="ability-modifier">{props.abilityScore}</div>
-        <div className="ability-score">{props.abilityModifier}</div>
+        <div className="ability-modifier">{props.abilityModifier}</div>
+        <div className="ability-score">{props.abilityScore}</div>
       </div>
       <div className="skill-items-display">{skillItemsDisplay}</div>
     </div>

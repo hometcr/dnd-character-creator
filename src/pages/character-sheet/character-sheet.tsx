@@ -182,7 +182,7 @@ export const CharacterSheet = () => {
           cantrips={characterData.cantrips}
           firstLevelSpells={characterData.knownSpells}
         />
-        <Skills abilityModifiers={abilityScores} skills={skills} />
+        <Skills abilityScores={abilityScores} skills={skills} />
         <ArmorAndWeapons
           weapons={characterData.weapons}
           armor={characterData.armor}

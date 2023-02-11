@@ -31,7 +31,7 @@ interface ISkills {
   Intelligence: ISkill;
 }
 
-interface IAbilityModifiers {
+interface IAbilityScores {
   Strength: number;
   Constitution: number;
   Wisdom: number;
@@ -40,19 +40,19 @@ interface IAbilityModifiers {
   Dexterity: number;
 }
 interface IProps {
-  abilityModifiers: IAbilityModifiers;
+  abilityScores: IAbilityScores;
   skills: ISkills;
 }
 
 export const Skills = (props: IProps) => {
-  interface IAbilityScores {
-    Strength: number;
-    Constitution: number;
-    Dexterity: number;
-    Intelligence: number;
-    Charisma: number;
-    Wisdom: number;
-  }
+  // interface IAbilityScores {
+  //   Strength: number;
+  //   Constitution: number;
+  //   Dexterity: number;
+  //   Intelligence: number;
+  //   Charisma: number;
+  //   Wisdom: number;
+  // }
 
   const getModifier = (score: number) => {
     let modifier = 0;
@@ -64,15 +64,15 @@ export const Skills = (props: IProps) => {
     return modifier;
   };
 
-  let abilityScores: IAbilityScores = { ...props.abilityModifiers };
-  for (let ability in props.abilityModifiers) {
+  let abilityModifiers: IAbilityScores = { ...props.abilityScores };
+  for (let ability in props.abilityScores) {
     let modifier = getModifier(
-      props.abilityModifiers[ability as keyof IAbilityModifiers]
+      props.abilityScores[ability as keyof IAbilityScores]
     );
-    abilityScores[ability as keyof IAbilityScores] = modifier;
+    abilityModifiers[ability as keyof IAbilityScores] = modifier;
   }
 
-  const createScoreDisplay = (score: number) => {
+  const createModifierDisplay = (score: number) => {
     let sign = "";
     if (score >= 0) {
       sign = "+";
@@ -81,8 +81,8 @@ export const Skills = (props: IProps) => {
   };
 
   const createSkillItem = (skill: string, score: number) => {
-    let scoreDisplay = createScoreDisplay(score);
-    return `${scoreDisplay} ${skill}`;
+    let modifierDisplay = createModifierDisplay(score);
+    return `${modifierDisplay} ${skill}`;
   };
 
   const createSkillItemList = (ability: String) => {
@@ -100,19 +100,17 @@ export const Skills = (props: IProps) => {
 
   let skillDisplays = () => {
     let skillDisplaysList = [];
-    for (let ability in abilityScores) {
-      let scoreDisplay = createScoreDisplay(
-        abilityScores[ability as keyof IAbilityScores]
+    for (let ability in abilityModifiers) {
+      let modifierDisplay = createModifierDisplay(
+        abilityModifiers[ability as keyof IAbilityScores]
       );
       let skillItems = createSkillItemList(ability);
       skillDisplaysList.push(
         <SkillDisplay
           ability={String(ability)}
-          abilityScore={scoreDisplay}
+          abilityModifier={modifierDisplay}
           skillItems={skillItems}
-          abilityModifier={
-            props.abilityModifiers[ability as keyof IAbilityModifiers]
-          }
+          abilityScore={props.abilityScores[ability as keyof IAbilityScores]}
         />
       );
     }
