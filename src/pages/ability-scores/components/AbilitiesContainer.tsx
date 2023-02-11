@@ -1,6 +1,6 @@
 import { Ability } from "./Ability";
-import { NavigateButton } from "../../../components/NavigateButton";
-
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 interface IProps {
   scores: Number[];
   setScores: Function;
@@ -14,9 +14,58 @@ let bonuses = {
   Intelligence: 0,
   Wisdom: 0,
 };
-
+export interface ISelectedScores {
+  Strength: Number | null;
+  Dexterity: Number | null;
+  Intelligence: Number | null;
+  Wisdom: Number | null;
+  Constitution: Number | null;
+  Charisma: Number | null;
+}
 export const AbilitiesContainer = (props: IProps) => {
-  let abilityScores = props.scores;
+  const navigate = useNavigate();
+
+  let initialSelectedScores = {
+    Strength: null,
+    Dexterity: null,
+    Intelligence: null,
+    Wisdom: null,
+    Constitution: null,
+    Charisma: null,
+  };
+
+  const [selectedScores, setSelectedScores] = useState<ISelectedScores>(
+    initialSelectedScores
+  );
+
+  const checkIfScoresComplete = () => {
+    if (props.scores.includes(0)) {
+      return false;
+    }
+    const scoresCopy = [...props.scores];
+    for (let ability in selectedScores) {
+      let score = Number(selectedScores[ability as keyof ISelectedScores]);
+      if (scoresCopy.includes(score)) {
+        let index = scoresCopy.indexOf(score);
+        scoresCopy.splice(index, 1);
+      }
+    }
+    if (scoresCopy.length > 0) {
+      return false;
+    } else {
+      return true;
+    }
+  };
+
+  const onPageSubmit = () => {
+    let scoresComplete = checkIfScoresComplete();
+    if (scoresComplete) {
+      // fillAbilitiesSlice();
+      navigate("/choices");
+    } else {
+      alert("Please choose which ability gets each score");
+    }
+  };
 
   return (
     <div className="abilities-container-etc">
@@ -26,16 +75,22 @@ export const AbilitiesContainer = (props: IProps) => {
             name="Strength"
             scores={props.scores}
             bonus={bonuses.Strength}
+            selectedScores={selectedScores}
+            setSelectedScores={setSelectedScores}
           />
           <Ability
             name="Wisdom"
             scores={props.scores}
             bonus={bonuses.Wisdom}
+            selectedScores={selectedScores}
+            setSelectedScores={setSelectedScores}
           />
           <Ability
             name="Charisma"
             scores={props.scores}
             bonus={bonuses.Charisma}
+            selectedScores={selectedScores}
+            setSelectedScores={setSelectedScores}
           />
         </div>
         <div className="abilities-bottom-row">
@@ -43,16 +98,22 @@ export const AbilitiesContainer = (props: IProps) => {
             name="Constitution"
             scores={props.scores}
             bonus={bonuses.Constitution}
+            selectedScores={selectedScores}
+            setSelectedScores={setSelectedScores}
           />
           <Ability
             name="Dexterity"
             scores={props.scores}
             bonus={bonuses.Dexterity}
+            selectedScores={selectedScores}
+            setSelectedScores={setSelectedScores}
           />
           <Ability
             name="Intelligence"
             scores={props.scores}
             bonus={bonuses.Intelligence}
+            selectedScores={selectedScores}
+            setSelectedScores={setSelectedScores}
           />
         </div>
         <p className="ability-score-note">
@@ -61,11 +122,9 @@ export const AbilitiesContainer = (props: IProps) => {
           }
         </p>
       </div>
-      <NavigateButton
-        destination="/choices"
-        text="Next"
-        className="abilities-next-button"
-      />
+      <button onClick={onPageSubmit} className="abilities-next-button">
+        Next
+      </button>
     </div>
   );
 };
