@@ -1,13 +1,23 @@
 import { Ability } from "./Ability";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux"
-import { fillSlice } from "../../../features/abilityScores"
+import { useDispatch } from "react-redux";
+import { fillSlice } from "../../../features/abilityScores";
 interface IProps {
   scores: Number[];
   setScores: Function;
 }
 
+interface IBonuses {
+  Strength: Number;
+  Charisma: Number;
+  Dexterity: Number;
+  Constitution: Number;
+  Intelligence: Number;
+  Wisdom: Number;
+}
+
+// grab real bonuses from data somehow
 let bonuses = {
   Strength: 2,
   Charisma: 0,
@@ -61,8 +71,14 @@ export const AbilitiesContainer = (props: IProps) => {
   };
 
   const fillAbilitiesSlice = () => {
-    dispatch(fillSlice(selectedScores));
-  }
+    let scoresWithBonuses = { ...selectedScores };
+    for (let score in scoresWithBonuses) {
+      scoresWithBonuses[score as keyof ISelectedScores] =
+        Number(scoresWithBonuses[score as keyof ISelectedScores]) +
+        Number(bonuses[score as keyof ISelectedScores]);
+    }
+    dispatch(fillSlice(scoresWithBonuses));
+  };
 
   const onPageSubmit = () => {
     let scoresComplete = checkIfScoresComplete();
