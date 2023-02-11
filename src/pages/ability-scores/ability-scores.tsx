@@ -7,7 +7,7 @@ export const AbilityScores = () => {
   ]);
   let [scoresDisplay, setScoresDisplay] = useState<JSX.Element[]>([]);
 
-  const getAbilityScore = () => {
+  const getOneAbilityScore = () => {
     let rolls = [];
     for (let i = 0; i < 4; i++) {
       rolls.push(Math.floor(Math.random() * 6) + 1);
@@ -23,7 +23,7 @@ export const AbilityScores = () => {
   const getAbilityScores = () => {
     let scores: Number[] = [];
     for (let i = 0; i < 6; i++) {
-      let AbilityScore = getAbilityScore();
+      let AbilityScore = getOneAbilityScore();
       scores.push(AbilityScore);
     }
     return scores;
@@ -61,7 +61,7 @@ export const AbilityScores = () => {
           <div className="scores-list-scores">{scoresDisplay}</div>
         </div>
       </div>
-      <AbilitiesContainer scores={abilityScores} />
+      <AbilitiesContainer scores={abilityScores} setScores={setAbilityScores}/>
     </div>
   );
 };

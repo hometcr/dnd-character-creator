@@ -3,6 +3,7 @@ import { NavigateButton } from "../../../components/NavigateButton";
 
 interface IProps {
   scores: Number[];
+  setScores: Function;
 }
 
 let bonuses = {
@@ -23,34 +24,34 @@ export const AbilitiesContainer = (props: IProps) => {
         <div className="abilities-top-row">
           <Ability
             name="Strength"
-            abilityScores={abilityScores}
+            scores={props.scores}
             bonus={bonuses.Strength}
           />
           <Ability
             name="Wisdom"
-            abilityScores={abilityScores}
+            scores={props.scores}
             bonus={bonuses.Wisdom}
           />
           <Ability
             name="Charisma"
-            abilityScores={abilityScores}
+            scores={props.scores}
             bonus={bonuses.Charisma}
           />
         </div>
         <div className="abilities-bottom-row">
           <Ability
             name="Constitution"
-            abilityScores={abilityScores}
+            scores={props.scores}
             bonus={bonuses.Constitution}
           />
           <Ability
             name="Dexterity"
-            abilityScores={abilityScores}
+            scores={props.scores}
             bonus={bonuses.Dexterity}
           />
           <Ability
             name="Intelligence"
-            abilityScores={abilityScores}
+            scores={props.scores}
             bonus={bonuses.Intelligence}
           />
         </div>
