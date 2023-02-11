@@ -7,6 +7,8 @@ import { Provider } from "react-redux"
 import beginReducer from "./features/begin"
 import abilityScoresReducer from "./features/abilityScores";
 
+export type IRootState = ReturnType<typeof store.getState>
+
 // store the global states
 const store = configureStore({
 	reducer: {

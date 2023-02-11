@@ -1,4 +1,4 @@
-import { descriptions } from "../assets/descriptions";
+import { descriptions, IDescriptions } from "../assets/descriptions";
 
 interface iProps {
   item: string;
