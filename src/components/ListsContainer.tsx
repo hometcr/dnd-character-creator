@@ -4,12 +4,16 @@ interface IProps {
   page: String;
   knownEquipment?: String[];
   unknownEquipment?: String[][];
-  knownProficiencies?: String[];
-  unknownProficiencies?: String[][];
+  knownSkillProficiencies?: String[];
+  unknownSkillProficiencies?: String[][];
+  knownItemProficiencies?: String[];
+  unknownItemProficiencies?: String[][];
   knownLanguages?: String[];
   unknownLanguages?: String[][];
   knownWeapons?: String[];
   unknownWeapons?: String[][];
+  knownArmor?: String[];
+  unknownArmor?: String[][];
   knownCantrips?: String[];
   unknownCantrips?: String[][];
   knownFirstLevelSpells?: String[];
@@ -19,14 +23,26 @@ interface IProps {
 }
 
 export const ListsContainer = (props: IProps) => {
-  // set up proficiencies list if one is sent in via props
-  let proficienciesList;
-  if (props.knownProficiencies && props.unknownProficiencies) {
-    proficienciesList = (
+  // set up skill proficiencies list if one is sent in via props
+  let skillProficienciesList;
+  if (props.knownSkillProficiencies && props.unknownSkillProficiencies) {
+    skillProficienciesList = (
       <ListOfChoices
-        listName="Proficiencies"
-        knownItems={props.knownProficiencies}
-        unknownItems={props.unknownProficiencies}
+        listName="Skill Proficiencies"
+        knownItems={props.knownSkillProficiencies}
+        unknownItems={props.unknownSkillProficiencies}
+      />
+    );
+  }
+
+  // set up item proficiencies list if one is sent in via props
+  let itemProficienciesList;
+  if (props.knownItemProficiencies && props.unknownItemProficiencies) {
+    itemProficienciesList = (
+      <ListOfChoices
+        listName="Item Proficiencies"
+        knownItems={props.knownItemProficiencies}
+        unknownItems={props.unknownItemProficiencies}
       />
     );
   }
@@ -51,6 +67,18 @@ export const ListsContainer = (props: IProps) => {
         listName="Weapons"
         knownItems={props.knownWeapons}
         unknownItems={props.unknownWeapons}
+      />
+    );
+  }
+
+  // set up armor list if one is sent in via props
+  let armorList;
+  if (props.knownArmor && props.unknownArmor) {
+    armorList = (
+      <ListOfChoices
+        listName="Armor"
+        knownItems={props.knownArmor}
+        unknownItems={props.unknownArmor}
       />
     );
   }
@@ -105,10 +133,12 @@ export const ListsContainer = (props: IProps) => {
 
   return (
     <div className="lists-container">
-      {proficienciesList}
       {equipmentList}
       {weaponsList}
+      {armorList}
       {languagesList}
+      {skillProficienciesList}
+      {itemProficienciesList}
       {cantripsList}
       {firstLevelSpellsList}
       {preparedSpellsList}

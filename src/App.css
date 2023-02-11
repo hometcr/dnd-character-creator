@@ -617,7 +617,8 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  margin: 30px;
+  margin-top: 30px;
+  margin-bottom: 10px;
 }
 
 .choices-page {
@@ -664,6 +665,7 @@ body {
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
+  margin-top: 15px;
 }
 
 .list-of-choices-name {

@@ -6,6 +6,7 @@ import { Provider } from "react-redux"
 // import a reducer for every piece of state
 import beginReducer from "./features/begin"
 import abilityScoresReducer from "./features/abilityScores";
+import choicesReducer from "./features/choices"
 
 export type IRootState = ReturnType<typeof store.getState>
 
@@ -14,6 +15,7 @@ const store = configureStore({
 	reducer: {
 		begin: beginReducer,
     abilityScores: abilityScoresReducer,
+    choices: choicesReducer
 	}
 });
 

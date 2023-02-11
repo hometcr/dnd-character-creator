@@ -2,15 +2,25 @@ import { ListsContainer } from "../components/ListsContainer";
 import { ItemDescription } from "../components/ItemDescription";
 import bow from "../assets/bow.png";
 import { NavigateButton } from "../components/NavigateButton";
+import { useSelector } from "react-redux";
+import { IRootState } from "../index";
+import { descriptions, IDescriptions } from "../assets/descriptions";
 
 export const Choices = () => {
+  const beginningInfo = useSelector((state: IRootState) => state.begin.value);
+
+  // change to update whenever a dropdown is changed
   let selectedItem = "";
 
-  let knownProficiencies = ["Animal Handling", "Survival"];
-  let unknownProficiencies = [
+  // get data from descriptions depending on choices from begin
+
+  let knownSkillProficiencies = ["Animal Handling", "Survival"];
+  let unknownSkillProficiencies = [
     ["Acrobatics", "Strength", "Dexterity"],
     ["Acrobatics", "Strength", "Dexterity"],
   ];
+  let knownItemProficiencies = ["Flute"];
+  let unknownItemProficiencies = [["Tinker's Tools", "Carpenter's Tools"]];
   let knownEquipment = ["Shovel", "Iron Pot", "Common Clothes"];
   let unknownEquipment = [
     ["Explorer's Pack", "Dungeoneer's Pack"],
@@ -24,6 +34,11 @@ export const Choices = () => {
   ];
   let knownWeapons = ["Longbow"];
   let unknownWeapons = [
+    ["Shield", "Axe"],
+    ["Light Crossbow", "Javelin"],
+  ];
+  let knownArmor = ["Longbow"];
+  let unknownArmor = [
     ["Shield", "Axe"],
     ["Light Crossbow", "Javelin"],
   ];
@@ -43,10 +58,14 @@ export const Choices = () => {
             page="choices"
             knownEquipment={knownEquipment}
             unknownEquipment={unknownEquipment}
-            knownProficiencies={knownProficiencies}
-            unknownProficiencies={unknownProficiencies}
+            knownSkillProficiencies={knownSkillProficiencies}
+            unknownSkillProficiencies={unknownSkillProficiencies}
+            knownItemProficiencies={knownItemProficiencies}
+            unknownItemProficiencies={unknownItemProficiencies}
             knownWeapons={knownWeapons}
             unknownWeapons={unknownWeapons}
+            knownArmor={knownArmor}
+            unknownArmor={unknownArmor}
             knownLanguages={knownLanguages}
             unknownLanguages={unknownLanguages}
           />
