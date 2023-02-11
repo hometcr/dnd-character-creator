@@ -3,19 +3,6 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { fillSlice } from "../../../features/abilityScores";
-interface IProps {
-  scores: Number[];
-  setScores: Function;
-}
-
-interface IBonuses {
-  Strength: Number;
-  Charisma: Number;
-  Dexterity: Number;
-  Constitution: Number;
-  Intelligence: Number;
-  Wisdom: Number;
-}
 
 // grab real bonuses from data somehow
 let bonuses = {
@@ -34,27 +21,31 @@ export interface ISelectedScores {
   Constitution: Number | null;
   Charisma: Number | null;
 }
+
+interface IProps {
+  scores: Number[];
+  setScores: Function;
+}
+
 export const AbilitiesContainer = (props: IProps) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  let initialSelectedScores = {
+  const [selectedScores, setSelectedScores] = useState<ISelectedScores>({
     Strength: null,
     Dexterity: null,
     Intelligence: null,
     Wisdom: null,
     Constitution: null,
     Charisma: null,
-  };
+  });
 
-  const [selectedScores, setSelectedScores] = useState<ISelectedScores>(
-    initialSelectedScores
-  );
-
-  const checkIfScoresComplete = () => {
+  const checkIfScoresIsComplete = () => {
+    // if dice haven't been rolled yet, return false
     if (props.scores.includes(0)) {
       return false;
     }
+    // remove each selected score from a list of all scores
     const scoresCopy = [...props.scores];
     for (let ability in selectedScores) {
       let score = Number(selectedScores[ability as keyof ISelectedScores]);
@@ -63,9 +54,11 @@ export const AbilitiesContainer = (props: IProps) => {
         scoresCopy.splice(index, 1);
       }
     }
+    // if all scores were not removed, return false
     if (scoresCopy.length > 0) {
       return false;
     } else {
+      // if all scores were removed, return true
       return true;
     }
   };
@@ -81,7 +74,7 @@ export const AbilitiesContainer = (props: IProps) => {
   };
 
   const onPageSubmit = () => {
-    let scoresComplete = checkIfScoresComplete();
+    let scoresComplete = checkIfScoresIsComplete();
     if (scoresComplete) {
       fillAbilitiesSlice();
       navigate("/choices");
