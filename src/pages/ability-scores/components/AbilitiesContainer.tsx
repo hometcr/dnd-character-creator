@@ -2,10 +2,10 @@ import { Ability } from "./Ability";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { useSelector } from "react-redux"
+import { useSelector } from "react-redux";
 import { fillSlice } from "../../../features/abilityScores";
-import { IRootState } from '../../../index';
-import { stats, IStats } from "../../../assets/stats"
+import { IRootState } from "../../../index";
+import { stats, IStats } from "../../../assets/stats";
 
 export interface ISelectedScores {
   Strength: Number | null;
@@ -25,7 +25,6 @@ export const AbilitiesContainer = (props: IProps) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const beginningInfo = useSelector((state: IRootState) => state.begin.value);
-  console.log(beginningInfo)
 
   const [selectedScores, setSelectedScores] = useState<ISelectedScores>({
     Strength: null,
@@ -39,27 +38,41 @@ export const AbilitiesContainer = (props: IProps) => {
   // grab bonuses from data
   const getBonuses = () => {
     let bonuses = {
-        Strength: 0,
-        Charisma: 0,
-        Dexterity: 0,
-        Constitution: 0,
-        Intelligence: 0,
-        Wisdom: 0,
-      };
-    // if stats[beginningInfo.class as keyof IStats] (
-    
-  }
-  console.log(stats[beginningInfo.class as keyof IStats])
-
-  // grab real bonuses from data somehow
-  let bonuses = {
-    Strength: 2,
-    Charisma: 0,
-    Dexterity: 0,
-    Constitution: 1,
-    Intelligence: 0,
-    Wisdom: 0,
+      Strength: 0,
+      Charisma: 0,
+      Dexterity: 0,
+      Constitution: 0,
+      Intelligence: 0,
+      Wisdom: 0,
+    };
+    let classBonuses = stats[beginningInfo.class as keyof IStats].bonuses;
+    if (classBonuses) {
+      for (let ability in classBonuses) {
+        bonuses[ability as keyof ISelectedScores] += Number(
+          classBonuses[ability as keyof ISelectedScores]
+        );
+      }
+    }
+    let raceBonuses = stats[beginningInfo.race as keyof IStats].bonuses;
+    if (raceBonuses) {
+      for (let ability in raceBonuses) {
+        bonuses[ability as keyof ISelectedScores] += Number(
+          raceBonuses[ability as keyof ISelectedScores]
+        );
+      }
+    }
+    let backgroundBonuses =
+      stats[beginningInfo.background as keyof IStats].bonuses;
+    if (backgroundBonuses) {
+      for (let ability in backgroundBonuses) {
+        bonuses[ability as keyof ISelectedScores] += Number(
+          backgroundBonuses[ability as keyof ISelectedScores]
+        );
+      }
+    }
+    return bonuses;
   };
+  let bonuses = getBonuses();
 
   const checkIfScoresIsComplete = () => {
     // if dice haven't been rolled yet, return false

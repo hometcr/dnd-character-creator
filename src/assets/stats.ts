@@ -27,7 +27,8 @@ interface ITypeStats {
 
 export interface IStats {
   Bard: ITypeStats;
-  "Hill Dwarf": ITypeStats;
+  // currently stats specifically for a Hill Dwarf
+  Dwarf: ITypeStats;
   Entertainer: ITypeStats;
 }
 
@@ -362,10 +363,10 @@ export const stats: IStats = {
       ],
     ],
   },
-  "Hill Dwarf": {
+  Dwarf: {
     bonuses: {
       Constitution: 2,
-      Wisdom: 1,
+      Wisdom: 1
     },
     knownItemProficiencies: [
       "Battleaxe",
