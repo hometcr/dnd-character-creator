@@ -1,6 +1,8 @@
 import { Ability } from "./Ability";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux"
+import { fillSlice } from "../../../features/abilityScores"
 interface IProps {
   scores: Number[];
   setScores: Function;
@@ -24,6 +26,7 @@ export interface ISelectedScores {
 }
 export const AbilitiesContainer = (props: IProps) => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   let initialSelectedScores = {
     Strength: null,
@@ -57,10 +60,14 @@ export const AbilitiesContainer = (props: IProps) => {
     }
   };
 
+  const fillAbilitiesSlice = () => {
+    dispatch(fillSlice(selectedScores));
+  }
+
   const onPageSubmit = () => {
     let scoresComplete = checkIfScoresComplete();
     if (scoresComplete) {
-      // fillAbilitiesSlice();
+      fillAbilitiesSlice();
       navigate("/choices");
     } else {
       alert("Please choose which ability gets each score");
