@@ -2,9 +2,10 @@ import { AbilitiesContainer } from "./components/AbilitiesContainer";
 import { useState } from "react";
 
 export const AbilityScores = () => {
-
-  let [diceRolled, setDiceRolled] = useState(false)
-
+  let [abilityScores, setAbilityScores] = useState<Number[]>([
+    0, 0, 0, 0, 0, 0,
+  ]);
+  let [scoresDisplay, setScoresDisplay] = useState<JSX.Element[]>([]);
 
   const getAbilityScore = () => {
     let rolls = [];
@@ -19,8 +20,8 @@ export const AbilityScores = () => {
     return AbilityScore;
   };
 
-  let scores: Number[] = [];
   const getAbilityScores = () => {
+    let scores: Number[] = [];
     for (let i = 0; i < 6; i++) {
       let AbilityScore = getAbilityScore();
       scores.push(AbilityScore);
@@ -28,15 +29,19 @@ export const AbilityScores = () => {
     return scores;
   };
 
-  let abilityScores: Number[] = [0, 0, 0, 0, 0, 0]
-  if (diceRolled) {
-    abilityScores = getAbilityScores()
-  }
+  const getScoresDisplay = (scores: Number[]) => {
+    let scoresDisplay = scores.map((score) => (
+      <div className="scores-list-score">{String(score)}</div>
+    ));
+    return scoresDisplay;
+  };
 
-
-  let scoresDisplay = scores.map((score) => (
-    <div className="scores-list-score">{String(score)}</div>
-  ));
+  const onDiceRoll = () => {
+    let rolledScores = getAbilityScores();
+    setAbilityScores(rolledScores);
+    let newScoresDisplay = getScoresDisplay(rolledScores);
+    setScoresDisplay(newScoresDisplay);
+  };
 
   return (
     <div className="ability-scores-page">
@@ -47,7 +52,9 @@ export const AbilityScores = () => {
           which score
         </p>
         <div className="roll-dice-container">
-          <button onClick={()=>{setDiceRolled(true)}}className="roll-dice-button">Roll dice</button>
+          <button onClick={onDiceRoll} className="roll-dice-button">
+            Roll dice
+          </button>
         </div>
         <div className="scores-list">
           <div className="scores-list-title">Scores: </div>
