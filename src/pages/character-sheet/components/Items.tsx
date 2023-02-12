@@ -24,6 +24,7 @@ export const Items = (props: IProps) => {
 
   let itemsDisplay = props.items.map((item) => (
     <DescriptionToggle
+      key={`${item}`}
       title={item}
       description={descriptions[item as keyof IDescriptions]}
     />

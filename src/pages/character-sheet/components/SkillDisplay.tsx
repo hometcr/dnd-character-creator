@@ -7,7 +7,7 @@ interface IProps {
 
 export const SkillDisplay = (props: IProps) => {
   let skillItemsDisplay = props.skillItems.map((skillItem) => {
-    return <div className="skill-item">{skillItem}</div>;
+    return <div key={`${skillItem}`} className="skill-item">{skillItem}</div>;
   });
 
   return (

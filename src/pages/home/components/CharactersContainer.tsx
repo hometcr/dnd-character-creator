@@ -9,7 +9,7 @@ export const CharactersContainer = (props: IProps) => {
   let characters;
   if (props.characters.length > 0) {
     characters = props.characters.map((character: ICharacter) => (
-      <Character character={character} />
+      <Character key={`${character}`} character={character} />
     ));
   } else {
     characters = (

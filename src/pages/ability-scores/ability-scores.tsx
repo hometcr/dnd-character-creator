@@ -30,8 +30,8 @@ export const AbilityScores = () => {
   };
 
   const getScoresDisplay = (scores: Number[]) => {
-    let scoresDisplay = scores.map((score) => (
-      <div className="scores-list-score">{String(score)}</div>
+    let scoresDisplay = scores.map((score, index) => (
+      <div key={`${index}`} className="scores-list-score">{String(score)}</div>
     ));
     return scoresDisplay;
   };

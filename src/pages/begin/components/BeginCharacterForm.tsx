@@ -82,7 +82,7 @@ export const BeginCharacterForm = (props: IProps) => {
             onChange={updateClass}
             className="begin-select"
           >
-            <option selected></option>
+            <option></option>
             <option>Fighter</option>
             <option>Wizard</option>
             <option>Bard</option>
@@ -96,7 +96,7 @@ export const BeginCharacterForm = (props: IProps) => {
             onChange={updateRace}
             className="begin-select"
           >
-            <option selected></option>
+            <option></option>
             <option>Human</option>
             <option>Dwarf</option>
             <option>Elf</option>
@@ -110,7 +110,7 @@ export const BeginCharacterForm = (props: IProps) => {
             onChange={updateBackground}
             className="begin-select"
           >
-            <option selected></option>
+            <option></option>
             <option>Entertainer</option>
             <option>Folk Hero</option>
             <option>Acolyte</option>

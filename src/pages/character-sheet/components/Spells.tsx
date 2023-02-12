@@ -12,6 +12,7 @@ interface IProps {
 export const Spells = (props: IProps) => {
   let cantripsDisplay = props.cantrips.map((cantrip) => (
     <DescriptionToggle
+      key={`${cantrip}`}
       title={cantrip}
       description={descriptions[cantrip as keyof IDescriptions]}
     />
@@ -19,6 +20,7 @@ export const Spells = (props: IProps) => {
 
   let firstLevelSpellsDisplay = props.firstLevelSpells.map((spell) => (
     <DescriptionToggle
+      key={`${spell}`}
       title={spell}
       description={descriptions[spell as keyof IDescriptions]}
     />

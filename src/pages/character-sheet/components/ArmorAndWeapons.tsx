@@ -9,6 +9,7 @@ interface IProps {
 export const ArmorAndWeapons = (props: IProps) => {
   let armorDisplay = props.armor.map((armorPiece) => (
     <DescriptionToggle
+      key={`${armorPiece}`}
       title={armorPiece}
       description={descriptions[armorPiece as keyof IDescriptions]}
     />
@@ -16,6 +17,7 @@ export const ArmorAndWeapons = (props: IProps) => {
 
   let weaponsDisplay = props.weapons.map((weapon) => (
     <DescriptionToggle
+      key={`${weapon}`}
       title={weapon}
       description={descriptions[weapon as keyof IDescriptions]}
     />

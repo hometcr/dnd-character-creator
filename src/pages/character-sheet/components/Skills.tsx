@@ -45,14 +45,6 @@ interface IProps {
 }
 
 export const Skills = (props: IProps) => {
-  // interface IAbilityScores {
-  //   Strength: number;
-  //   Constitution: number;
-  //   Dexterity: number;
-  //   Intelligence: number;
-  //   Charisma: number;
-  //   Wisdom: number;
-  // }
 
   const getModifier = (score: number) => {
     let modifier = 0;
@@ -111,6 +103,7 @@ export const Skills = (props: IProps) => {
           abilityModifier={modifierDisplay}
           skillItems={skillItems}
           abilityScore={props.abilityScores[ability as keyof IAbilityScores]}
+          key={`${ability}`}
         />
       );
     }

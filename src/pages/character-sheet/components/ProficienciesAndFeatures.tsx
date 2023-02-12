@@ -14,6 +14,7 @@ export const ProficienciesAndFeatures = (props: IProps) => {
 
   let featuresDisplay = props.features.map((feature) => (
     <DescriptionToggle
+      key={`${feature}`}
       title={feature}
       description={descriptions[feature as keyof IDescriptions]}
     />
