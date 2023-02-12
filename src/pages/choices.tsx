@@ -32,13 +32,8 @@ export const Choices = () => {
       "Tinker's Tools",
     ],
   ];
-  let knownWeapons = ["Longbow"];
-  let unknownWeapons = [
-    ["Shield", "Axe"],
-    ["Light Crossbow", "Javelin"],
-  ];
-  let knownArmor = ["Longbow"];
-  let unknownArmor = [
+  let knownArmorAndWeapons = ["Longbow"];
+  let unknownArmorAndWeapons = [
     ["Shield", "Axe"],
     ["Light Crossbow", "Javelin"],
   ];
@@ -62,10 +57,8 @@ export const Choices = () => {
             unknownSkillProficiencies={unknownSkillProficiencies}
             knownItemProficiencies={knownItemProficiencies}
             unknownItemProficiencies={unknownItemProficiencies}
-            knownWeapons={knownWeapons}
-            unknownWeapons={unknownWeapons}
-            knownArmor={knownArmor}
-            unknownArmor={unknownArmor}
+            knownArmorAndWeapons={knownArmorAndWeapons}
+            unknownArmorAndWeapons={unknownArmorAndWeapons}
             knownLanguages={knownLanguages}
             unknownLanguages={unknownLanguages}
           />
