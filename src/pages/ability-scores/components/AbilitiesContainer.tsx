@@ -113,7 +113,7 @@ export const AbilitiesContainer = (props: IProps) => {
       fillAbilitiesSlice();
       navigate("/choices");
     } else {
-      alert("Please choose which ability gets each score");
+      alert("Please choose a unique score for each ability");
     }
   };
 
