@@ -153,12 +153,6 @@ export const Spells = () => {
     initialSelectedPreparedSpells
   );
 
-  // fill knownPreparedSpells with chosen cantrips
-  
-
-  // if character is a bard, fill knownPreparedSpells with selectedFirstLevelSpells
-
-
   return (
     <div className="spells-page">
       <div className="spells-without-description">

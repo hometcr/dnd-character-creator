@@ -406,6 +406,8 @@ body {
   padding: 40px;
   display: flex;
   flex-direction: column;
+  /* recently added */
+  max-height: 90%;
 }
 
 .item-description-title {
@@ -422,7 +424,6 @@ body {
   border-width: 1px;
   padding: 30px;
   overflow: scroll;
-  max-height: 470px;
 }
 
 .empty-description-message {
@@ -756,6 +757,8 @@ body {
   justify-content: space-between;
   width: 50%;
   min-width: 300px;
+  /* recently added */
+  height: 100%;
 }
 
 .spells-title {

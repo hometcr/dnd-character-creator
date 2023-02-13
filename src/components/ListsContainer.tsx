@@ -199,7 +199,6 @@ export const ListsContainer = (props: IProps) => {
         knownItems={props.knownPreparedSpells}
         unknownItems={props.unknownPreparedSpells}
         setRecentlySelectedItem={props.setRecentlySelectedItem}
-        // CHANGE TO SELECTED SPELLS
         selectedItems={props.selectedPreparedSpells}
         setSelectedItems={props.setSelectedPreparedSpells}
       />
