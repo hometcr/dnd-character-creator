@@ -2,7 +2,20 @@ import { ListOfChoices } from "./ListOfChoices";
 import { useState } from "react";
 interface IProps {
   page: String;
-  setRecentlySelectedItem: Function,
+  // states
+  setRecentlySelectedItem: Function;
+  selectedSkillProficiencies?: String[];
+  setSelectedSkillProficiencies?: Function;
+  selectedItemProficiencies?: String[];
+  setSelectedItemProficiencies?: Function;
+  selectedEquipment?: String[];
+  setSelectedEquipment?: Function;
+  selectedLanguages?: String[];
+  setSelectedLanguages?: Function;
+  selectedArmorAndWeapons?: String[];
+  setSelectedArmorAndWeapons?: Function;
+
+  //lists from choices page
   knownEquipment?: String[];
   unknownEquipment?: String[][];
   knownSkillProficiencies?: String[];
@@ -13,6 +26,8 @@ interface IProps {
   unknownLanguages?: String[][];
   knownArmorAndWeapons?: String[];
   unknownArmorAndWeapons?: String[][];
+
+  // lists from spells page
   knownCantrips?: String[];
   unknownCantrips?: String[][];
   knownFirstLevelSpells?: String[];
@@ -22,132 +37,165 @@ interface IProps {
 }
 
 export const ListsContainer = (props: IProps) => {
-  // keep track of whatever was most recently selected
-  // so we can pop up its description
-
-  const [selectedSkillProficiencies, setSelectedSkillProficiencies] = useState(
-    []
-  );
-  const [selectedEquipment, setSelectedEquipment] = useState([]);
-  const [selectedItemProficiencies, setSelectedItemProficiencies] = useState(
-    []
-  );
-  const [selectedLanguages, setSelectedLanguages] = useState([]);
-  const [selectedArmorAndWeapons, setSelectedArmorAndWeapons] = useState([]);
-
   // set up skill proficiencies list if one is sent in via props
   let skillProficienciesList;
-  if (props.knownSkillProficiencies && props.unknownSkillProficiencies) {
+  if (
+    props.knownSkillProficiencies &&
+    props.unknownSkillProficiencies &&
+    props.selectedSkillProficiencies &&
+    props.setSelectedSkillProficiencies
+  ) {
     skillProficienciesList = (
       <ListOfChoices
         listName="Skill Proficiencies"
         knownItems={props.knownSkillProficiencies}
         unknownItems={props.unknownSkillProficiencies}
-        // recentlySelectedItem={props.recentlySelectedItem}
         setRecentlySelectedItem={props.setRecentlySelectedItem}
-        setSelectedSkillProficiencies={setSelectedSkillProficiencies}
+        selectedItems={props.selectedSkillProficiencies}
+        setSelectedItems={props.setSelectedSkillProficiencies}
       />
     );
   }
 
   // set up item proficiencies list if one is sent in via props
   let itemProficienciesList;
-  if (props.knownItemProficiencies && props.unknownItemProficiencies) {
+  if (
+    props.knownItemProficiencies &&
+    props.unknownItemProficiencies &&
+    props.selectedItemProficiencies &&
+    props.setSelectedItemProficiencies
+  ) {
     itemProficienciesList = (
       <ListOfChoices
         listName="Item Proficiencies"
         knownItems={props.knownItemProficiencies}
         unknownItems={props.unknownItemProficiencies}
-        // recentlySelectedItem={recentlySelectedItem}
         setRecentlySelectedItem={props.setRecentlySelectedItem}
-        setSelectedItemProficiencies={setSelectedItemProficiencies}
+        selectedItems={props.selectedItemProficiencies}
+        setSelectedItems={props.setSelectedItemProficiencies}
       />
     );
   }
 
   // set up equipment list if one is sent in via props
   let equipmentList;
-  if (props.knownEquipment && props.unknownEquipment) {
+  if (
+    props.knownEquipment &&
+    props.unknownEquipment &&
+    props.selectedEquipment &&
+    props.setSelectedEquipment
+  ) {
     equipmentList = (
       <ListOfChoices
         listName="Equipment"
         knownItems={props.knownEquipment}
         unknownItems={props.unknownEquipment}
-        // recentlySelectedItem={recentlySelectedItem}
         setRecentlySelectedItem={props.setRecentlySelectedItem}
-        setSelectedEquipment={setSelectedEquipment}
+        selectedItems={props.selectedEquipment}
+        setSelectedItems={props.setSelectedEquipment}
       />
     );
   }
 
   // set up armor & weapons list if one is sent in via props
   let armorAndWeaponsList;
-  if (props.knownArmorAndWeapons && props.unknownArmorAndWeapons) {
+  if (
+    props.knownArmorAndWeapons &&
+    props.unknownArmorAndWeapons &&
+    props.selectedArmorAndWeapons &&
+    props.setSelectedArmorAndWeapons
+  ) {
     armorAndWeaponsList = (
       <ListOfChoices
         listName="Armor & Weapons"
         knownItems={props.knownArmorAndWeapons}
         unknownItems={props.unknownArmorAndWeapons}
-        // recentlySelectedItem={recentlySelectedItem}
         setRecentlySelectedItem={props.setRecentlySelectedItem}
-        setSelectedArmorAndWeapons={setSelectedArmorAndWeapons}
+        selectedItems={props.selectedArmorAndWeapons}
+        setSelectedItems={props.setSelectedArmorAndWeapons}
       />
     );
   }
 
   // set up languages list if one is sent in via props
   let languagesList;
-  if (props.knownLanguages && props.unknownLanguages) {
+  if (
+    props.knownLanguages &&
+    props.unknownLanguages &&
+    props.selectedLanguages &&
+    props.setSelectedLanguages
+  ) {
     languagesList = (
       <ListOfChoices
         listName="Languages"
         knownItems={props.knownLanguages}
         unknownItems={props.unknownLanguages}
-        // recentlySelectedItem={recentlySelectedItem}
         setRecentlySelectedItem={props.setRecentlySelectedItem}
-        setSelectedLanguages={setSelectedLanguages}
+        selectedItems={props.selectedLanguages}
+        setSelectedItems={props.setSelectedLanguages}
       />
     );
   }
 
   // set up cantrips list if one is sent in via props
   let cantripsList;
-  if (props.knownCantrips && props.unknownCantrips) {
+  if (
+    props.knownCantrips &&
+    props.unknownCantrips &&
+    props.selectedEquipment &&
+    props.setSelectedEquipment
+  ) {
     cantripsList = (
       <ListOfChoices
         listName="Cantrips"
         knownItems={props.knownCantrips}
         unknownItems={props.unknownCantrips}
-        // recentlySelectedItem={recentlySelectedItem}
         setRecentlySelectedItem={props.setRecentlySelectedItem}
+        // CHANGE TO SELECTED CANTRIPS
+        selectedItems={props.selectedEquipment}
+        setSelectedItems={props.setSelectedEquipment}
       />
     );
   }
 
   // set up first level spells list if one is sent in via props
   let firstLevelSpellsList;
-  if (props.knownFirstLevelSpells && props.unknownFirstLevelSpells) {
+  if (
+    props.knownFirstLevelSpells &&
+    props.unknownFirstLevelSpells &&
+    props.selectedEquipment &&
+    props.setSelectedEquipment
+  ) {
     firstLevelSpellsList = (
       <ListOfChoices
         listName="1st Level Spells"
         knownItems={props.knownFirstLevelSpells}
         unknownItems={props.unknownFirstLevelSpells}
-        // recentlySelectedItem={recentlySelectedItem}
         setRecentlySelectedItem={props.setRecentlySelectedItem}
+        // CHANGE TO SELECTED SPELLS
+        selectedItems={props.selectedEquipment}
+        setSelectedItems={props.setSelectedEquipment}
       />
     );
   }
 
   // set up prepared spells list if one is sent in via props
   let preparedSpellsList;
-  if (props.knownPreparedSpells && props.unknownPreparedSpells) {
+  if (
+    props.knownPreparedSpells &&
+    props.unknownPreparedSpells &&
+    props.selectedEquipment &&
+    props.setSelectedEquipment
+  ) {
     preparedSpellsList = (
       <ListOfChoices
         listName="Prepared Spells"
         knownItems={props.knownPreparedSpells}
         unknownItems={props.unknownPreparedSpells}
-        // recentlySelectedItem={recentlySelectedItem}
         setRecentlySelectedItem={props.setRecentlySelectedItem}
+        // CHANGE TO SELECTED SPELLS
+        selectedItems={props.selectedEquipment}
+        setSelectedItems={props.setSelectedEquipment}
       />
     );
   }

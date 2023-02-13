@@ -10,7 +10,6 @@ import { stats, IStats, ITypeStats } from "../assets/stats";
 
 export const Choices = () => {
   const beginningInfo = useSelector((state: IRootState) => state.begin.value);
-
   const [recentlySelectedItem, setRecentlySelectedItem] = useState("");
 
   // initialize data for getChoicesFromBeginInfo()
@@ -202,8 +201,50 @@ export const Choices = () => {
       unknownArmorAndWeapons = [[]];
     }
   };
-
   getChoicesFromBeginInfo();
+
+  // set up initital states for selected items
+  let initialSelectedEquipment: String[] = [];
+  let initialSelectedLanguages: String[] = [];
+  let initialSelectedSkillProficiencies: String[] = [];
+  let initialSelectedArmorAndWeapons: String[] = [];
+  let initialSelectedItemProficiencies: String[] = [];
+
+  const getInitialStates = () => {
+    for (let item of unknownItems) {
+      initialSelectedEquipment.push(item[0]);
+    }
+    for (let item of unknownLanguages) {
+      initialSelectedLanguages.push(item[0]);
+    }
+    for (let item of unknownSkillProficiencies) {
+      initialSelectedSkillProficiencies.push(item[0]);
+    }
+    for (let item of unknownItemProficiencies) {
+      initialSelectedItemProficiencies.push(item[0]);
+    }
+    for (let item of unknownArmorAndWeapons) {
+      initialSelectedArmorAndWeapons.push(item[0]);
+    }
+  };
+  getInitialStates();
+
+  // states have to be set all the way down here
+  const [selectedSkillProficiencies, setSelectedSkillProficiencies] = useState(
+    initialSelectedSkillProficiencies
+  );
+  const [selectedEquipment, setSelectedEquipment] = useState(
+    initialSelectedEquipment
+  );
+  const [selectedItemProficiencies, setSelectedItemProficiencies] = useState(
+    initialSelectedItemProficiencies
+  );
+  const [selectedLanguages, setSelectedLanguages] = useState(
+    initialSelectedLanguages
+  );
+  const [selectedArmorAndWeapons, setSelectedArmorAndWeapons] = useState(
+    initialSelectedArmorAndWeapons
+  );
 
   return (
     <div className="choices-page">
@@ -216,7 +257,19 @@ export const Choices = () => {
           </div>
           <ListsContainer
             page="choices"
+            // states
             setRecentlySelectedItem={setRecentlySelectedItem}
+            selectedSkillProficiencies={selectedSkillProficiencies}
+            setSelectedSkillProficiencies={setSelectedSkillProficiencies}
+            selectedItemProficiencies={selectedItemProficiencies}
+            setSelectedItemProficiencies={setSelectedItemProficiencies}
+            selectedEquipment={selectedEquipment}
+            setSelectedEquipment={setSelectedEquipment}
+            selectedLanguages={selectedLanguages}
+            setSelectedLanguages={setSelectedLanguages}
+            selectedArmorAndWeapons={selectedArmorAndWeapons}
+            setSelectedArmorAndWeapons={setSelectedArmorAndWeapons}
+            // items lists
             knownEquipment={knownItems}
             unknownEquipment={unknownItems}
             knownSkillProficiencies={knownSkillProficiencies}

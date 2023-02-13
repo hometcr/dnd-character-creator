@@ -4,25 +4,12 @@ interface IProps {
   listName: String;
   knownItems: String[];
   unknownItems: String[][];
-  // recentlySelectedItem: String;
   setRecentlySelectedItem: Function;
-  setSelectedSkillProficiencies?: Function;
-  setSelectedEquipment?: Function;
-  setSelectedItemProficiencies?: Function;
-  setSelectedLanguages?: Function;
-  setSelectedArmorAndWeapons?: Function;
+  selectedItems: String[];
+  setSelectedItems: Function;
 }
 
 export const ListOfChoices = (props: IProps) => {
-  // get initital state for selected items
-  let initialSelectedItems = [];
-  for (let item of props.unknownItems) {
-    initialSelectedItems.push(item[0]);
-  }
-
-  const [theseSelectedItems, setTheseSelectedItems] = useState(initialSelectedItems);
-  console.log(theseSelectedItems);
-
   // transform known items into listable divs
   let listedKnownItems = props.knownItems.map((knownItem, index) => (
     <div key={`${knownItem}.${index}`} className="item-in-choices-list">
@@ -30,34 +17,41 @@ export const ListOfChoices = (props: IProps) => {
     </div>
   ));
 
+  // transform unknown items into dropdowns
+  let listedUnknownItems;
+  if (props.unknownItems[0].length > 0) {
+    listedUnknownItems = props.unknownItems.map(
+      (unknownItem, dropdownIndex) => (
+        <select
+          key={`${unknownItem}.${dropdownIndex}`}
+          className="item-select"
+          value={String(props.selectedItems[dropdownIndex])}
+          onChange={(event) => updateSelectedItem(event, dropdownIndex)}
+        >
+          {unknownItem.map((option, optionIndex) => (
+            <option key={`${option}.${dropdownIndex}.${optionIndex}`}>
+              {option}
+            </option>
+          ))}
+        </select>
+      )
+    );
+  } else {
+    listedUnknownItems = <div></div>;
+  }
+
+  // when any item is selected, make it the recently selected item (so its description
+  // can pop up) and update the selected_(equipment/languages/etc) list
   const updateSelectedItem = (
     event: React.SyntheticEvent<EventTarget>,
     index: number
   ) => {
     const selectedInput = (event.target as HTMLInputElement).value;
-    const newSelectedItems = [...theseSelectedItems];
+    const newSelectedItems = [...props.selectedItems];
     newSelectedItems[index] = selectedInput;
-    setTheseSelectedItems(newSelectedItems);
-    props.setRecentlySelectedItem(selectedInput)
+    props.setSelectedItems(newSelectedItems);
+    props.setRecentlySelectedItem(selectedInput);
   };
-
-  let listedUnknownItems;
-  if (props.unknownItems[0].length > 0) {
-    listedUnknownItems = props.unknownItems.map((unknownItem, indexOut) => (
-      <select
-        key={`${unknownItem}.${indexOut}.out`}
-        className="item-select"
-        value={String(theseSelectedItems[indexOut])}
-        onChange={(event) => updateSelectedItem(event, indexOut)}
-      >
-        {unknownItem.map((option, indexIn) => (
-          <option key={`${option}.${indexOut}.${indexIn}`}>{option}</option>
-        ))}
-      </select>
-    ));
-  } else {
-    listedUnknownItems = <div></div>;
-  }
 
   return (
     <div className="list-of-choices-and-title">
