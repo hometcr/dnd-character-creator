@@ -120,11 +120,11 @@ export const ListsContainer = (props: IProps) => {
 
   return (
     <div className="lists-container">
+      {skillProficienciesList}
+      {itemProficienciesList}
       {equipmentList}
       {armorAndWeaponsList}
       {languagesList}
-      {skillProficienciesList}
-      {itemProficienciesList}
       {cantripsList}
       {firstLevelSpellsList}
       {preparedSpellsList}
