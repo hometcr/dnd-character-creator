@@ -7,9 +7,11 @@ import { useState } from "react";
 import { stats, IStats } from "../assets/stats";
 import { useDispatch } from "react-redux";
 import { fillSlice } from "../features/choices";
+import { useNavigate } from "react-router-dom";
 
 export const Choices = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const beginningInfo = useSelector((state: IRootState) => state.begin.value);
   const [recentlySelectedItem, setRecentlySelectedItem] = useState("");
 
@@ -299,6 +301,7 @@ export const Choices = () => {
     let uniqueItems = new Set(allItems);
     let uniqueLanguages = new Set(allLanguages);
     let uniqueArmorAndWeapons = new Set(allArmorAndWeapons);
+
     // if any duplicates are found, alert the user
     if (allSkillProficiencies.length != uniqueSkillProficiencies.size) {
       alert("Please choose unique skill proficiencies");
@@ -311,6 +314,7 @@ export const Choices = () => {
     } else if (allArmorAndWeapons.length != uniqueArmorAndWeapons.size) {
       alert("Please choose unique armor & weapons");
     } else {
+
       // if no duplicates are found, fill the slice
       let choicesInfo = {
         skillProficiencies: selectedSkillProficiencies,
@@ -320,6 +324,7 @@ export const Choices = () => {
         languages: selectedLanguages,
       };
       dispatch(fillSlice(choicesInfo));
+      navigate('/spells');
     }
   };
 
