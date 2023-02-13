@@ -154,6 +154,7 @@ export const Spells = () => {
   );
 
   // fill knownPreparedSpells with chosen cantrips
+  
 
   // if character is a bard, fill knownPreparedSpells with selectedFirstLevelSpells
 

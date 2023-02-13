@@ -53,6 +53,11 @@ export const ListOfChoices = (props: IProps) => {
     props.setRecentlySelectedItem(selectedInput);
   };
 
+  // if there are no items, display N/A
+  if (props.knownItems.length == 0 && props.unknownItems[0].length == 0) {
+    listedKnownItems = [<div>N/A</div>];
+  }
+
   return (
     <div className="list-of-choices-and-title">
       <div className="list-of-choices-name">{props.listName}</div>
