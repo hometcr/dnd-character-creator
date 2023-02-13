@@ -1,6 +1,11 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialChoicesState = {
+  skillProficiencies: [],
+  itemProficiencies: [],
+  items: [],
+  armorAndWeapons: [],
+  languages: []
 };
 
 export const choicesSlice = createSlice({

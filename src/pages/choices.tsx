@@ -3,10 +3,13 @@ import { ItemDescription } from "../components/ItemDescription";
 import bow from "../assets/bow.png";
 import { useSelector } from "react-redux";
 import { IRootState } from "../index";
-import { useState} from "react";
+import { useState } from "react";
 import { stats, IStats } from "../assets/stats";
+import { useDispatch } from "react-redux";
+import { fillSlice } from "../features/choices";
 
 export const Choices = () => {
+  const dispatch = useDispatch();
   const beginningInfo = useSelector((state: IRootState) => state.begin.value);
   const [recentlySelectedItem, setRecentlySelectedItem] = useState("");
 
@@ -23,7 +26,8 @@ export const Choices = () => {
   let unknownLanguages: String[][] = [];
 
   const getChoicesFromBeginInfo = () => {
-    // fill knownSkillProficiencies
+    // fill knownSkillProficiencies with unique values
+    let nonUniqueItems: String[] = [];
     const classKnownSkillProficiencies =
       stats[beginningInfo.class as keyof IStats].knownSkillProficiencies;
     const raceKnownSkillProficiencies =
@@ -31,14 +35,18 @@ export const Choices = () => {
     const backgroundKnownSkillProficiencies =
       stats[beginningInfo.background as keyof IStats].knownSkillProficiencies;
     if (classKnownSkillProficiencies) {
-      knownSkillProficiencies.push(...classKnownSkillProficiencies);
+      nonUniqueItems.push(...classKnownSkillProficiencies);
     }
     if (raceKnownSkillProficiencies) {
-      knownSkillProficiencies.push(...raceKnownSkillProficiencies);
+      nonUniqueItems.push(...raceKnownSkillProficiencies);
     }
     if (backgroundKnownSkillProficiencies) {
-      knownSkillProficiencies.push(...backgroundKnownSkillProficiencies);
+      nonUniqueItems.push(...backgroundKnownSkillProficiencies);
     }
+    let uniqueItems = new Set(nonUniqueItems);
+    let items = Array.from(uniqueItems);
+    knownSkillProficiencies = [...items];
+
     // fill unknownSkillProficiencies
     const classUnknownSkillProficiencies =
       stats[beginningInfo.class as keyof IStats].unknownSkillProficiencies;
@@ -58,7 +66,9 @@ export const Choices = () => {
     if (unknownSkillProficiencies.length == 0) {
       unknownSkillProficiencies = [[]];
     }
-    // fill knownItemProficiencies
+
+    // fill knownItemProficiencies with unique values
+    nonUniqueItems = [];
     const classKnownItemProficiencies =
       stats[beginningInfo.class as keyof IStats].knownItemProficiencies;
     const raceKnownItemProficiencies =
@@ -66,14 +76,18 @@ export const Choices = () => {
     const backgroundKnownItemProficiencies =
       stats[beginningInfo.background as keyof IStats].knownItemProficiencies;
     if (classKnownItemProficiencies) {
-      knownItemProficiencies.push(...classKnownItemProficiencies);
+      nonUniqueItems.push(...classKnownItemProficiencies);
     }
     if (raceKnownItemProficiencies) {
-      knownItemProficiencies.push(...raceKnownItemProficiencies);
+      nonUniqueItems.push(...raceKnownItemProficiencies);
     }
     if (backgroundKnownItemProficiencies) {
-      knownItemProficiencies.push(...backgroundKnownItemProficiencies);
+      nonUniqueItems.push(...backgroundKnownItemProficiencies);
     }
+    uniqueItems = new Set(nonUniqueItems);
+    items = Array.from(uniqueItems);
+    knownItemProficiencies = [...items];
+
     // fill unknownItemProficiencies
     const classUnknownItemProficiencies =
       stats[beginningInfo.class as keyof IStats].unknownItemProficiencies;
@@ -94,21 +108,26 @@ export const Choices = () => {
       unknownItemProficiencies = [[]];
     }
 
-    // fill knownItems
+    // fill knownItems with unique values
+    nonUniqueItems = [];
     const classKnownItems =
       stats[beginningInfo.class as keyof IStats].knownItems;
     const raceKnownItems = stats[beginningInfo.race as keyof IStats].knownItems;
     const backgroundKnownItems =
       stats[beginningInfo.background as keyof IStats].knownItems;
     if (classKnownItems) {
-      knownItems.push(...classKnownItems);
+      nonUniqueItems.push(...classKnownItems);
     }
     if (raceKnownItems) {
-      knownItems.push(...raceKnownItems);
+      nonUniqueItems.push(...raceKnownItems);
     }
     if (backgroundKnownItems) {
-      knownItems.push(...backgroundKnownItems);
+      nonUniqueItems.push(...backgroundKnownItems);
     }
+    uniqueItems = new Set(nonUniqueItems);
+    items = Array.from(uniqueItems);
+    knownItems = [...items];
+
     // fill unknownItems
     const classUnknownItems =
       stats[beginningInfo.class as keyof IStats].unknownItems;
@@ -128,7 +147,9 @@ export const Choices = () => {
     if (unknownItems.length == 0) {
       unknownItems = [[]];
     }
-    // fill knownLanguages
+
+    // fill knownLanguages with unique values
+    nonUniqueItems = [];
     const classKnownLanguages =
       stats[beginningInfo.class as keyof IStats].knownLanguages;
     const raceKnownLanguages =
@@ -136,14 +157,18 @@ export const Choices = () => {
     const backgroundKnownLanguages =
       stats[beginningInfo.background as keyof IStats].knownLanguages;
     if (classKnownLanguages) {
-      knownLanguages.push(...classKnownLanguages);
+      nonUniqueItems.push(...classKnownLanguages);
     }
     if (raceKnownLanguages) {
-      knownLanguages.push(...raceKnownLanguages);
+      nonUniqueItems.push(...raceKnownLanguages);
     }
     if (backgroundKnownLanguages) {
-      knownLanguages.push(...backgroundKnownLanguages);
+      nonUniqueItems.push(...backgroundKnownLanguages);
     }
+    uniqueItems = new Set(nonUniqueItems);
+    items = Array.from(uniqueItems);
+    knownLanguages = [...items];
+
     // fill unknownLanguages
     const classUnknownLanguages =
       stats[beginningInfo.class as keyof IStats].unknownLanguages;
@@ -163,7 +188,9 @@ export const Choices = () => {
     if (unknownLanguages.length == 0) {
       unknownLanguages = [[]];
     }
-    // fill knownArmorAndWeapons
+
+    // fill knownArmorAndWeapons with unique values
+    nonUniqueItems = [];
     const classKnownArmorAndWeapons =
       stats[beginningInfo.class as keyof IStats].knownArmorAndWeapons;
     const raceKnownArmorAndWeapons =
@@ -171,14 +198,18 @@ export const Choices = () => {
     const backgroundKnownArmorAndWeapons =
       stats[beginningInfo.background as keyof IStats].knownArmorAndWeapons;
     if (classKnownArmorAndWeapons) {
-      knownArmorAndWeapons.push(...classKnownArmorAndWeapons);
+      nonUniqueItems.push(...classKnownArmorAndWeapons);
     }
     if (raceKnownArmorAndWeapons) {
-      knownArmorAndWeapons.push(...raceKnownArmorAndWeapons);
+      nonUniqueItems.push(...raceKnownArmorAndWeapons);
     }
     if (backgroundKnownArmorAndWeapons) {
-      knownArmorAndWeapons.push(...backgroundKnownArmorAndWeapons);
+      nonUniqueItems.push(...backgroundKnownArmorAndWeapons);
     }
+    uniqueItems = new Set(nonUniqueItems);
+    items = Array.from(uniqueItems);
+    knownArmorAndWeapons = [...items];
+
     // fill unknownArmorAndWeapons
     const classUnknownArmorAndWeapons =
       stats[beginningInfo.class as keyof IStats].unknownArmorAndWeapons;
@@ -199,6 +230,7 @@ export const Choices = () => {
       unknownArmorAndWeapons = [[]];
     }
   };
+
   getChoicesFromBeginInfo();
 
   // initialize initial states
@@ -244,13 +276,56 @@ export const Choices = () => {
     initialSelectedArmorAndWeapons
   );
 
-    const onPageSubmit = () => {
-      console.log(`items: ${selectedEquipment}`)
-      console.log(`skill prof: ${selectedSkillProficiencies}`)
-      console.log(`item prof: ${selectedItemProficiencies}`)
-      console.log(`languages: ${selectedLanguages}`)
-      console.log(`armor/weapons: ${selectedArmorAndWeapons}`)
+  const fillChoicesSlice = () => {
+    // combine pre-known and chosen items
+    let allSkillProficiencies = [
+      ...knownSkillProficiencies,
+      ...selectedSkillProficiencies,
+    ];
+    let allItems = [...knownItems, ...selectedEquipment];
+    let allLanguages = [...knownLanguages, ...selectedLanguages];
+    let allItemProficiencies = [
+      ...knownItemProficiencies,
+      ...selectedItemProficiencies,
+    ];
+    let allArmorAndWeapons = [
+      ...knownArmorAndWeapons,
+      ...selectedArmorAndWeapons,
+    ];
+
+    // create sets of each list to help find duplicates
+    let uniqueSkillProficiencies = new Set(allSkillProficiencies);
+    let uniqueItemProficiencies = new Set(allItemProficiencies);
+    let uniqueItems = new Set(allItems);
+    let uniqueLanguages = new Set(allLanguages);
+    let uniqueArmorAndWeapons = new Set(allArmorAndWeapons);
+    // if any duplicates are found, alert the user
+    if (allSkillProficiencies.length != uniqueSkillProficiencies.size) {
+      alert("Please choose unique skill proficiencies");
+    } else if (allItemProficiencies.length != uniqueItemProficiencies.size) {
+      alert("Please choose unique item proficiencies");
+    } else if (allItems.length != uniqueItems.size) {
+      alert("Please choose unique equipment");
+    } else if (allLanguages.length != uniqueLanguages.size) {
+      alert("Please choose unique languages");
+    } else if (allArmorAndWeapons.length != uniqueArmorAndWeapons.size) {
+      alert("Please choose unique armor & weapons");
+    } else {
+      // if no duplicates are found, fill the slice
+      let choicesInfo = {
+        skillProficiencies: selectedSkillProficiencies,
+        itemProficiencies: selectedItemProficiencies,
+        items: selectedEquipment,
+        armorAndWeapons: selectedArmorAndWeapons,
+        languages: selectedLanguages,
+      };
+      dispatch(fillSlice(choicesInfo));
     }
+  };
+
+  const onPageSubmit = () => {
+    fillChoicesSlice();
+  };
 
   return (
     <div className="choices-page">
@@ -288,7 +363,9 @@ export const Choices = () => {
             unknownLanguages={unknownLanguages}
           />
         </div>
-        <button className="choices-next-button" onClick={onPageSubmit}>Next</button>
+        <button className="choices-next-button" onClick={onPageSubmit}>
+          Next
+        </button>
       </div>
       <div className="choices-description-container">
         <ItemDescription item={recentlySelectedItem} />
