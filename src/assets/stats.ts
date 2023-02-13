@@ -1,6 +1,6 @@
 import { options } from "./options";
 
-interface ITypeStats {
+export interface ITypeStats {
   bonuses?: {
     Strength?: Number;
     Dexterity?: Number;
@@ -241,7 +241,6 @@ export const stats: IStats = {
     knownItemProficiencies: ["Disguise Kit"],
     unknownItemProficiencies: [options["instruments"]],
     knownSkillProficiencies: ["Acrobatics", "Performance"],
-    unknownSkillProficiencies: [[]],
     knownItems: ["The Favor of an Admirer", "Costume"],
     unknownItems: [options["instruments"]],
   },
