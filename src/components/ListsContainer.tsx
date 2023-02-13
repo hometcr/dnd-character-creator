@@ -1,5 +1,5 @@
 import { ListOfChoices } from "./ListOfChoices";
-
+import { useState } from "react";
 interface IProps {
   page: String;
   knownEquipment?: String[];
@@ -21,6 +21,20 @@ interface IProps {
 }
 
 export const ListsContainer = (props: IProps) => {
+  // keep track of whatever was most recently selected
+  // so we can pop up its description
+  const [recentlySelectedItem, setRecentlySelectedItem] = useState("");
+
+  const [selectedSkillProficiencies, setSelectedSkillProficiencies] = useState(
+    []
+  );
+  const [selectedEquipment, setSelectedEquipment] = useState([]);
+  const [selectedItemProficiencies, setSelectedItemProficiencies] = useState(
+    []
+  );
+  const [selectedLanguages, setSelectedLanguages] = useState([]);
+  const [selectedArmorAndWeapons, setSelectedArmorAndWeapons] = useState([]);
+
   // set up skill proficiencies list if one is sent in via props
   let skillProficienciesList;
   if (props.knownSkillProficiencies && props.unknownSkillProficiencies) {
@@ -29,6 +43,9 @@ export const ListsContainer = (props: IProps) => {
         listName="Skill Proficiencies"
         knownItems={props.knownSkillProficiencies}
         unknownItems={props.unknownSkillProficiencies}
+        recentlySelectedItem={recentlySelectedItem}
+        setRecentlySelectedItem={setRecentlySelectedItem}
+        setSelectedSkillProficiencies={setSelectedSkillProficiencies}
       />
     );
   }
@@ -41,6 +58,9 @@ export const ListsContainer = (props: IProps) => {
         listName="Item Proficiencies"
         knownItems={props.knownItemProficiencies}
         unknownItems={props.unknownItemProficiencies}
+        recentlySelectedItem={recentlySelectedItem}
+        setRecentlySelectedItem={setRecentlySelectedItem}
+        setSelectedItemProficiencies={setSelectedItemProficiencies}
       />
     );
   }
@@ -53,6 +73,9 @@ export const ListsContainer = (props: IProps) => {
         listName="Equipment"
         knownItems={props.knownEquipment}
         unknownItems={props.unknownEquipment}
+        recentlySelectedItem={recentlySelectedItem}
+        setRecentlySelectedItem={setRecentlySelectedItem}
+        setSelectedEquipment={setSelectedEquipment}
       />
     );
   }
@@ -65,10 +88,12 @@ export const ListsContainer = (props: IProps) => {
         listName="Armor & Weapons"
         knownItems={props.knownArmorAndWeapons}
         unknownItems={props.unknownArmorAndWeapons}
+        recentlySelectedItem={recentlySelectedItem}
+        setRecentlySelectedItem={setRecentlySelectedItem}
+        setSelectedArmorAndWeapons={setSelectedArmorAndWeapons}
       />
     );
   }
-
 
   // set up languages list if one is sent in via props
   let languagesList;
@@ -78,6 +103,9 @@ export const ListsContainer = (props: IProps) => {
         listName="Languages"
         knownItems={props.knownLanguages}
         unknownItems={props.unknownLanguages}
+        recentlySelectedItem={recentlySelectedItem}
+        setRecentlySelectedItem={setRecentlySelectedItem}
+        setSelectedLanguages={setSelectedLanguages}
       />
     );
   }
@@ -90,6 +118,8 @@ export const ListsContainer = (props: IProps) => {
         listName="Cantrips"
         knownItems={props.knownCantrips}
         unknownItems={props.unknownCantrips}
+        recentlySelectedItem={recentlySelectedItem}
+        setRecentlySelectedItem={setRecentlySelectedItem}
       />
     );
   }
@@ -102,6 +132,8 @@ export const ListsContainer = (props: IProps) => {
         listName="1st Level Spells"
         knownItems={props.knownFirstLevelSpells}
         unknownItems={props.unknownFirstLevelSpells}
+        recentlySelectedItem={recentlySelectedItem}
+        setRecentlySelectedItem={setRecentlySelectedItem}
       />
     );
   }
@@ -114,6 +146,8 @@ export const ListsContainer = (props: IProps) => {
         listName="Prepared Spells"
         knownItems={props.knownPreparedSpells}
         unknownItems={props.unknownPreparedSpells}
+        recentlySelectedItem={recentlySelectedItem}
+        setRecentlySelectedItem={setRecentlySelectedItem}
       />
     );
   }
