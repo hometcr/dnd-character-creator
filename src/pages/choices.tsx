@@ -1,12 +1,10 @@
 import { ListsContainer } from "../components/ListsContainer";
 import { ItemDescription } from "../components/ItemDescription";
 import bow from "../assets/bow.png";
-import { NavigateButton } from "../components/NavigateButton";
 import { useSelector } from "react-redux";
 import { IRootState } from "../index";
-import { useState, useEffect } from "react";
-import { descriptions, IDescriptions } from "../assets/descriptions";
-import { stats, IStats, ITypeStats } from "../assets/stats";
+import { useState} from "react";
+import { stats, IStats } from "../assets/stats";
 
 export const Choices = () => {
   const beginningInfo = useSelector((state: IRootState) => state.begin.value);
@@ -203,7 +201,7 @@ export const Choices = () => {
   };
   getChoicesFromBeginInfo();
 
-  // set up initital states for selected items
+  // initialize initial states
   let initialSelectedEquipment: String[] = [];
   let initialSelectedLanguages: String[] = [];
   let initialSelectedSkillProficiencies: String[] = [];
@@ -246,6 +244,14 @@ export const Choices = () => {
     initialSelectedArmorAndWeapons
   );
 
+    const onPageSubmit = () => {
+      console.log(`items: ${selectedEquipment}`)
+      console.log(`skill prof: ${selectedSkillProficiencies}`)
+      console.log(`item prof: ${selectedItemProficiencies}`)
+      console.log(`languages: ${selectedLanguages}`)
+      console.log(`armor/weapons: ${selectedArmorAndWeapons}`)
+    }
+
   return (
     <div className="choices-page">
       <div className="choices-without-description">
@@ -282,11 +288,7 @@ export const Choices = () => {
             unknownLanguages={unknownLanguages}
           />
         </div>
-        <NavigateButton
-          destination="/spells"
-          text="Next"
-          className="choices-next-button"
-        />
+        <button className="choices-next-button" onClick={onPageSubmit}>Next</button>
       </div>
       <div className="choices-description-container">
         <ItemDescription item={recentlySelectedItem} />

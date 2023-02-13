@@ -99,7 +99,7 @@ export const stats: IStats = {
     ],
     knownItems: ["Spellbook"],
     unknownItems: [
-      ["Component Pounch", "Arcane Focus"],
+      ["Component Pouch", "Arcane Focus"],
       ["Scholar's Pack", "Explorer's Pack"],
     ],
     unknownArmorAndWeapons: [["Quarterstaff", "Dagger"]],

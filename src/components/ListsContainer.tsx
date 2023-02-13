@@ -1,5 +1,5 @@
 import { ListOfChoices } from "./ListOfChoices";
-import { useState } from "react";
+
 interface IProps {
   page: String;
   // states
