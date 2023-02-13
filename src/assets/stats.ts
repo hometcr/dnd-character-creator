@@ -21,8 +21,8 @@ export interface ITypeStats {
   unknownLanguages?: String[][];
   knownCantrips?: String[];
   unknownCantrips?: String[][];
-  knownSpells?: String[];
-  unknownSpells?: String[][];
+  knownFirstLevelSpells?: String[];
+  unknownFirstLevelSpells?: String[][];
 }
 
 export interface IStats {
@@ -77,8 +77,8 @@ export const stats: IStats = {
       options["spells"]["Bard"]["cantrips"],
       options["spells"]["Bard"]["cantrips"],
     ],
-    knownSpells: [],
-    unknownSpells: [
+    knownFirstLevelSpells: [],
+    unknownFirstLevelSpells: [
       options["spells"]["Bard"]["firstLevel"],
       options["spells"]["Bard"]["firstLevel"],
       options["spells"]["Bard"]["firstLevel"],
@@ -108,7 +108,7 @@ export const stats: IStats = {
       options["spells"]["Wizard"]["cantrips"],
       options["spells"]["Wizard"]["cantrips"],
     ],
-    unknownSpells: [
+    unknownFirstLevelSpells: [
       options["spells"]["Wizard"]["firstLevel"],
       options["spells"]["Wizard"]["firstLevel"],
       options["spells"]["Wizard"]["firstLevel"],

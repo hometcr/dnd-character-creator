@@ -2,7 +2,7 @@ import { ListOfChoices } from "./ListOfChoices";
 
 interface IProps {
   page: String;
-  // states
+  // states from choices page
   setRecentlySelectedItem: Function;
   selectedSkillProficiencies?: String[];
   setSelectedSkillProficiencies?: Function;
@@ -26,6 +26,14 @@ interface IProps {
   unknownLanguages?: String[][];
   knownArmorAndWeapons?: String[];
   unknownArmorAndWeapons?: String[][];
+
+  // states from spells page
+  selectedCantrips?: String[];
+  selectedFirstLevelSpells?: String[];
+  selectedPreparedSpells?: String[];
+  setSelectedCantrips?: Function;
+  setSelectedFirstLevelSpells?: Function;
+  setSelectedPreparedSpells?: Function;
 
   // lists from spells page
   knownCantrips?: String[];
@@ -142,8 +150,8 @@ export const ListsContainer = (props: IProps) => {
   if (
     props.knownCantrips &&
     props.unknownCantrips &&
-    props.selectedEquipment &&
-    props.setSelectedEquipment
+    props.selectedCantrips &&
+    props.setSelectedCantrips
   ) {
     cantripsList = (
       <ListOfChoices
@@ -151,9 +159,8 @@ export const ListsContainer = (props: IProps) => {
         knownItems={props.knownCantrips}
         unknownItems={props.unknownCantrips}
         setRecentlySelectedItem={props.setRecentlySelectedItem}
-        // CHANGE TO SELECTED CANTRIPS
-        selectedItems={props.selectedEquipment}
-        setSelectedItems={props.setSelectedEquipment}
+        selectedItems={props.selectedCantrips}
+        setSelectedItems={props.setSelectedCantrips}
       />
     );
   }
@@ -163,8 +170,8 @@ export const ListsContainer = (props: IProps) => {
   if (
     props.knownFirstLevelSpells &&
     props.unknownFirstLevelSpells &&
-    props.selectedEquipment &&
-    props.setSelectedEquipment
+    props.selectedFirstLevelSpells &&
+    props.setSelectedFirstLevelSpells
   ) {
     firstLevelSpellsList = (
       <ListOfChoices
@@ -172,9 +179,8 @@ export const ListsContainer = (props: IProps) => {
         knownItems={props.knownFirstLevelSpells}
         unknownItems={props.unknownFirstLevelSpells}
         setRecentlySelectedItem={props.setRecentlySelectedItem}
-        // CHANGE TO SELECTED SPELLS
-        selectedItems={props.selectedEquipment}
-        setSelectedItems={props.setSelectedEquipment}
+        selectedItems={props.selectedFirstLevelSpells}
+        setSelectedItems={props.setSelectedFirstLevelSpells}
       />
     );
   }
@@ -184,8 +190,8 @@ export const ListsContainer = (props: IProps) => {
   if (
     props.knownPreparedSpells &&
     props.unknownPreparedSpells &&
-    props.selectedEquipment &&
-    props.setSelectedEquipment
+    props.selectedPreparedSpells &&
+    props.setSelectedPreparedSpells
   ) {
     preparedSpellsList = (
       <ListOfChoices
@@ -194,8 +200,8 @@ export const ListsContainer = (props: IProps) => {
         unknownItems={props.unknownPreparedSpells}
         setRecentlySelectedItem={props.setRecentlySelectedItem}
         // CHANGE TO SELECTED SPELLS
-        selectedItems={props.selectedEquipment}
-        setSelectedItems={props.setSelectedEquipment}
+        selectedItems={props.selectedPreparedSpells}
+        setSelectedItems={props.setSelectedPreparedSpells}
       />
     );
   }
