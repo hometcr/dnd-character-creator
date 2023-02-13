@@ -11,7 +11,7 @@ import { stats, IStats, ITypeStats } from "../assets/stats";
 export const Choices = () => {
   const beginningInfo = useSelector((state: IRootState) => state.begin.value);
 
-  let [selectedItem, setSelectedItem] = useState("");
+  const [recentlySelectedItem, setRecentlySelectedItem] = useState("");
 
   // initialize data for getChoicesFromBeginInfo()
   let knownSkillProficiencies: String[] = [];
@@ -216,6 +216,7 @@ export const Choices = () => {
           </div>
           <ListsContainer
             page="choices"
+            setRecentlySelectedItem={setRecentlySelectedItem}
             knownEquipment={knownItems}
             unknownEquipment={unknownItems}
             knownSkillProficiencies={knownSkillProficiencies}
@@ -235,7 +236,7 @@ export const Choices = () => {
         />
       </div>
       <div className="choices-description-container">
-        <ItemDescription item={selectedItem} />
+        <ItemDescription item={recentlySelectedItem} />
       </div>
     </div>
   );

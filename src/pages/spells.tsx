@@ -2,9 +2,12 @@ import { ListsContainer } from "../components/ListsContainer";
 import { ItemDescription } from "../components/ItemDescription";
 import book from "../assets/book.jpg";
 import { NavigateButton } from "../components/NavigateButton";
+import { useState } from "react";
 
 export const Spells = () => {
-  let selectedItem = "";
+  // let selectedItem = "";
+  const [recentlySelectedItem, setRecentlySelectedItem] = useState("");
+
 
   let knownCantrips: String[] = [];
   let unknownCantrips: String[][] = [[]];
@@ -29,6 +32,7 @@ export const Spells = () => {
           </div>
           <ListsContainer
             page="spells"
+            setRecentlySelectedItem={setRecentlySelectedItem}
             knownCantrips={knownCantrips}
             unknownCantrips={unknownCantrips}
             knownFirstLevelSpells={knownFirstLevelSpells}
@@ -44,7 +48,7 @@ export const Spells = () => {
         />
       </div>
       <div className="spells-description-container">
-        <ItemDescription item={selectedItem} />
+        <ItemDescription item={recentlySelectedItem} />
       </div>
     </div>
   );

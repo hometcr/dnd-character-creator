@@ -4,7 +4,7 @@ interface IProps {
   listName: String;
   knownItems: String[];
   unknownItems: String[][];
-  recentlySelectedItem: String;
+  // recentlySelectedItem: String;
   setRecentlySelectedItem: Function;
   setSelectedSkillProficiencies?: Function;
   setSelectedEquipment?: Function;
@@ -20,8 +20,8 @@ export const ListOfChoices = (props: IProps) => {
     initialSelectedItems.push(item[0]);
   }
 
-  const [selectedItems, setSelectedItems] = useState(initialSelectedItems);
-  console.log(selectedItems);
+  const [theseSelectedItems, setTheseSelectedItems] = useState(initialSelectedItems);
+  console.log(theseSelectedItems);
 
   // transform known items into listable divs
   let listedKnownItems = props.knownItems.map((knownItem, index) => (
@@ -35,9 +35,10 @@ export const ListOfChoices = (props: IProps) => {
     index: number
   ) => {
     const selectedInput = (event.target as HTMLInputElement).value;
-    const newSelectedItems = [...selectedItems];
+    const newSelectedItems = [...theseSelectedItems];
     newSelectedItems[index] = selectedInput;
-    setSelectedItems(newSelectedItems);
+    setTheseSelectedItems(newSelectedItems);
+    props.setRecentlySelectedItem(selectedInput)
   };
 
   let listedUnknownItems;
@@ -46,7 +47,7 @@ export const ListOfChoices = (props: IProps) => {
       <select
         key={`${unknownItem}.${indexOut}.out`}
         className="item-select"
-        value={String(selectedItems[indexOut])}
+        value={String(theseSelectedItems[indexOut])}
         onChange={(event) => updateSelectedItem(event, indexOut)}
       >
         {unknownItem.map((option, indexIn) => (
