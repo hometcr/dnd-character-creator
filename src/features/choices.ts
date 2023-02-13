@@ -5,7 +5,7 @@ const initialChoicesState = {
   itemProficiencies: [],
   items: [],
   armorAndWeapons: [],
-  languages: []
+  languages: [],
 };
 
 export const choicesSlice = createSlice({

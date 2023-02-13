@@ -314,7 +314,6 @@ export const Choices = () => {
     } else if (allArmorAndWeapons.length != uniqueArmorAndWeapons.size) {
       alert("Please choose unique armor & weapons");
     } else {
-
       // if no duplicates are found, fill the slice
       let choicesInfo = {
         skillProficiencies: selectedSkillProficiencies,
@@ -324,7 +323,7 @@ export const Choices = () => {
         languages: selectedLanguages,
       };
       dispatch(fillSlice(choicesInfo));
-      navigate('/spells');
+      navigate("/spells");
     }
   };
 
