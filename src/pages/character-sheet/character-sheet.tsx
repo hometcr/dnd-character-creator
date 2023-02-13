@@ -149,7 +149,6 @@ export const CharacterSheet = () => {
     cp: characterData.money[3],
   };
 
-  // fix ability scores and modifiers names inside skills.tsx
   return (
     <div className="character-sheet-page">
       <div className="character-sheet-name-class-race">

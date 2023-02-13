@@ -8,22 +8,25 @@ import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { IRootState } from "../index";
 import { stats, IStats } from "../assets/stats";
+import {getModifier} from "../helpers/getModifier"
+import { options } from "../assets/options";
 
 export const Spells = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const beginningInfo = useSelector((state: IRootState) => state.begin.value);
+  const abilityScores = useSelector((state: IRootState) => state.abilityScores.value);
   const [recentlySelectedItem, setRecentlySelectedItem] = useState("");
 
-  console.log(beginningInfo);
+  // console.log(beginningInfo);
 
   // initialize data for getSpellChoicesFromBeginInfo()
   let knownCantrips: String[] = [];
-  let unknownCantrips: String[][] = [[]];
+  let unknownCantrips: String[][] = [];
   let knownFirstLevelSpells: String[] = [];
-  let unknownFirstLevelSpells: String[][] = [[]];
+  let unknownFirstLevelSpells: String[][] = [];
   let knownPreparedSpells: String[] = [];
-  let unknownPreparedSpells: String[][] = [[]];
+  let unknownPreparedSpells: String[][] = [];
 
   const getSpellsFromBeginInfo = () => {
     // fill knownCantrips with unique values
@@ -107,6 +110,20 @@ export const Spells = () => {
     if (unknownFirstLevelSpells.length == 0) {
       unknownFirstLevelSpells = [[]];
     }
+
+    // if character is a wizard, fill unknownPreparedSpells with int+1 dropdowns
+    if (beginningInfo.class == "Wizard") {
+      const intelligenceModifier = getModifier(abilityScores.Intelligence)
+      // minimum of one prepared spell
+      const preparedSpellsCount = 1 + Math.max(0, intelligenceModifier)
+      for (let i=0; i<preparedSpellsCount; i++) {
+        unknownPreparedSpells.push(options.spells.Wizard.firstLevel)
+      }
+    }
+    if (unknownPreparedSpells.length == 0) {
+      unknownPreparedSpells = [[]]
+    }
+
   };
   getSpellsFromBeginInfo();
 
@@ -135,6 +152,11 @@ export const Spells = () => {
   const [selectedPreparedSpells, setSelectedPreparedSpells] = useState(
     initialSelectedPreparedSpells
   );
+
+  // fill knownPreparedSpells with chosen cantrips
+
+  // if character is a bard, fill knownPreparedSpells with selectedFirstLevelSpells
+
 
   return (
     <div className="spells-page">

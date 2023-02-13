@@ -1,4 +1,5 @@
 import { SkillDisplay } from "./SkillDisplay";
+import { getModifier } from "../../../helpers/getModifier";
 
 interface ISkill {
   "Saving Throws"?: number;
@@ -45,17 +46,6 @@ interface IProps {
 }
 
 export const Skills = (props: IProps) => {
-
-  const getModifier = (score: number) => {
-    let modifier = 0;
-    if (score > 10) {
-      modifier = Math.floor((score - 10) / 2);
-    } else {
-      modifier = Math.floor((score - 9) / 2);
-    }
-    return modifier;
-  };
-
   let abilityModifiers: IAbilityScores = { ...props.abilityScores };
   for (let ability in props.abilityScores) {
     let modifier = getModifier(
