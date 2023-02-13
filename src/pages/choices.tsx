@@ -4,29 +4,28 @@ import bow from "../assets/bow.png";
 import { NavigateButton } from "../components/NavigateButton";
 import { useSelector } from "react-redux";
 import { IRootState } from "../index";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { descriptions, IDescriptions } from "../assets/descriptions";
 import { stats, IStats, ITypeStats } from "../assets/stats";
 
 export const Choices = () => {
   const beginningInfo = useSelector((state: IRootState) => state.begin.value);
 
-  // change to update whenever a dropdown is changed
   let [selectedItem, setSelectedItem] = useState("");
 
   // initialize data for getChoicesFromBeginInfo()
   let knownSkillProficiencies: String[] = [];
-  let unknownSkillProficiencies: String[][] = [[]];
+  let unknownSkillProficiencies: String[][] = [];
   let knownItemProficiencies: String[] = [];
-  let unknownItemProficiencies: String[][] = [[]];
-  let knownEquipment: String[] = [];
-  let unknownEquipment: String[][] = [[]];
+  let unknownItemProficiencies: String[][] = [];
+  let knownItems: String[] = [];
+  let unknownItems: String[][] = [];
   let knownArmorAndWeapons: String[] = [];
-  let unknownArmorAndWeapons: String[][] = [[]];
+  let unknownArmorAndWeapons: String[][] = [];
   let knownLanguages: String[] = [];
-  let unknownLanguages: String[][] = [[]];
+  let unknownLanguages: String[][] = [];
 
-  const fillLists = () => {
+  const getChoicesFromBeginInfo = () => {
     // fill knownSkillProficiencies
     const classKnownSkillProficiencies =
       stats[beginningInfo.class as keyof IStats].knownSkillProficiencies;
@@ -34,7 +33,6 @@ export const Choices = () => {
       stats[beginningInfo.race as keyof IStats].knownSkillProficiencies;
     const backgroundKnownSkillProficiencies =
       stats[beginningInfo.background as keyof IStats].knownSkillProficiencies;
-      console.log(stats[beginningInfo.background as keyof IStats].knownSkillProficiencies)
     if (classKnownSkillProficiencies) {
       knownSkillProficiencies.push(...classKnownSkillProficiencies);
     }
@@ -42,7 +40,6 @@ export const Choices = () => {
       knownSkillProficiencies.push(...raceKnownSkillProficiencies);
     }
     if (backgroundKnownSkillProficiencies) {
-      console.log(backgroundKnownSkillProficiencies)
       knownSkillProficiencies.push(...backgroundKnownSkillProficiencies);
     }
     // fill unknownSkillProficiencies
@@ -61,37 +58,155 @@ export const Choices = () => {
     if (backgroundUnknownSkillProficiencies) {
       unknownSkillProficiencies.push(...backgroundUnknownSkillProficiencies);
     }
-  }
+    if (unknownSkillProficiencies.length == 0) {
+      unknownSkillProficiencies = [[]];
+    }
+    // fill knownItemProficiencies
+    const classKnownItemProficiencies =
+      stats[beginningInfo.class as keyof IStats].knownItemProficiencies;
+    const raceKnownItemProficiencies =
+      stats[beginningInfo.race as keyof IStats].knownItemProficiencies;
+    const backgroundKnownItemProficiencies =
+      stats[beginningInfo.background as keyof IStats].knownItemProficiencies;
+    if (classKnownItemProficiencies) {
+      knownItemProficiencies.push(...classKnownItemProficiencies);
+    }
+    if (raceKnownItemProficiencies) {
+      knownItemProficiencies.push(...raceKnownItemProficiencies);
+    }
+    if (backgroundKnownItemProficiencies) {
+      knownItemProficiencies.push(...backgroundKnownItemProficiencies);
+    }
+    // fill unknownItemProficiencies
+    const classUnknownItemProficiencies =
+      stats[beginningInfo.class as keyof IStats].unknownItemProficiencies;
+    const raceUnknownItemProficiencies =
+      stats[beginningInfo.race as keyof IStats].unknownItemProficiencies;
+    const backgroundUnknownItemProficiencies =
+      stats[beginningInfo.background as keyof IStats].unknownItemProficiencies;
+    if (classUnknownItemProficiencies) {
+      unknownItemProficiencies.push(...classUnknownItemProficiencies);
+    }
+    if (raceUnknownItemProficiencies) {
+      unknownItemProficiencies.push(...raceUnknownItemProficiencies);
+    }
+    if (backgroundUnknownItemProficiencies) {
+      unknownItemProficiencies.push(...backgroundUnknownItemProficiencies);
+    }
+    if (unknownItemProficiencies.length == 0) {
+      unknownItemProficiencies = [[]];
+    }
 
-  fillLists()
-  // console.log(knownSkillProficiencies);
-  // console.log("hello")
+    // fill knownItems
+    const classKnownItems =
+      stats[beginningInfo.class as keyof IStats].knownItems;
+    const raceKnownItems = stats[beginningInfo.race as keyof IStats].knownItems;
+    const backgroundKnownItems =
+      stats[beginningInfo.background as keyof IStats].knownItems;
+    if (classKnownItems) {
+      knownItems.push(...classKnownItems);
+    }
+    if (raceKnownItems) {
+      knownItems.push(...raceKnownItems);
+    }
+    if (backgroundKnownItems) {
+      knownItems.push(...backgroundKnownItems);
+    }
+    // fill unknownItems
+    const classUnknownItems =
+      stats[beginningInfo.class as keyof IStats].unknownItems;
+    const raceUnknownItems =
+      stats[beginningInfo.race as keyof IStats].unknownItems;
+    const backgroundUnknownItems =
+      stats[beginningInfo.background as keyof IStats].unknownItems;
+    if (classUnknownItems) {
+      unknownItems = [...classUnknownItems];
+    }
+    if (raceUnknownItems) {
+      unknownItems.push(...raceUnknownItems);
+    }
+    if (backgroundUnknownItems) {
+      unknownItems.push(...backgroundUnknownItems);
+    }
+    if (unknownItems.length == 0) {
+      unknownItems = [[]];
+    }
+    // fill knownLanguages
+    const classKnownLanguages =
+      stats[beginningInfo.class as keyof IStats].knownLanguages;
+    const raceKnownLanguages =
+      stats[beginningInfo.race as keyof IStats].knownLanguages;
+    const backgroundKnownLanguages =
+      stats[beginningInfo.background as keyof IStats].knownLanguages;
+    if (classKnownLanguages) {
+      knownLanguages.push(...classKnownLanguages);
+    }
+    if (raceKnownLanguages) {
+      knownLanguages.push(...raceKnownLanguages);
+    }
+    if (backgroundKnownLanguages) {
+      knownLanguages.push(...backgroundKnownLanguages);
+    }
+    // fill unknownLanguages
+    const classUnknownLanguages =
+      stats[beginningInfo.class as keyof IStats].unknownLanguages;
+    const raceUnknownLanguages =
+      stats[beginningInfo.race as keyof IStats].unknownLanguages;
+    const backgroundUnknownLanguages =
+      stats[beginningInfo.background as keyof IStats].unknownLanguages;
+    if (classUnknownLanguages) {
+      unknownLanguages = [...classUnknownLanguages];
+    }
+    if (raceUnknownLanguages) {
+      unknownLanguages.push(...raceUnknownLanguages);
+    }
+    if (backgroundUnknownLanguages) {
+      unknownLanguages.push(...backgroundUnknownLanguages);
+    }
+    if (unknownLanguages.length == 0) {
+      unknownLanguages = [[]];
+    }
+    // fill knownArmorAndWeapons
+    const classKnownArmorAndWeapons =
+      stats[beginningInfo.class as keyof IStats].knownArmorAndWeapons;
+    const raceKnownArmorAndWeapons =
+      stats[beginningInfo.race as keyof IStats].knownArmorAndWeapons;
+    const backgroundKnownArmorAndWeapons =
+      stats[beginningInfo.background as keyof IStats].knownArmorAndWeapons;
+    if (classKnownArmorAndWeapons) {
+      knownArmorAndWeapons.push(...classKnownArmorAndWeapons);
+    }
+    if (raceKnownArmorAndWeapons) {
+      knownArmorAndWeapons.push(...raceKnownArmorAndWeapons);
+    }
+    if (backgroundKnownArmorAndWeapons) {
+      knownArmorAndWeapons.push(...backgroundKnownArmorAndWeapons);
+    }
+    // fill unknownArmorAndWeapons
+    const classUnknownArmorAndWeapons =
+      stats[beginningInfo.class as keyof IStats].unknownArmorAndWeapons;
+    const raceUnknownArmorAndWeapons =
+      stats[beginningInfo.race as keyof IStats].unknownArmorAndWeapons;
+    const backgroundUnknownArmorAndWeapons =
+      stats[beginningInfo.background as keyof IStats].unknownArmorAndWeapons;
+    if (classUnknownArmorAndWeapons) {
+      unknownArmorAndWeapons = [...classUnknownArmorAndWeapons];
+    }
+    if (raceUnknownArmorAndWeapons) {
+      unknownArmorAndWeapons.push(...raceUnknownArmorAndWeapons);
+    }
+    if (backgroundUnknownArmorAndWeapons) {
+      unknownArmorAndWeapons.push(...backgroundUnknownArmorAndWeapons);
+    }
+    if (unknownArmorAndWeapons.length == 0) {
+      unknownArmorAndWeapons = [[]];
+    }
+  };
 
-  // let knownSkillProficiencies = ["Animal Handling", "Survival"];
-  // let unknownSkillProficiencies = [
-  //   ["Acrobatics", "Strength", "Dexterity"],
-  //   ["Acrobatics", "Strength", "Dexterity"],
-  // ];
-  // let knownItemProficiencies = ["Flute"];
-  // let unknownItemProficiencies = [["Tinker's Tools", "Carpenter's Tools"]];
-  // let knownEquipment = ["Shovel", "Iron Pot", "Common Clothes"];
-  // let unknownEquipment = [
-  //   ["Explorer's Pack", "Dungeoneer's Pack"],
-  //   [
-  //     "Calligrapher's Supplies",
-  //     "Carpenter's Tools",
-  //     "Cook's Utensils",
-  //     "Mason's Tools",
-  //     "Tinker's Tools",
-  //   ],
-  // ];
-  // let knownArmorAndWeapons = ["Longbow"];
-  // let unknownArmorAndWeapons = [
-  //   ["Shield", "Axe"],
-  //   ["Light Crossbow", "Javelin"],
-  // ];
-  // let knownLanguages = ["Common", "Dwarvish"];
-  // let unknownLanguages = [[]];
+  // useEffect(() => {
+  //   getChoicesFromBeginInfo();
+  // }, []);
+  getChoicesFromBeginInfo();
 
   return (
     <div className="choices-page">
@@ -104,8 +219,8 @@ export const Choices = () => {
           </div>
           <ListsContainer
             page="choices"
-            knownEquipment={knownEquipment}
-            unknownEquipment={unknownEquipment}
+            knownEquipment={knownItems}
+            unknownEquipment={unknownItems}
             knownSkillProficiencies={knownSkillProficiencies}
             unknownSkillProficiencies={unknownSkillProficiencies}
             knownItemProficiencies={knownItemProficiencies}
