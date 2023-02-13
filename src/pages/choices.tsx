@@ -203,9 +203,6 @@ export const Choices = () => {
     }
   };
 
-  // useEffect(() => {
-  //   getChoicesFromBeginInfo();
-  // }, []);
   getChoicesFromBeginInfo();
 
   return (
