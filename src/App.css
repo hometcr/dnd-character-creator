@@ -697,6 +697,8 @@ body {
 
 .item-select {
   font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
+  margin-top: 2px;
+  margin-bottom: 2px;
 }
 
 .choices-next-button {

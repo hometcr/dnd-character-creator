@@ -1,15 +1,15 @@
-import { ListsContainer } from "../components/ListsContainer";
-import { ItemDescription } from "../components/ItemDescription";
-import book from "../assets/book.jpg";
+import { ListsContainer } from "../../components/ListsContainer";
+import { ItemDescription } from "../../components/ItemDescription";
+import book from "../../assets/book.jpg";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
-import { IRootState } from "../index";
-import { stats, IStats } from "../assets/stats";
-import { getModifier } from "../helpers/getModifier";
-import { options } from "../assets/options";
-import { fillSlice } from "../features/spells";
+import { IRootState } from "../../index";
+import { stats, IStats } from "../../assets/stats";
+import { getModifier } from "../../helpers/getModifier";
+import { options } from "../../assets/options";
+import { CreateCharacterButton } from "./components/CreateCharacterButton";
 
 export const Spells = () => {
   const dispatch = useDispatch();
@@ -18,6 +18,7 @@ export const Spells = () => {
   const abilityScores = useSelector(
     (state: IRootState) => state.abilityScores.value
   );
+  const choicesInfo = useSelector((state: IRootState) => state.choices.value);
   const [recentlySelectedItem, setRecentlySelectedItem] = useState("");
 
   // console.log(beginningInfo);
@@ -154,43 +155,6 @@ export const Spells = () => {
     initialSelectedPreparedSpells
   );
 
-  const fillSpellsSlice = () => {
-    // combine pre-known and chosen items
-    let allCantrips = [...knownCantrips, ...selectedCantrips];
-    let allFirstLevelSpells = [
-      ...knownFirstLevelSpells,
-      ...selectedFirstLevelSpells,
-    ];
-    let allPreparedSpells = [...knownPreparedSpells, ...selectedPreparedSpells];
-
-    // create sets of each list to help find duplicates
-    let uniqueCantrips = new Set(allCantrips);
-    let uniqueFirstLevelSpells = new Set(allFirstLevelSpells);
-    let uniquePreparedSpells = new Set(allPreparedSpells);
-
-    // if any duplicates are found, alert the user
-    if (allCantrips.length != uniqueCantrips.size) {
-      alert("Please choose unique cantrips");
-    } else if (allFirstLevelSpells.length != uniqueFirstLevelSpells.size) {
-      alert("Please choose unique first level spells");
-    } else if (allPreparedSpells.length != uniquePreparedSpells.size) {
-      alert("Please choose unique prepared spells");
-    } else {
-      // if no duplicates are found, fill the slice
-      let spellsInfo = {
-        cantrips: allCantrips,
-        firstLevelSpells: allFirstLevelSpells,
-        preparedSpells: allPreparedSpells,
-      };
-      dispatch(fillSlice(spellsInfo));
-      // navigate("/spells");
-    }
-  };
-
-  const onPageSubmit = () => {
-    fillSpellsSlice();
-  };
-
   return (
     <div className="spells-page">
       <div className="spells-without-description">
@@ -224,9 +188,14 @@ export const Spells = () => {
             unknownPreparedSpells={unknownPreparedSpells}
           />
         </div>
-        <button className="create-character-button" onClick={onPageSubmit}>
-          Next
-        </button>
+        <CreateCharacterButton
+          knownCantrips={knownCantrips}
+          selectedCantrips={selectedCantrips}
+          knownFirstLevelSpells={knownFirstLevelSpells}
+          selectedFirstLevelSpells={selectedFirstLevelSpells}
+          knownPreparedSpells={knownPreparedSpells}
+          selectedPreparedSpells={selectedPreparedSpells}
+        />
       </div>
       <div className="spells-description-container">
         <ItemDescription item={recentlySelectedItem} />
