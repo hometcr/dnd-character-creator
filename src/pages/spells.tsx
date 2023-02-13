@@ -1,21 +1,23 @@
 import { ListsContainer } from "../components/ListsContainer";
 import { ItemDescription } from "../components/ItemDescription";
 import book from "../assets/book.jpg";
-import { NavigateButton } from "../components/NavigateButton";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { IRootState } from "../index";
 import { stats, IStats } from "../assets/stats";
-import {getModifier} from "../helpers/getModifier"
+import { getModifier } from "../helpers/getModifier";
 import { options } from "../assets/options";
+import { fillSlice } from "../features/spells";
 
 export const Spells = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const beginningInfo = useSelector((state: IRootState) => state.begin.value);
-  const abilityScores = useSelector((state: IRootState) => state.abilityScores.value);
+  const abilityScores = useSelector(
+    (state: IRootState) => state.abilityScores.value
+  );
   const [recentlySelectedItem, setRecentlySelectedItem] = useState("");
 
   // console.log(beginningInfo);
@@ -113,17 +115,16 @@ export const Spells = () => {
 
     // if character is a wizard, fill unknownPreparedSpells with int+1 dropdowns
     if (beginningInfo.class == "Wizard") {
-      const intelligenceModifier = getModifier(abilityScores.Intelligence)
+      const intelligenceModifier = getModifier(abilityScores.Intelligence);
       // minimum of one prepared spell
-      const preparedSpellsCount = 1 + Math.max(0, intelligenceModifier)
-      for (let i=0; i<preparedSpellsCount; i++) {
-        unknownPreparedSpells.push(options.spells.Wizard.firstLevel)
+      const preparedSpellsCount = 1 + Math.max(0, intelligenceModifier);
+      for (let i = 0; i < preparedSpellsCount; i++) {
+        unknownPreparedSpells.push(options.spells.Wizard.firstLevel);
       }
     }
     if (unknownPreparedSpells.length == 0) {
-      unknownPreparedSpells = [[]]
+      unknownPreparedSpells = [[]];
     }
-
   };
   getSpellsFromBeginInfo();
 
@@ -152,6 +153,43 @@ export const Spells = () => {
   const [selectedPreparedSpells, setSelectedPreparedSpells] = useState(
     initialSelectedPreparedSpells
   );
+
+  const fillSpellsSlice = () => {
+    // combine pre-known and chosen items
+    let allCantrips = [...knownCantrips, ...selectedCantrips];
+    let allFirstLevelSpells = [
+      ...knownFirstLevelSpells,
+      ...selectedFirstLevelSpells,
+    ];
+    let allPreparedSpells = [...knownPreparedSpells, ...selectedPreparedSpells];
+
+    // create sets of each list to help find duplicates
+    let uniqueCantrips = new Set(allCantrips);
+    let uniqueFirstLevelSpells = new Set(allFirstLevelSpells);
+    let uniquePreparedSpells = new Set(allPreparedSpells);
+
+    // if any duplicates are found, alert the user
+    if (allCantrips.length != uniqueCantrips.size) {
+      alert("Please choose unique cantrips");
+    } else if (allFirstLevelSpells.length != uniqueFirstLevelSpells.size) {
+      alert("Please choose unique first level spells");
+    } else if (allPreparedSpells.length != uniquePreparedSpells.size) {
+      alert("Please choose unique prepared spells");
+    } else {
+      // if no duplicates are found, fill the slice
+      let spellsInfo = {
+        cantrips: allCantrips,
+        firstLevelSpells: allFirstLevelSpells,
+        preparedSpells: allPreparedSpells,
+      };
+      dispatch(fillSlice(spellsInfo));
+      // navigate("/spells");
+    }
+  };
+
+  const onPageSubmit = () => {
+    fillSpellsSlice();
+  };
 
   return (
     <div className="spells-page">
@@ -186,11 +224,9 @@ export const Spells = () => {
             unknownPreparedSpells={unknownPreparedSpells}
           />
         </div>
-        <NavigateButton
-          destination="/character-sheet"
-          text="Create Character"
-          className="create-character-button"
-        />
+        <button className="create-character-button" onClick={onPageSubmit}>
+          Next
+        </button>
       </div>
       <div className="spells-description-container">
         <ItemDescription item={recentlySelectedItem} />
