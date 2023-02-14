@@ -2,34 +2,34 @@ import { options } from "./options";
 
 export interface ITypeStats {
   bonuses?: {
-    Strength?: Number;
-    Dexterity?: Number;
-    Intelligence?: Number;
-    Charisma?: Number;
-    Constitution?: Number;
-    Wisdom?: Number;
+    Strength?: number;
+    Dexterity?: number;
+    Intelligence?: number;
+    Charisma?: number;
+    Constitution?: number;
+    Wisdom?: number;
   };
-  knownSkillProficiencies?: String[];
-  unknownSkillProficiencies?: String[][];
-  knownItemProficiencies?: String[];
-  unknownItemProficiencies?: String[][];
-  knownItems?: String[];
-  unknownItems?: String[][];
-  knownArmorAndWeapons?: String[];
-  unknownArmorAndWeapons?: String[][];
-  knownLanguages?: String[];
-  unknownLanguages?: String[][];
-  knownCantrips?: String[];
-  unknownCantrips?: String[][];
-  knownFirstLevelSpells?: String[];
-  unknownFirstLevelSpells?: String[][];
+  knownSkillProficiencies?: string[];
+  unknownSkillProficiencies?: string[][];
+  knownItemProficiencies?: string[];
+  unknownItemProficiencies?: string[][];
+  knownItems?: string[];
+  unknownItems?: string[][];
+  knownArmorAndWeapons?: string[];
+  unknownArmorAndWeapons?: string[][];
+  knownLanguages?: string[];
+  unknownLanguages?: string[][];
+  knownCantrips?: string[];
+  unknownCantrips?: string[][];
+  knownFirstLevelSpells?: string[];
+  unknownFirstLevelSpells?: string[][];
   hitDice?: (string | number)[];
-  baseHp?: Number;
-  hpBonus?: Number;
-  savingThrowProficiencies?: String[];
-  features?: String[];
-  speed?: Number;
-  money? : Number[];
+  baseHp?: number;
+  hpBonus?: number;
+  savingThrowProficiencies?: string[];
+  features?: string[];
+  speed?: number;
+  money? : number[];
 }
 
 export interface IStats {

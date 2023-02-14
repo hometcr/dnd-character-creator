@@ -15,7 +15,7 @@ export interface ICharacter {
 
 export interface ICharacterData {
   id: string;
-  userId: number;
+  userId: string;
   name: string;
   race: string;
   class: string;

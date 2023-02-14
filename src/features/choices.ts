@@ -1,6 +1,14 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-const initialChoicesState = {
+interface IChoices {
+  skillProficiencies: string[],
+  itemProficiencies: string[],
+  items: string[],
+  armorAndWeapons: string[],
+  languages: string[],
+}
+
+const initialChoicesState: IChoices = {
   skillProficiencies: [],
   itemProficiencies: [],
   items: [],

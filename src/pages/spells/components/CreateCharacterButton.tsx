@@ -8,15 +8,52 @@ import { useSelector } from "react-redux";
 import { IRootState } from "../../../index";
 import { stats, IStats } from "../../../assets/stats";
 import { getModifier } from "../../../helpers/getModifier";
-import choices from "../../../features/choices";
+// import choices from "../../../features/choices";
 
 interface IProps {
-  knownCantrips: String[];
-  selectedCantrips: String[];
-  knownFirstLevelSpells: String[];
-  selectedFirstLevelSpells: String[];
-  knownPreparedSpells: String[];
-  selectedPreparedSpells: String[];
+  knownCantrips: string[];
+  selectedCantrips: string[];
+  knownFirstLevelSpells: string[];
+  selectedFirstLevelSpells: string[];
+  knownPreparedSpells: string[];
+  selectedPreparedSpells: string[];
+}
+
+interface ICharacterData {
+  userId: string;
+  name: string;
+  race: string;
+  class: string;
+  background: string;
+  level: number;
+  proficiencyBonus: number;
+  speed: number;
+  hitDice: (string | number)[];
+  initiative: number;
+  passivePerception: number;
+  hp: number;
+  ac: number;
+  savingThrowProficiencies: string[];
+  skillProficiencies: string[];
+  strengthScore: number;
+  charismaScore: number;
+  intelligenceScore: number;
+  wisdomScore: number;
+  dexterityScore: number;
+  constitutionScore: number;
+  armor: string[];
+  weapons: string[];
+  features: string[];
+  itemProficiencies: string[];
+  languages: string[];
+  spellSlots: number;
+  spellSaveDc: number;
+  spellAttackModifier: number;
+  cantrips: string[];
+  knownSpells: string[];
+  preparedSpells: string[];
+  money: number[];
+  items: string[];
 }
 
 export const CreateCharacterButton = (props: IProps) => {
@@ -33,9 +70,9 @@ export const CreateCharacterButton = (props: IProps) => {
   );
   const choicesInfo = useSelector((state: IRootState) => state.choices.value);
 
-  let allCantrips: String[] = [];
-  let allFirstLevelSpells: String[] = [];
-  let allPreparedSpells: String[] = [];
+  let allCantrips: string[] = [];
+  let allFirstLevelSpells: string[] = [];
+  let allPreparedSpells: string[] = [];
 
   const fillSpellsSlice = () => {
     // combine pre-known and chosen items
@@ -75,10 +112,21 @@ export const CreateCharacterButton = (props: IProps) => {
 
   const createNewCharacter = async () => {
     if (user) {
-      // used to calculate initiative
+      // used in other calculations
       const dexterityModifier = getModifier(abilityScores.Dexterity);
+      const wisdomModifier = getModifier(abilityScores.Wisdom)
 
-      const newCharacter = {
+      let perceptionSkill = 10 + wisdomModifier
+      if (choicesInfo.skillProficiencies.includes("Perception")) {
+        perceptionSkill += 2
+      }
+
+      // let hitDice: [number, string]
+      // if (typeof stats[beginningInfo.class as keyof IStats].hitDice !== undefined) {
+      //   hitDice = stats[beginningInfo.class as keyof IStats].hitDice
+      // }
+
+      const newCharacter: ICharacterData = {
         userId: user.uid,
         name: beginningInfo.name,
         race: beginningInfo.race,
@@ -86,8 +134,8 @@ export const CreateCharacterButton = (props: IProps) => {
         background: beginningInfo.background,
         level: 1,
         proficiencyBonus: 2,
-        speed: stats[beginningInfo.race as keyof IStats].speed,
-        hitDice: stats[beginningInfo.class as keyof IStats].hitDice,
+        speed: Number(stats[beginningInfo.race as keyof IStats].speed),
+        hitDice: stats[beginningInfo.class as keyof IStats].hitDice ?? [1, "d8"],
         initiative: dexterityModifier,
         // calculate later : 10 + perception skill
         passivePerception: 0,
@@ -97,7 +145,7 @@ export const CreateCharacterButton = (props: IProps) => {
         // other options depending on armor
         ac: 0,
         savingThrowProficiencies:
-          stats[beginningInfo.class as keyof IStats].savingThrowProficiencies,
+          stats[beginningInfo.class as keyof IStats].savingThrowProficiencies ?? [""],
         skillProficiencies: choicesInfo.skillProficiencies,
         strengthScore: abilityScores.Strength,
         charismaScore: abilityScores.Charisma,
@@ -121,7 +169,7 @@ export const CreateCharacterButton = (props: IProps) => {
         cantrips: allCantrips,
         knownSpells: allFirstLevelSpells,
         preparedSpells: allPreparedSpells,
-        money: stats[beginningInfo.background as keyof IStats].money,
+        money: stats[beginningInfo.background as keyof IStats].money ?? [0, 0, 0, 0],
         items: choicesInfo.items,
       };
       // make sure each field has the correct type!

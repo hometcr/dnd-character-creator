@@ -16,20 +16,20 @@ export const Choices = () => {
   const [recentlySelectedItem, setRecentlySelectedItem] = useState("");
 
   // initialize data for getChoicesFromBeginInfo()
-  let knownSkillProficiencies: String[] = [];
-  let unknownSkillProficiencies: String[][] = [];
-  let knownItemProficiencies: String[] = [];
-  let unknownItemProficiencies: String[][] = [];
-  let knownItems: String[] = [];
-  let unknownItems: String[][] = [];
-  let knownArmorAndWeapons: String[] = [];
-  let unknownArmorAndWeapons: String[][] = [];
-  let knownLanguages: String[] = [];
-  let unknownLanguages: String[][] = [];
+  let knownSkillProficiencies: string[] = [];
+  let unknownSkillProficiencies: string[][] = [];
+  let knownItemProficiencies: string[] = [];
+  let unknownItemProficiencies: string[][] = [];
+  let knownItems: string[] = [];
+  let unknownItems: string[][] = [];
+  let knownArmorAndWeapons: string[] = [];
+  let unknownArmorAndWeapons: string[][] = [];
+  let knownLanguages: string[] = [];
+  let unknownLanguages: string[][] = [];
 
   const getChoicesFromBeginInfo = () => {
     // fill knownSkillProficiencies with unique values
-    let nonUniqueItems: String[] = [];
+    let nonUniqueItems: string[] = [];
     const classKnownSkillProficiencies =
       stats[beginningInfo.class as keyof IStats].knownSkillProficiencies;
     const raceKnownSkillProficiencies =
@@ -236,11 +236,11 @@ export const Choices = () => {
   getChoicesFromBeginInfo();
 
   // initialize initial states
-  let initialSelectedEquipment: String[] = [];
-  let initialSelectedLanguages: String[] = [];
-  let initialSelectedSkillProficiencies: String[] = [];
-  let initialSelectedArmorAndWeapons: String[] = [];
-  let initialSelectedItemProficiencies: String[] = [];
+  let initialSelectedEquipment: string[] = [];
+  let initialSelectedLanguages: string[] = [];
+  let initialSelectedSkillProficiencies: string[] = [];
+  let initialSelectedArmorAndWeapons: string[] = [];
+  let initialSelectedItemProficiencies: string[] = [];
 
   const getInitialStates = () => {
     for (let item of unknownItems) {

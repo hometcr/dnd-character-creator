@@ -16,7 +16,7 @@ export const CharacterSheet = () => {
 
   const initialCharacterData = {
     id: "",
-    userId: 0,
+    userId: "",
     name: "",
     race: "",
     class: "",

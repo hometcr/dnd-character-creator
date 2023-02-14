@@ -24,16 +24,16 @@ export const Spells = () => {
   // console.log(beginningInfo);
 
   // initialize data for getSpellChoicesFromBeginInfo()
-  let knownCantrips: String[] = [];
-  let unknownCantrips: String[][] = [];
-  let knownFirstLevelSpells: String[] = [];
-  let unknownFirstLevelSpells: String[][] = [];
-  let knownPreparedSpells: String[] = [];
-  let unknownPreparedSpells: String[][] = [];
+  let knownCantrips: string[] = [];
+  let unknownCantrips: string[][] = [];
+  let knownFirstLevelSpells: string[] = [];
+  let unknownFirstLevelSpells: string[][] = [];
+  let knownPreparedSpells: string[] = [];
+  let unknownPreparedSpells: string[][] = [];
 
   const getSpellsFromBeginInfo = () => {
     // fill knownCantrips with unique values
-    let nonUniqueItems: String[] = [];
+    let nonUniqueItems: string[] = [];
     const classKnownCantrips =
       stats[beginningInfo.class as keyof IStats].knownCantrips;
     const raceKnownCantrips =
@@ -130,9 +130,9 @@ export const Spells = () => {
   getSpellsFromBeginInfo();
 
   // initialize initial states
-  let initialSelectedCantrips: String[] = [];
-  let initialSelectedFirstLevelSpells: String[] = [];
-  let initialSelectedPreparedSpells: String[] = [];
+  let initialSelectedCantrips: string[] = [];
+  let initialSelectedFirstLevelSpells: string[] = [];
+  let initialSelectedPreparedSpells: string[] = [];
 
   const getInitialStates = () => {
     for (let item of unknownCantrips) {
