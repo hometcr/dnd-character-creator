@@ -2,7 +2,6 @@ import { SkillDisplay } from "./SkillDisplay";
 import { getModifier } from "../../../helpers/getModifier";
 
 interface ISkill {
-  "Saving Throws"?: number;
   Athletics?: number;
   Acrobatics?: number;
   "Sleight of Hand"?: number;
@@ -42,7 +41,8 @@ interface IAbilityScores {
 }
 interface IProps {
   abilityScores: IAbilityScores;
-  skills: ISkills;
+  savingThrowProficiencies: String[];
+  skillProficiencies: String[];
 }
 
 export const Skills = (props: IProps) => {
@@ -54,6 +54,42 @@ export const Skills = (props: IProps) => {
     abilityModifiers[ability as keyof IAbilityScores] = modifier;
   }
 
+  // calculate saving throw based on prop
+  const savingThrows = {
+    Strength: abilityModifiers["Strength"],
+    Intelligence: abilityModifiers["Intelligence"],
+    Charisma: abilityModifiers["Charisma"],
+    Dexterity: abilityModifiers["Dexterity"],
+    Constitution: abilityModifiers["Constitution"],
+    Wisdom: abilityModifiers["Wisdom"],
+  }
+
+
+   // add bonuses based on allSkillProficiencies
+  const allSkills = {
+    Athletics: abilityModifiers["Strength"],
+    Acrobatics: abilityModifiers["Dexterity"],
+    "Sleight of Hand": abilityModifiers["Dexterity"],
+    Stealth: abilityModifiers["Dexterity"],
+
+    Deception: abilityModifiers["Charisma"],
+    Intimidation: abilityModifiers["Charisma"],
+    Performance: abilityModifiers["Charisma"],
+    Persuasion: abilityModifiers["Charisma"],
+
+    "Animal Handling": abilityModifiers["Wisdom"],
+    Insight: abilityModifiers["Wisdom"],
+    Medicine: abilityModifiers["Wisdom"],
+    Perception: abilityModifiers["Wisdom"],
+    Survival: abilityModifiers["Wisdom"],
+
+    Arcana: abilityModifiers["Intelligence"],
+    History: abilityModifiers["Intelligence"],
+    Investigation: abilityModifiers["Intelligence"],
+    Nature: abilityModifiers["Intelligence"],
+    Religion: abilityModifiers["Intelligence"],
+  };
+
   const createModifierDisplay = (score: number) => {
     let sign = "";
     if (score >= 0) {
@@ -62,18 +98,33 @@ export const Skills = (props: IProps) => {
     return `${sign}${score}`;
   };
 
+  const savingThrowDisplays = {
+    Strength: "",
+    Charisma: "",
+    Intelligence: "",
+    Wisdom: "",
+    Dexterity: "",
+    Constitution: ""
+  }
+  for (let ability in savingThrows) {
+    let throwDisplay = createModifierDisplay(savingThrows[ability as keyof ISkills])
+    savingThrowDisplays[ability as keyof ISkills] = throwDisplay
+  }
+
   const createSkillItem = (skill: string, score: number) => {
     let modifierDisplay = createModifierDisplay(score);
+    console.log(`creating ${modifierDisplay}`)
+    console.log(`skill is ${skill}`)
+    console.log(`score is ${score}`)
     return `${modifierDisplay} ${skill}`;
   };
 
-  const createSkillItemList = (ability: String) => {
-    let skillsDict = props.skills[ability as keyof ISkills];
-    let skillItemList = [];
-    for (let skill in skillsDict) {
+  const createSkillItemList = (certainSkills: string[]) => {
+    let skillItemList = []
+    for (let skill of certainSkills) {
       let newSkillItem = createSkillItem(
         skill,
-        Number(skillsDict[skill as keyof ISkill])
+        Number(allSkills[skill as keyof ISkill])
       );
       skillItemList.push(newSkillItem);
     }
@@ -83,17 +134,31 @@ export const Skills = (props: IProps) => {
   let skillDisplays = () => {
     let skillDisplaysList = [];
     for (let ability in abilityModifiers) {
+      let theseSkills: string[] = []
+      if (ability == "Strength") {
+        theseSkills = ["Athletics"]
+      } else if (ability == "Wisdom") {
+        theseSkills = ["Animal Handling", "Insight", "Medicine", "Perception", "Survival"]
+      } else if ( ability == "Charisma"
+      ) {
+        theseSkills = ["Deception", "Intimidation", "Performance", "Persuasion"]
+      } else if (ability == "Intelligence") {
+        theseSkills = ["Arcana", "History", "Investigation", "Nature", "Religion"]
+      } else if (ability == "Dexterity") {
+        theseSkills = ["Acrobatics", "Sleight of Hand", "Stealth"]
+      }
       let modifierDisplay = createModifierDisplay(
         abilityModifiers[ability as keyof IAbilityScores]
       );
-      let skillItems = createSkillItemList(ability);
+      let skillItems = createSkillItemList(theseSkills);
       skillDisplaysList.push(
         <SkillDisplay
           ability={String(ability)}
           abilityModifier={modifierDisplay}
           skillItems={skillItems}
           abilityScore={props.abilityScores[ability as keyof IAbilityScores]}
-          key={`${ability}`}
+          key={ability}
+          savingThrowDisplay={savingThrowDisplays[ability as keyof ISkills]}
         />
       );
     }

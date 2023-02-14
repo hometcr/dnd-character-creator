@@ -3,6 +3,7 @@ interface IProps {
   abilityModifier: string;
   skillItems: string[];
   abilityScore: number;
+  savingThrowDisplay: string;
 }
 
 export const SkillDisplay = (props: IProps) => {
@@ -17,7 +18,10 @@ export const SkillDisplay = (props: IProps) => {
         <div className="ability-modifier">{props.abilityModifier}</div>
         <div className="ability-score">{props.abilityScore}</div>
       </div>
-      <div className="skill-items-display">{skillItemsDisplay}</div>
+      <div className="skill-items-display">
+        <div className="skill-item">{`${props.savingThrowDisplay} Saving Throws`}</div>
+        {skillItemsDisplay}
+        </div>
     </div>
   );
 };

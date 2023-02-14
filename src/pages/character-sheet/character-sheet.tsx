@@ -30,12 +30,7 @@ export const CharacterSheet = () => {
     hp: 0,
     ac: 0,
     skillProficiencies: [],
-    strengthSavingThrow: 0,
-    constitutionSavingThrow: 0,
-    wisdomSavingThrow: 0,
-    intelligenceSavingThrow: 0,
-    charismaSavingThrow: 0,
-    dexteritySavingThrow: 0,
+    savingThrowProficiencies: [],
     strengthScore: 0,
     charismaScore: 0,
     intelligenceScore: 0,
@@ -105,42 +100,6 @@ export const CharacterSheet = () => {
     Intelligence: characterData.intelligenceScore,
   };
 
-  const skills = {
-    Strength: {
-      "Saving Throws": characterData.strengthSavingThrow,
-      Athletics: characterData.athleticsSkill,
-    },
-    Constitution: { "Saving Throws": characterData.constitutionSavingThrow },
-    Dexterity: {
-      "Saving Throws": characterData.dexteritySavingThrow,
-      Acrobatics: characterData.acrobaticsSkill,
-      "Sleight of Hand": characterData.sleightOfHandSkill,
-      Stealth: characterData.stealthSkill,
-    },
-    Charisma: {
-      "Saving Throws": characterData.charismaSavingThrow,
-      Deception: characterData.deceptionSkill,
-      Intimidation: characterData.intimidationSkill,
-      Performance: characterData.performanceSkill,
-      Persuasion: characterData.persuasionSkill,
-    },
-    Wisdom: {
-      "Saving Throws": characterData.wisdomSavingThrow,
-      "Animal Handling": characterData.animalHandlingSkill,
-      Insight: characterData.insightSkill,
-      Medicine: characterData.medicineSkill,
-      Perception: characterData.perceptionSkill,
-      Survival: characterData.survivalSkill,
-    },
-    Intelligence: {
-      "Saving Throws": characterData.intelligenceSavingThrow,
-      Arcana: characterData.arcanaSkill,
-      History: characterData.historySkill,
-      Investigation: characterData.investigationSkill,
-      Nature: characterData.natureSkill,
-      Religion: characterData.religionSkill,
-    },
-  };
 
   const money = {
     pp: characterData.money[0],
@@ -181,7 +140,7 @@ export const CharacterSheet = () => {
           cantrips={characterData.cantrips}
           firstLevelSpells={characterData.knownSpells}
         />
-        <Skills abilityScores={abilityScores} skills={skills} />
+        <Skills abilityScores={abilityScores} savingThrowProficiencies={characterData.savingThrowProficiencies} skillProficiencies={characterData.skillProficiencies}/>
         <ArmorAndWeapons
           weapons={characterData.weapons}
           armor={characterData.armor}
