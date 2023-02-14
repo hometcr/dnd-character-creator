@@ -1,14 +1,15 @@
 import { fillSlice } from "../../../features/spells";
 import { useDispatch } from "react-redux";
-import { db } from "../../../config/firebase";
-import { collection, addDoc } from "firebase/firestore";
 import { auth } from "../../../config/firebase";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useSelector } from "react-redux";
 import { IRootState } from "../../../index";
 import { stats, IStats } from "../../../assets/stats";
 import { getModifier } from "../../../helpers/getModifier";
-// import choices from "../../../features/choices";
+import { db } from "../../../config/firebase";
+import { collection, getDocs, where, query, addDoc } from "firebase/firestore";
+import { useState, useRef, useLayoutEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 interface IProps {
   knownCantrips: string[];
@@ -69,6 +70,12 @@ export const CreateCharacterButton = (props: IProps) => {
     (state: IRootState) => state.abilityScores.value
   );
   const choicesInfo = useSelector((state: IRootState) => state.choices.value);
+  // grab reference to characters in database
+  const charactersRef = collection(db, "characters");
+  // set up navigation
+  const navigate = useNavigate();
+
+  const [createdCharacterId, setCreatedCharacterId] = useState("");
 
   let allCantrips: string[] = [];
   let allFirstLevelSpells: string[] = [];
@@ -117,7 +124,7 @@ export const CreateCharacterButton = (props: IProps) => {
       const wisdomModifier = getModifier(abilityScores.Wisdom);
       const constitutionModifier = getModifier(abilityScores.Constitution);
       const intelligenceModifier = getModifier(abilityScores.Intelligence);
-      const charismaModifier = getModifier(abilityScores.Charisma)
+      const charismaModifier = getModifier(abilityScores.Charisma);
 
       let passivePerception = 10 + wisdomModifier;
       if (choicesInfo.skillProficiencies.includes("Perception")) {
@@ -132,6 +139,8 @@ export const CreateCharacterButton = (props: IProps) => {
       }
 
       let features: string[] = [];
+      console.log(stats[beginningInfo.race as keyof IStats].features);
+      console.log(beginningInfo.race);
       features = [
         ...(stats[beginningInfo.class as keyof IStats].features as string[]),
         ...(stats[beginningInfo.race as keyof IStats].features as string[]),
@@ -139,31 +148,75 @@ export const CreateCharacterButton = (props: IProps) => {
           .features as string[]),
       ];
 
-      let spellSlots = 0
+      let spellSlots = 0;
       if (beginningInfo.class == "Wizard") {
-        spellSlots = 2
+        spellSlots = 2;
       } else if (beginningInfo.class == "Bard") {
-        spellSlots = 2
+        spellSlots = 2;
       }
 
-      let spellSaveDc = 0
+      let spellSaveDc = 0;
       if (beginningInfo.class == "Wizard") {
-        spellSaveDc += 8 + 2 + intelligenceModifier
+        spellSaveDc += 8 + 2 + intelligenceModifier;
       } else if (beginningInfo.class == "Bard") {
-        spellSaveDc += 8 + 2 + charismaModifier
+        spellSaveDc += 8 + 2 + charismaModifier;
       }
 
-      let spellAttackModifier = 0
+      let spellAttackModifier = 0;
       if (beginningInfo.class == "Wizard") {
-        spellAttackModifier += 2 + intelligenceModifier
+        spellAttackModifier += 2 + intelligenceModifier;
       } else if (beginningInfo.class == "Bard") {
-        spellAttackModifier += 2 + charismaModifier
+        spellAttackModifier += 2 + charismaModifier;
       }
 
+      let armor: string[] = [];
+      let weapons: string[] = [];
+      for (let item of choicesInfo.armorAndWeapons) {
+        if (
+          item == "Shield" ||
+          item.includes("Armor") ||
+          item.includes("Chain") ||
+          item.includes("Scale") ||
+          item.includes("Plate") ||
+          item.includes("plate") ||
+          item.includes("Mail") ||
+          item.includes("Splint")
+        ) {
+          armor.push(item);
+        } else {
+          weapons.push(item);
+        }
+      }
+
+      // random lists are coming in with "undefined" as an element.
       // not sure why this error is happening, but I can catch it here
-      let knownFirstLevelSpells = props.knownFirstLevelSpells;
-      if (knownFirstLevelSpells[0] == undefined) {
-        knownFirstLevelSpells = [];
+      let knownFirstLevelSpells = [...props.knownFirstLevelSpells];
+      for (let item of knownFirstLevelSpells) {
+        if (item == undefined) {
+          let index = knownFirstLevelSpells.indexOf(item);
+          knownFirstLevelSpells.splice(index, 1);
+        }
+      }
+      let languages = [...choicesInfo.languages];
+      for (let item of languages) {
+        if (item == undefined) {
+          let index = languages.indexOf(item);
+          languages.splice(index, 1);
+        }
+      }
+      let cantrips = [...props.knownCantrips];
+      for (let item of cantrips) {
+        if (item == undefined) {
+          let index = cantrips.indexOf(item);
+          cantrips.splice(index, 1);
+        }
+      }
+      let preppedSpells = [...props.knownPreparedSpells];
+      for (let item of preppedSpells) {
+        if (item == undefined) {
+          let index = preppedSpells.indexOf(item);
+          preppedSpells.splice(index, 1);
+        }
       }
 
       const newCharacter: ICharacterData = {
@@ -194,26 +247,25 @@ export const CreateCharacterButton = (props: IProps) => {
         wisdomScore: abilityScores.Wisdom,
         dexterityScore: abilityScores.Dexterity,
         constitutionScore: abilityScores.Constitution,
-        // separate armor from weapons, then store here
-        armor: [],
-        weapons: [],
+        armor: armor,
+        weapons: weapons,
         features: features,
         itemProficiencies: choicesInfo.itemProficiencies,
-        languages: choicesInfo.languages,
+        languages: languages,
         spellSlots: spellSlots,
         spellSaveDc: spellSaveDc,
         spellAttackModifier: spellAttackModifier,
-        cantrips: allCantrips,
+        cantrips: cantrips,
         knownSpells: knownFirstLevelSpells,
-        preparedSpells: allPreparedSpells,
+        preparedSpells: preppedSpells,
         money: stats[beginningInfo.background as keyof IStats].money ?? [
           0, 0, 0, 0,
         ],
         items: choicesInfo.items,
       };
-      // make sure each field has the correct type!
-      console.log(newCharacter);
-      // await addDoc(charactersCollectionRef, newCharacter);
+      await addDoc(charactersCollectionRef, newCharacter).then((docRef) => {
+        navigate(`/character-sheet/${docRef.id}`);
+      });
     } else {
       alert("An unknown error has occured. Please try again later.");
     }

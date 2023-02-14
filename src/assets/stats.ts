@@ -262,6 +262,7 @@ export const stats: IStats = {
     knownLanguages: ["Common"],
     unknownLanguages: [options["languages"]],
     speed: 30,
+    features: [],
   },
   Halfling: {
     bonuses: {
