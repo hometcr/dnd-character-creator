@@ -23,6 +23,13 @@ export interface ITypeStats {
   unknownCantrips?: String[][];
   knownFirstLevelSpells?: String[];
   unknownFirstLevelSpells?: String[][];
+  hitDice?: (string | number)[];
+  baseHp?: Number;
+  hpBonus?: Number;
+  savingThrowProficiencies?: String[];
+  features?: String[];
+  speed?: Number;
+  money? : Number[];
 }
 
 export interface IStats {
@@ -84,6 +91,10 @@ export const stats: IStats = {
       options["spells"]["Bard"]["firstLevel"],
       options["spells"]["Bard"]["firstLevel"],
     ],
+    hitDice: [1, "d8"],
+    baseHp: 8,
+    savingThrowProficiencies: ["Dexterity", "Charisma"],
+    features: ["Ritual Casting", "Bardic Inspiration"],
   },
   Wizard: {
     unknownSkillProficiencies: [
@@ -117,6 +128,10 @@ export const stats: IStats = {
       options["spells"]["Wizard"]["firstLevel"],
       options["spells"]["Wizard"]["firstLevel"],
     ],
+    hitDice: [1, "d6"],
+    baseHp: 6,
+    savingThrowProficiencies: ["Intelligence", "Wisdom"],
+    features: ["Ritual Casting", "Arcane Recovery"],
   },
   Fighter: {
     unknownSkillProficiencies: [
@@ -154,6 +169,10 @@ export const stats: IStats = {
       ["Shield", ...options["weapons"]["martial"]],
       ["Light Crossbow", "Handaxe"],
     ],
+    hitDice: [1, "d10"],
+    baseHp: 10,
+    savingThrowProficiencies: ["Strength", "Constitution"],
+    features: ["Dueling", "Second Wind"],
   },
   Paladin: {
     unknownSkillProficiencies: [
@@ -188,6 +207,10 @@ export const stats: IStats = {
       options["weapons"]["martial"],
       options["weapons"]["simpleMelee"],
     ],
+    hitDice: [1, "d10"],
+    baseHp: 10,
+    savingThrowProficiencies: ["Wisdom", "Charisma"],
+    features: ["Divine Sense", "Lay on Hands"],
   },
   // RACES
   Dwarf: {
@@ -205,6 +228,14 @@ export const stats: IStats = {
       ["Smith's Tools", "Brewer's Supplies", "Mason's Tools"],
     ],
     knownLanguages: ["Common", "Dwarvish"],
+    features: [
+      "Darkvision",
+      "Dwarven Resilience",
+      "Stonecunning",
+      "Dwarven Toughness",
+    ],
+    hpBonus: 1,
+    speed: 25,
   },
   Elf: {
     bonuses: {
@@ -216,6 +247,8 @@ export const stats: IStats = {
     knownLanguages: ["Common", "Elven"],
     unknownLanguages: [options["languages"]],
     unknownCantrips: [options["spells"]["Wizard"]["cantrips"]],
+    features: ["Darkvision", "Fey Ancestry", "Trance"],
+    speed: 30,
   },
   Human: {
     bonuses: {
@@ -228,6 +261,7 @@ export const stats: IStats = {
     },
     knownLanguages: ["Common"],
     unknownLanguages: [options["languages"]],
+    speed: 30,
   },
   Halfling: {
     bonuses: {
@@ -235,6 +269,8 @@ export const stats: IStats = {
       Charisma: 1,
     },
     knownLanguages: ["Common", "Halfling"],
+    features: ["Lucky", "Brave", "Nimble", "Naturally Stealthy"],
+    speed: 25,
   },
   // BACKGROUNDS
   Entertainer: {
@@ -243,6 +279,8 @@ export const stats: IStats = {
     knownSkillProficiencies: ["Acrobatics", "Performance"],
     knownItems: ["The Favor of an Admirer", "Costume"],
     unknownItems: [options["instruments"]],
+    money: [0, 0, 15, 0],
+    features: ["Entertainer Routines", "By Popular Demand"],
   },
   Acolyte: {
     knownSkillProficiencies: ["Insight", "Religion"],
@@ -254,6 +292,8 @@ export const stats: IStats = {
       "Vestements",
       "Common Clothes",
     ],
+    money: [0, 0, 15, 0],
+    features: ["Shelter of the Faithful"],
   },
   "Folk Hero": {
     knownSkillProficiencies: ["Animal Handling", "Survival"],
@@ -261,11 +301,15 @@ export const stats: IStats = {
     unknownItemProficiencies: [options["artisansTools"]],
     knownItems: ["Shovel", "Iron Pot", "Common Clothes"],
     unknownItems: [options["artisansTools"]],
+    money: [0, 0, 15, 0],
+    features: ["Defining Event", "Rustic Hospitality"],
   },
   Noble: {
     knownSkillProficiencies: ["History", "Persuasion"],
     unknownItems: [["Dice Set", "Playing Card Set"]],
     unknownLanguages: [options["languages"]],
     knownItems: ["Fine Clothes", "Signet Ring", "Scroll of Pedigree"],
+    money: [0, 0, 25, 0],
+    features: ["Position of Privilege"],
   },
 };

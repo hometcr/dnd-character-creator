@@ -316,7 +316,6 @@ export const Choices = () => {
     } else {
       // if no duplicates are found, fill the slice
       let choicesInfo = {
-        // CHANGE TO ALL (NOT SELECTED)
         skillProficiencies: allSkillProficiencies,
         itemProficiencies: allItemProficiencies,
         items: allItems,

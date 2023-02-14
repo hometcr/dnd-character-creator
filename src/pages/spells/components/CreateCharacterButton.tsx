@@ -6,8 +6,8 @@ import { auth } from "../../../config/firebase";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useSelector } from "react-redux";
 import { IRootState } from "../../../index";
-import { stats, IStats } from "../../../assets/stats"
-import { getModifier } from "../../../helpers/getModifier"
+import { stats, IStats } from "../../../assets/stats";
+import { getModifier } from "../../../helpers/getModifier";
 import choices from "../../../features/choices";
 
 interface IProps {
@@ -28,18 +28,23 @@ export const CreateCharacterButton = (props: IProps) => {
   const [user] = useAuthState(auth);
   // grab remaining data from global state
   const beginningInfo = useSelector((state: IRootState) => state.begin.value);
-  const abilityScores = useSelector((state: IRootState) => state.abilityScores.value);
+  const abilityScores = useSelector(
+    (state: IRootState) => state.abilityScores.value
+  );
   const choicesInfo = useSelector((state: IRootState) => state.choices.value);
 
+  let allCantrips: String[] = [];
+  let allFirstLevelSpells: String[] = [];
+  let allPreparedSpells: String[] = [];
 
   const fillSpellsSlice = () => {
     // combine pre-known and chosen items
-    let allCantrips = [...props.knownCantrips, ...props.selectedCantrips];
-    let allFirstLevelSpells = [
+    allCantrips = [...props.knownCantrips, ...props.selectedCantrips];
+    allFirstLevelSpells = [
       ...props.knownFirstLevelSpells,
       ...props.selectedFirstLevelSpells,
     ];
-    let allPreparedSpells = [
+    allPreparedSpells = [
       ...props.knownPreparedSpells,
       ...props.selectedPreparedSpells,
     ];
@@ -63,7 +68,6 @@ export const CreateCharacterButton = (props: IProps) => {
         firstLevelSpells: allFirstLevelSpells,
         preparedSpells: allPreparedSpells,
       };
-      console.log("filling slice");
       dispatch(fillSlice(spellsInfo));
       // navigate("/spells");
     }
@@ -72,8 +76,7 @@ export const CreateCharacterButton = (props: IProps) => {
   const createNewCharacter = async () => {
     if (user) {
       // used to calculate initiative
-      const dexterityModifier = getModifier(abilityScores.Dexterity)
-
+      const dexterityModifier = getModifier(abilityScores.Dexterity);
 
       const newCharacter = {
         userId: user.uid,
@@ -83,20 +86,18 @@ export const CreateCharacterButton = (props: IProps) => {
         background: beginningInfo.background,
         level: 1,
         proficiencyBonus: 2,
-        // grab from race stats
-        speed: 0,
-        // grab from class stats
-        hitDice: [],
+        speed: stats[beginningInfo.race as keyof IStats].speed,
+        hitDice: stats[beginningInfo.class as keyof IStats].hitDice,
         initiative: dexterityModifier,
         // calculate later : 10 + perception skill
         passivePerception: 0,
-        // grab from class stats
+        // calculate later : grab base from class stats, bonus from race stats, and add con modifier
         hp: 0,
-        // calculate later : 10 + dex mod if no armor, 
+        // calculate later : 10 + dex mod if no armor,
         // other options depending on armor
         ac: 0,
-        // grab from class stats
-        savingThrowProficiencies: [],
+        savingThrowProficiencies:
+          stats[beginningInfo.class as keyof IStats].savingThrowProficiencies,
         skillProficiencies: choicesInfo.skillProficiencies,
         strengthScore: abilityScores.Strength,
         charismaScore: abilityScores.Charisma,
@@ -130,24 +131,23 @@ export const CreateCharacterButton = (props: IProps) => {
         features: [],
         itemProficiencies: choicesInfo.itemProficiencies,
         languages: choicesInfo.languages,
-        // grab from class stats and calculate with mods
+        // calculate with mods per class
         spellSlots: 0,
-        // grab from class stats and calculate with mods
+        // calculate with mods per class
         spellSaveDc: 0,
-        // grab from class stats and calculate with mods
+        // calculate with mods per class
         spellAttackModifier: 0,
-        cantrips: props.knownCantrips,
-        knownSpells: props.knownFirstLevelSpells,
-        preparedSpells: props.knownPreparedSpells,
-        // grab from background stats
-        money: [],
+        cantrips: allCantrips,
+        knownSpells: allFirstLevelSpells,
+        preparedSpells: allPreparedSpells,
+        money: stats[beginningInfo.background as keyof IStats].money,
         items: choicesInfo.items,
       };
       // make sure each field has the correct type!
       console.log(newCharacter)
       await addDoc(charactersCollectionRef, newCharacter);
     } else {
-      alert("An unknown error has occured. Please try again later.")
+      alert("An unknown error has occured. Please try again later.");
     }
   };
 
