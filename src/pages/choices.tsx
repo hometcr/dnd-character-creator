@@ -317,11 +317,11 @@ export const Choices = () => {
       // if no duplicates are found, fill the slice
       let choicesInfo = {
         // CHANGE TO ALL (NOT SELECTED)
-        skillProficiencies: selectedSkillProficiencies,
-        itemProficiencies: selectedItemProficiencies,
-        items: selectedEquipment,
-        armorAndWeapons: selectedArmorAndWeapons,
-        languages: selectedLanguages,
+        skillProficiencies: allSkillProficiencies,
+        itemProficiencies: allItemProficiencies,
+        items: allItems,
+        armorAndWeapons: allArmorAndWeapons,
+        languages: allLanguages,
       };
       dispatch(fillSlice(choicesInfo));
       navigate("/spells");

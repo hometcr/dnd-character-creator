@@ -1,9 +1,14 @@
 import { fillSlice } from "../../../features/spells";
 import { useDispatch } from "react-redux";
-import { useSelector } from "react-redux";
-import { useState, useEffect } from "react";
 import { db } from "../../../config/firebase";
 import { collection, addDoc } from "firebase/firestore";
+import { auth } from "../../../config/firebase";
+import { useAuthState } from "react-firebase-hooks/auth";
+import { useSelector } from "react-redux";
+import { IRootState } from "../../../index";
+import { stats, IStats } from "../../../assets/stats"
+import { getModifier } from "../../../helpers/getModifier"
+import choices from "../../../features/choices";
 
 interface IProps {
   knownCantrips: String[];
@@ -15,8 +20,17 @@ interface IProps {
 }
 
 export const CreateCharacterButton = (props: IProps) => {
+  // set up ability to push to global state
   const dispatch = useDispatch();
+  // set up ability to access characters collection in db
   const charactersCollectionRef = collection(db, "characters");
+  // grab info about logged-in user
+  const [user] = useAuthState(auth);
+  // grab remaining data from global state
+  const beginningInfo = useSelector((state: IRootState) => state.begin.value);
+  const abilityScores = useSelector((state: IRootState) => state.abilityScores.value);
+  const choicesInfo = useSelector((state: IRootState) => state.choices.value);
+
 
   const fillSpellsSlice = () => {
     // combine pre-known and chosen items
@@ -56,13 +70,85 @@ export const CreateCharacterButton = (props: IProps) => {
   };
 
   const createNewCharacter = async () => {
-    const newCharacter = {
-      test: "This is a test",
-      number: 3,
-    };
-    // give addDoc an object defining what add to the database
-    // make sure each field has the correct type!
-    await addDoc(charactersCollectionRef, newCharacter);
+    if (user) {
+      // used to calculate initiative
+      const dexterityModifier = getModifier(abilityScores.Dexterity)
+
+
+      const newCharacter = {
+        userId: user.uid,
+        name: beginningInfo.name,
+        race: beginningInfo.race,
+        class: beginningInfo.class,
+        background: beginningInfo.background,
+        level: 1,
+        proficiencyBonus: 2,
+        // grab from race stats
+        speed: 0,
+        // grab from class stats
+        hitDice: [],
+        initiative: dexterityModifier,
+        // calculate later : 10 + perception skill
+        passivePerception: 0,
+        // grab from class stats
+        hp: 0,
+        // calculate later : 10 + dex mod if no armor, 
+        // other options depending on armor
+        ac: 0,
+        // grab from class stats
+        savingThrowProficiencies: [],
+        skillProficiencies: choicesInfo.skillProficiencies,
+        strengthScore: abilityScores.Strength,
+        charismaScore: abilityScores.Charisma,
+        intelligenceScore: abilityScores.Intelligence,
+        wisdomScore: abilityScores.Wisdom,
+        dexterityScore: abilityScores.Dexterity,
+        constitutionScore: abilityScores.Constitution,
+        // calculate these based on modifiers and proficiencies
+        athleticsSkill: 0,
+        acrobaticsSkill: 0,
+        sleightOfHandSkill: 0,
+        stealthSkill: 0,
+        deceptionSkill: 0,
+        intimidationSkill: 0,
+        performanceSkill: 0,
+        persuasionSkill: 0,
+        animalHandlingSkill: 0,
+        insightSkill: 0,
+        medicineSkill: 0,
+        perceptionSkill: 0,
+        survivalSkill: 0,
+        arcanaSkill: 0,
+        historySkill: 0,
+        investigationSkill: 0,
+        natureSkill: 0,
+        religionSkill: 0,
+        // separate armor from weapons, then store here
+        armor: [],
+        weapons: [],
+        // grab from all stats
+        features: [],
+        itemProficiencies: choicesInfo.itemProficiencies,
+        languages: choicesInfo.languages,
+        // grab from class stats and calculate with mods
+        spellSlots: 0,
+        // grab from class stats and calculate with mods
+        spellSaveDc: 0,
+        // grab from class stats and calculate with mods
+        spellAttackModifier: 0,
+        cantrips: props.knownCantrips,
+        knownSpells: props.knownFirstLevelSpells,
+        preparedSpells: props.knownPreparedSpells,
+        // grab from background stats
+        money: [],
+        items: choicesInfo.items,
+      };
+      // make sure each field has the correct type!
+      console.log(newCharacter)
+      await addDoc(charactersCollectionRef, newCharacter);
+    } else {
+      alert("An unknown error has occured. Please try again later.")
+    }
   };
 
   const onPageSubmit = () => {
