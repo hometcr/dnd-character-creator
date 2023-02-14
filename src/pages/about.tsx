@@ -16,7 +16,7 @@ const navigate = useNavigate()
         <p className="about-title">I hope you enjoy my capstone project!</p>
         <p className="about-paragraph">
           Two years ago (when I knew nothing about coding), I was invited 
-          to join a zoom Dungeon’s and Dragons campaign. I enjoyed the 
+          to join a zoom Dungeons and Dragons campaign. I enjoyed the 
           game, but my favorite part was creating spreadsheets to keep 
           track of the character information. Making the perfect excel 
           character sheet became my pandemic hobby.</p>
