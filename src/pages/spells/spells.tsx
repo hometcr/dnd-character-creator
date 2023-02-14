@@ -21,8 +21,6 @@ export const Spells = () => {
   const choicesInfo = useSelector((state: IRootState) => state.choices.value);
   const [recentlySelectedItem, setRecentlySelectedItem] = useState("");
 
-  // console.log(beginningInfo);
-
   // initialize data for getSpellChoicesFromBeginInfo()
   let knownCantrips: string[] = [];
   let unknownCantrips: string[][] = [];
@@ -135,11 +133,15 @@ export const Spells = () => {
   let initialSelectedPreparedSpells: string[] = [];
 
   const getInitialStates = () => {
-    for (let item of unknownCantrips) {
-      initialSelectedCantrips.push(item[0]);
+    if (unknownCantrips) {
+      for (let item of unknownCantrips) {
+        initialSelectedCantrips.push(item[0]);
+      }
     }
-    for (let item of unknownFirstLevelSpells) {
-      initialSelectedFirstLevelSpells.push(item[0]);
+    if (unknownFirstLevelSpells[0].length > 0) {
+      for (let item of unknownFirstLevelSpells) {
+        initialSelectedFirstLevelSpells.push(item[0]);
+      }
     }
   };
   getInitialStates();
@@ -154,6 +156,9 @@ export const Spells = () => {
   const [selectedPreparedSpells, setSelectedPreparedSpells] = useState(
     initialSelectedPreparedSpells
   );
+
+  console.log(initialSelectedFirstLevelSpells)
+  // console.log(selectedFirstLevelSpells)
 
   return (
     <div className="spells-page">

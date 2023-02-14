@@ -10,6 +10,7 @@ interface IProps {
 }
 
 export const ListOfChoices = (props: IProps) => {
+
   // transform known items into listable divs
   let listedKnownItems = props.knownItems.map((knownItem, index) => (
     <div key={`${knownItem}.${index}`} className="item-in-choices-list">

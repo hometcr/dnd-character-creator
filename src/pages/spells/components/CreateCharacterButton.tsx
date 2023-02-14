@@ -74,6 +74,7 @@ export const CreateCharacterButton = (props: IProps) => {
   let allFirstLevelSpells: string[] = [];
   let allPreparedSpells: string[] = [];
 
+
   const fillSpellsSlice = () => {
     // combine pre-known and chosen items
     allCantrips = [...props.knownCantrips, ...props.selectedCantrips];
@@ -90,6 +91,7 @@ export const CreateCharacterButton = (props: IProps) => {
     let uniqueCantrips = new Set(allCantrips);
     let uniqueFirstLevelSpells = new Set(allFirstLevelSpells);
     let uniquePreparedSpells = new Set(allPreparedSpells);
+
 
     // if any duplicates are found, alert the user
     if (allCantrips.length != uniqueCantrips.size) {
@@ -125,6 +127,12 @@ export const CreateCharacterButton = (props: IProps) => {
       // if (typeof stats[beginningInfo.class as keyof IStats].hitDice !== undefined) {
       //   hitDice = stats[beginningInfo.class as keyof IStats].hitDice
       // }
+
+      // not sure why this error is happening, but I can catch it here
+      let knownFirstLevelSpells = props.knownFirstLevelSpells
+      if (knownFirstLevelSpells[0] == undefined) {
+        knownFirstLevelSpells = []
+      }
 
       const newCharacter: ICharacterData = {
         userId: user.uid,
@@ -167,7 +175,7 @@ export const CreateCharacterButton = (props: IProps) => {
         // calculate with mods per class
         spellAttackModifier: 0,
         cantrips: allCantrips,
-        knownSpells: allFirstLevelSpells,
+        knownSpells: knownFirstLevelSpells,
         preparedSpells: allPreparedSpells,
         money: stats[beginningInfo.background as keyof IStats].money ?? [0, 0, 0, 0],
         items: choicesInfo.items,
