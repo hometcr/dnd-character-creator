@@ -1,6 +1,9 @@
 import { fillSlice } from "../../../features/spells";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
+import { useState, useEffect } from "react";
+import { db } from "../../../config/firebase";
+import { collection, addDoc } from "firebase/firestore";
 
 interface IProps {
   knownCantrips: String[];
@@ -13,6 +16,7 @@ interface IProps {
 
 export const CreateCharacterButton = (props: IProps) => {
   const dispatch = useDispatch();
+  const charactersCollectionRef = collection(db, "characters");
 
   const fillSpellsSlice = () => {
     // combine pre-known and chosen items
@@ -51,7 +55,15 @@ export const CreateCharacterButton = (props: IProps) => {
     }
   };
 
-  const createNewCharacter = () => {};
+  const createNewCharacter = async () => {
+    const newCharacter = {
+      test: "This is a test",
+      number: 3,
+    };
+    // give addDoc an object defining what add to the database
+    // make sure each field has the correct type!
+    await addDoc(charactersCollectionRef, newCharacter);
+  };
 
   const onPageSubmit = () => {
     fillSpellsSlice();
