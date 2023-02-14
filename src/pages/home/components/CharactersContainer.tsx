@@ -8,8 +8,8 @@ interface IProps {
 export const CharactersContainer = (props: IProps) => {
   let characters;
   if (props.characters.length > 0) {
-    characters = props.characters.map((character: ICharacter) => (
-      <Character key={`${character}`} character={character} />
+    characters = props.characters.map((character: ICharacter, index) => (
+      <Character key={index} character={character} />
     ));
   } else {
     characters = (

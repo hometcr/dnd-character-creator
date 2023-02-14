@@ -23,13 +23,13 @@ export const ListOfChoices = (props: IProps) => {
     listedUnknownItems = props.unknownItems.map(
       (unknownItem, dropdownIndex) => (
         <select
-          key={`${unknownItem}.${dropdownIndex}`}
+          key={dropdownIndex}
           className="item-select"
           value={String(props.selectedItems[dropdownIndex])}
           onChange={(event) => updateSelectedItem(event, dropdownIndex)}
         >
           {unknownItem.map((option, optionIndex) => (
-            <option key={`${option}.${dropdownIndex}.${optionIndex}`}>
+            <option key={optionIndex}>
               {option}
             </option>
           ))}

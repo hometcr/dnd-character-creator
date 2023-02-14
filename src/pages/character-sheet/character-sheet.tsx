@@ -12,7 +12,6 @@ import { ICharacterData } from "../home/home";
 
 export const CharacterSheet = () => {
   const routeParams = useParams();
-  console.log(routeParams.id);
 
   const initialCharacterData = {
     id: "",
@@ -60,11 +59,9 @@ export const CharacterSheet = () => {
       const docRef = doc(db, "characters", routeParams.id);
       const docSnap = await getDoc(docRef);
       if (docSnap.exists()) {
-        console.log("Document data:", docSnap.data());
         const givenData = docSnap.data() as ICharacterData;
         setCharacterData(givenData);
       } else {
-        console.log("No such document!");
       }
     }
   };

@@ -113,9 +113,6 @@ export const Skills = (props: IProps) => {
 
   const createSkillItem = (skill: string, score: number) => {
     let modifierDisplay = createModifierDisplay(score);
-    console.log(`creating ${modifierDisplay}`)
-    console.log(`skill is ${skill}`)
-    console.log(`score is ${score}`)
     return `${modifierDisplay} ${skill}`;
   };
 
