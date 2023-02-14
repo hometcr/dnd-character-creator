@@ -169,25 +169,6 @@ export const CreateCharacterButton = (props: IProps) => {
         spellAttackModifier += 2 + charismaModifier;
       }
 
-      let armor: string[] = [];
-      let weapons: string[] = [];
-      for (let item of choicesInfo.armorAndWeapons) {
-        if (
-          item == "Shield" ||
-          item.includes("Armor") ||
-          item.includes("Chain") ||
-          item.includes("Scale") ||
-          item.includes("Plate") ||
-          item.includes("plate") ||
-          item.includes("Mail") ||
-          item.includes("Splint")
-        ) {
-          armor.push(item);
-        } else {
-          weapons.push(item);
-        }
-      }
-
       // random lists are coming in with "undefined" as an element.
       // not sure why this error is happening, but I can catch it here
       let knownFirstLevelSpells = [...props.knownFirstLevelSpells];
@@ -195,13 +176,6 @@ export const CreateCharacterButton = (props: IProps) => {
         if (item == undefined) {
           let index = knownFirstLevelSpells.indexOf(item);
           knownFirstLevelSpells.splice(index, 1);
-        }
-      }
-      let languages = [...choicesInfo.languages];
-      for (let item of languages) {
-        if (item == undefined) {
-          let index = languages.indexOf(item);
-          languages.splice(index, 1);
         }
       }
       let cantrips = [...props.knownCantrips];
@@ -216,6 +190,60 @@ export const CreateCharacterButton = (props: IProps) => {
         if (item == undefined) {
           let index = preppedSpells.indexOf(item);
           preppedSpells.splice(index, 1);
+        }
+      }
+      let languages = [...choicesInfo.languages];
+      for (let item of languages) {
+        if (item == undefined) {
+          let index = languages.indexOf(item);
+          languages.splice(index, 1);
+        }
+      }
+      let armorAndWeapons = [...choicesInfo.armorAndWeapons];
+      for (let item of armorAndWeapons) {
+        if (item == undefined) {
+          let index = armorAndWeapons.indexOf(item);
+          armorAndWeapons.splice(index, 1);
+        }
+      }
+      let skillProficiencies = [...choicesInfo.skillProficiencies];
+      for (let item of skillProficiencies) {
+        if (item == undefined) {
+          let index = skillProficiencies.indexOf(item);
+          skillProficiencies.splice(index, 1);
+        }
+      }
+      let itemProficiencies = [...choicesInfo.itemProficiencies];
+      for (let item of itemProficiencies) {
+        if (item == undefined) {
+          let index = itemProficiencies.indexOf(item);
+          itemProficiencies.splice(index, 1);
+        }
+      }
+      let items = [...choicesInfo.items];
+      for (let item of items) {
+        if (item == undefined) {
+          let index = items.indexOf(item);
+          items.splice(index, 1);
+        }
+      }
+
+      let armor: string[] = [];
+      let weapons: string[] = [];
+      for (let item of armorAndWeapons) {
+        if (
+          item == "Shield" ||
+          item.includes("Armor") ||
+          item.includes("Chain") ||
+          item.includes("Scale") ||
+          item.includes("Plate") ||
+          item.includes("plate") ||
+          item.includes("Mail") ||
+          item.includes("Splint")
+        ) {
+          armor.push(item);
+        } else {
+          weapons.push(item);
         }
       }
 
@@ -240,7 +268,7 @@ export const CreateCharacterButton = (props: IProps) => {
         ac: 14,
         savingThrowProficiencies: stats[beginningInfo.class as keyof IStats]
           .savingThrowProficiencies ?? [""],
-        skillProficiencies: choicesInfo.skillProficiencies,
+        skillProficiencies: skillProficiencies,
         strengthScore: abilityScores.Strength,
         charismaScore: abilityScores.Charisma,
         intelligenceScore: abilityScores.Intelligence,
@@ -250,7 +278,7 @@ export const CreateCharacterButton = (props: IProps) => {
         armor: armor,
         weapons: weapons,
         features: features,
-        itemProficiencies: choicesInfo.itemProficiencies,
+        itemProficiencies: itemProficiencies,
         languages: languages,
         spellSlots: spellSlots,
         spellSaveDc: spellSaveDc,
@@ -261,8 +289,9 @@ export const CreateCharacterButton = (props: IProps) => {
         money: stats[beginningInfo.background as keyof IStats].money ?? [
           0, 0, 0, 0,
         ],
-        items: choicesInfo.items,
+        items: items,
       };
+      console.log(newCharacter);
       await addDoc(charactersCollectionRef, newCharacter).then((docRef) => {
         navigate(`/character-sheet/${docRef.id}`);
       });
