@@ -74,7 +74,6 @@ export const CreateCharacterButton = (props: IProps) => {
   let allFirstLevelSpells: string[] = [];
   let allPreparedSpells: string[] = [];
 
-
   const fillSpellsSlice = () => {
     // combine pre-known and chosen items
     allCantrips = [...props.knownCantrips, ...props.selectedCantrips];
@@ -91,7 +90,6 @@ export const CreateCharacterButton = (props: IProps) => {
     let uniqueCantrips = new Set(allCantrips);
     let uniqueFirstLevelSpells = new Set(allFirstLevelSpells);
     let uniquePreparedSpells = new Set(allPreparedSpells);
-
 
     // if any duplicates are found, alert the user
     if (allCantrips.length != uniqueCantrips.size) {
@@ -116,22 +114,56 @@ export const CreateCharacterButton = (props: IProps) => {
     if (user) {
       // used in other calculations
       const dexterityModifier = getModifier(abilityScores.Dexterity);
-      const wisdomModifier = getModifier(abilityScores.Wisdom)
+      const wisdomModifier = getModifier(abilityScores.Wisdom);
+      const constitutionModifier = getModifier(abilityScores.Constitution);
+      const intelligenceModifier = getModifier(abilityScores.Intelligence);
+      const charismaModifier = getModifier(abilityScores.Charisma)
 
-      let perceptionSkill = 10 + wisdomModifier
+      let passivePerception = 10 + wisdomModifier;
       if (choicesInfo.skillProficiencies.includes("Perception")) {
-        perceptionSkill += 2
+        passivePerception += 2;
       }
 
-      // let hitDice: [number, string]
-      // if (typeof stats[beginningInfo.class as keyof IStats].hitDice !== undefined) {
-      //   hitDice = stats[beginningInfo.class as keyof IStats].hitDice
-      // }
+      let hp =
+        constitutionModifier +
+        (stats[beginningInfo.class as keyof IStats].baseHp ?? 0);
+      if (stats[beginningInfo.race as keyof IStats].hpBonus) {
+        hp += stats[beginningInfo.race as keyof IStats].hpBonus ?? 0;
+      }
+
+      let features: string[] = [];
+      features = [
+        ...(stats[beginningInfo.class as keyof IStats].features as string[]),
+        ...(stats[beginningInfo.race as keyof IStats].features as string[]),
+        ...(stats[beginningInfo.background as keyof IStats]
+          .features as string[]),
+      ];
+
+      let spellSlots = 0
+      if (beginningInfo.class == "Wizard") {
+        spellSlots = 2
+      } else if (beginningInfo.class == "Bard") {
+        spellSlots = 2
+      }
+
+      let spellSaveDc = 0
+      if (beginningInfo.class == "Wizard") {
+        spellSaveDc += 8 + 2 + intelligenceModifier
+      } else if (beginningInfo.class == "Bard") {
+        spellSaveDc += 8 + 2 + charismaModifier
+      }
+
+      let spellAttackModifier = 0
+      if (beginningInfo.class == "Wizard") {
+        spellAttackModifier += 2 + intelligenceModifier
+      } else if (beginningInfo.class == "Bard") {
+        spellAttackModifier += 2 + charismaModifier
+      }
 
       // not sure why this error is happening, but I can catch it here
-      let knownFirstLevelSpells = props.knownFirstLevelSpells
+      let knownFirstLevelSpells = props.knownFirstLevelSpells;
       if (knownFirstLevelSpells[0] == undefined) {
-        knownFirstLevelSpells = []
+        knownFirstLevelSpells = [];
       }
 
       const newCharacter: ICharacterData = {
@@ -143,17 +175,18 @@ export const CreateCharacterButton = (props: IProps) => {
         level: 1,
         proficiencyBonus: 2,
         speed: Number(stats[beginningInfo.race as keyof IStats].speed),
-        hitDice: stats[beginningInfo.class as keyof IStats].hitDice ?? [1, "d8"],
+        hitDice: stats[beginningInfo.class as keyof IStats].hitDice ?? [
+          1,
+          "d8",
+        ],
         initiative: dexterityModifier,
-        // calculate later : 10 + perception skill
-        passivePerception: 0,
-        // calculate later : grab base from class stats, bonus from race stats, and add con modifier
-        hp: 0,
+        passivePerception: passivePerception,
+        hp: hp,
         // calculate later : 10 + dex mod if no armor,
         // other options depending on armor
-        ac: 0,
-        savingThrowProficiencies:
-          stats[beginningInfo.class as keyof IStats].savingThrowProficiencies ?? [""],
+        ac: 14,
+        savingThrowProficiencies: stats[beginningInfo.class as keyof IStats]
+          .savingThrowProficiencies ?? [""],
         skillProficiencies: choicesInfo.skillProficiencies,
         strengthScore: abilityScores.Strength,
         charismaScore: abilityScores.Charisma,
@@ -164,25 +197,23 @@ export const CreateCharacterButton = (props: IProps) => {
         // separate armor from weapons, then store here
         armor: [],
         weapons: [],
-        // grab from all stats
-        features: [],
+        features: features,
         itemProficiencies: choicesInfo.itemProficiencies,
         languages: choicesInfo.languages,
-        // calculate with mods per class
-        spellSlots: 0,
-        // calculate with mods per class
-        spellSaveDc: 0,
-        // calculate with mods per class
-        spellAttackModifier: 0,
+        spellSlots: spellSlots,
+        spellSaveDc: spellSaveDc,
+        spellAttackModifier: spellAttackModifier,
         cantrips: allCantrips,
         knownSpells: knownFirstLevelSpells,
         preparedSpells: allPreparedSpells,
-        money: stats[beginningInfo.background as keyof IStats].money ?? [0, 0, 0, 0],
+        money: stats[beginningInfo.background as keyof IStats].money ?? [
+          0, 0, 0, 0,
+        ],
         items: choicesInfo.items,
       };
       // make sure each field has the correct type!
-      console.log(newCharacter)
-      await addDoc(charactersCollectionRef, newCharacter);
+      console.log(newCharacter);
+      // await addDoc(charactersCollectionRef, newCharacter);
     } else {
       alert("An unknown error has occured. Please try again later.");
     }
