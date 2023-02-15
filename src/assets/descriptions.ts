@@ -1,4 +1,4 @@
-import { isStringLiteral, StringLiteral } from "typescript";
+import { isStringLiteral, StringLiteral, StringMappingType } from "typescript";
 import { string } from "yup";
 
 export interface IDescriptions {
@@ -88,6 +88,17 @@ export interface IDescriptions {
   "Tinker's Tools": string;
   Shovel: string;
   "Bag of Holding": string;
+  // instruments
+  Bagpipes: string;
+  Drum: string;
+  Dulcimer: string;
+  Flute: string;
+  Lute: string;
+  Lyre: string;
+  Horn: string;
+  "Pan Flute": string;
+  Shawm: string;
+  Viol: string;
   // SKILLS //
   Athletics: string;
   Acrobatics: string;
@@ -107,6 +118,10 @@ export interface IDescriptions {
   Intimidation: string;
   Performance: string;
   Persuasion: string;
+  // LANGUAGES //
+  Common: string;
+  Dwarvish: string;
+  Elvish: string;
 }
 
 export const descriptions: IDescriptions = {
@@ -236,7 +251,18 @@ export const descriptions: IDescriptions = {
   Shovel: "A standard shovel used for digging.",
   "Bag of Holding":
     "This bag has an interior space considerably larger than its outside dimensions, roughly 2 feet in diameter at the mouth and 4 feet deep. The bag can hold up to 500 pounds, not exceeding a volume of 64 cubic feet. The bag weighs 15 pounds, regardless of its contents. Retrieving an item from the bag requires an action. If the bag is overloaded, pierced, or torn, it ruptures and is destroyed, and its contents are scattered in the Astral Plane. If the bag is turned inside out, its Contents spill forth, unharmed, but the bag must be put right before it can be used again. Breathing creatures inside the bag can survive up to a number of minutes equal to 10 divided by the number of creatures (minimum 1 minute), after which time they begin to suffocate. Placing a bag of holding inside an extradimensional space created by a Handy Haversack, Portable Hole, or similar item instantly destroys both items and opens a gate to the Astral Plane. The gate originates where the one item was placed inside the other. Any creature within 10 feet of the gate is sucked through it to a random Location on the Astral Plane. The gate then closes. The gate is one-way only and can't be reopened.",
-  // SKILLS //
+  // instruments
+  Bagpipes: "Bagpipes are a reeded woodwind instrument that consists of multiple pipes connected to a bladder that is filled with air. The bladder can be made of leather and produces a Celtic sound. Expensive bagpipes might boast silver or gold inlays along the pipes and chanter. The chanter is the pipe with holes that one covers up to produce different notes. Perfect for those looking to march into battle.",
+  Drum: "A drum is perhaps the simplest of all percussion instruments. Within the realms of DnD, a drum can be crafted from any round, hollow wood frame over which a piece of leather is stretched. Drums are very customizable. The sound and pitch of the instrument are affected by both the size of the frame and the tightness of the leather. A musician may use multiple drums at once to create a richer sound.",
+  Dulcimer: "Dulcimers are known for their sweet sounds, and are likely derived in name from Latin dulce melos (or “sweet song”). Dulcimers come in many shapes and sizes, but generally consist of a hollow wooden body with strings, similar to a violin or guitar. The strings on mountain dulcimers are typically plucked, while those on hammered dulcimers are typically struck with small hammers to produce notes. A charming instrument, the dulcimer has a long and proud history.",
+  Flute: "At its core, the flute is a very simple instrument. It typically consists of a wooden tube with holes that are covered to create sounds, although sometimes metals tubes can be used. Medieval flutes typically had a different appearance to modern-day flutes. They looked more similar to a sideways recorder vs. a modern flute which has multiple valves running along its body. Perfect for beginner crafters looking for a simple instrument. Flutes can be made out of any suitable material, from reeds to sturdy vegetables.",
+  Lute: "Another favorite instrument of Bards, the lute is a string instrument with a deep hollow wooden body. Typically lutes have an opening on the front to allow sound to escape. However, some lutes enclosed which results in a more muffled – some might say eerie – sound. Lutes are plucked by the musician.",
+  Lyre: "One of the oldest instruments known to man, the lyre is a popular choice for creating music in the realms of DnD. Known for their angelic sounds, lyres have U-shaped wooden bodies with a connecting bar that runs along the top. The top piece holds several strings which are plucked by the musician. A standard lyre contains 7 strings, but can have any number of strings. Lyres also range from simple to wonderfully ornate.",
+  Horn: "Horns are generic in nature and include a wide range of instruments. All consist of a metal tube (typically brass) with a bell-like opening at one end, and a mouthpiece on the other. The length of pipe controls the pitch – longer instruments produce lower pitch, while shorter produce higher pitch. Horns may also have valve-like openings (such as in the French horn) which change the pitch when pressed.",
+  "Pan Flute": "The pan flute is a favorite instrument in DnD and typically consists of multiple wooden tubes of different lengths that are joined together. The instrument resembles a triangle with the shortest tube on one side and the longest tube at the other side. The musician blows across the tubes, moving to different tubes to produce different notes.",
+  Shawm: "The shawm is another woodwind instrument for beginners. It is simple in design, resembling the modern-day recorder. The shawm consists of a long wooden item that is flared at the end, similar to a horn. Instead of a mouthpiece, the shawm has a reed which the musician vibrates to create pitches. Smaller shawms are higher pitched, while larger shawms are lower pitched… and both are adored by Gnomes.",
+  Viol: "The viol is a precursor for many stringed instruments, such as the cello or violin. The instrument consists of six strings which line a hollow wooden body. The strings are either plucked or pressed against the instrument at different lengths along the neck. They also have a string or bow drawn against them, and this creates a unique vibrating sound. Popular with many realm adventurers.",
+    // SKILLS //
   Athletics:
     "Your Athletics check covers difficult situations you encounter while climbing, jumping, or swimming. Examples include the following activities: You attempt to climb a sheer or slippery cliff, avoid hazards while scaling a wall, or cling to a surface while something is trying to knock you off. You try to jump an unusually long distance or pull off a stunt midjump. You struggle to swim or stay afloat in treacherous currents, storm-tossed waves, or areas of thick seaweed. Or another creature tries to push or pull you underwater or otherwise interfere with your swimming.",
   Acrobatics:
@@ -273,4 +299,8 @@ export const descriptions: IDescriptions = {
     "Your Performance check determines how well you can delight an audience with music, dance, acting, storytelling, or some other form of entertainment.",
   Persuasion:
     "When you attempt to influence someone or a group of people with tact, social graces, or good nature, the GM might ask you to make a Persuasion check. Typically, you use persuasion when acting in good faith, to foster friendships, make cordial requests, or exhibit proper etiquette. Examples of persuading others include convincing a chamberlain to let your party see the king, negotiating peace between warring tribes, or inspiring a crowd of townsfolk.",
-};
+  // LANGUAGES //
+  Common: "The language typically spoken by humans. It uses a Common script.",
+  Elvish: "The language typically spoken by elves. It uses an Elvish script.",
+  Dwarvish: "The language typically spoken by dwarves. It uses a Dwarvish script.",
+  };

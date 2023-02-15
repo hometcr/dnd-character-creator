@@ -37,8 +37,8 @@ export const options = {
     "Lute",
     "Lyre",
     "Horn",
-    "Pan flute",
-    "Shawn",
+    "Pan Flute",
+    "Shawm",
     "Viol",
   ],
   artisansTools: [
