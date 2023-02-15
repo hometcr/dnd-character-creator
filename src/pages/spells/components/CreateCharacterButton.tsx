@@ -306,7 +306,7 @@ export const CreateCharacterButton = (props: IProps) => {
   };
   return (
     <button className="create-character-button" onClick={onPageSubmit}>
-      Next
+      Create Character
     </button>
   );
 };

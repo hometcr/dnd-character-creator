@@ -208,7 +208,7 @@ export const options = {
         "Disguise Self",
         "Dissonant Whispers",
         "Distort Value",
-        "Eart Tremor",
+        "Earth Tremor",
         "Faerie Fire",
         "Feather Fall",
         "Guiding Hand",
