@@ -171,21 +171,21 @@ export const CreateCharacterButton = (props: IProps) => {
 
       // random lists are coming in with "undefined" as an element.
       // not sure why this error is happening, but I can catch it here
-      let knownFirstLevelSpells = [...props.knownFirstLevelSpells];
+      let knownFirstLevelSpells = [...allFirstLevelSpells];
       for (let item of knownFirstLevelSpells) {
         if (item == undefined) {
           let index = knownFirstLevelSpells.indexOf(item);
           knownFirstLevelSpells.splice(index, 1);
         }
       }
-      let cantrips = [...props.knownCantrips];
+      let cantrips = [...allCantrips];
       for (let item of cantrips) {
         if (item == undefined) {
           let index = cantrips.indexOf(item);
           cantrips.splice(index, 1);
         }
       }
-      let preppedSpells = [...props.knownPreparedSpells];
+      let preppedSpells = [...allPreparedSpells];
       for (let item of preppedSpells) {
         if (item == undefined) {
           let index = preppedSpells.indexOf(item);
